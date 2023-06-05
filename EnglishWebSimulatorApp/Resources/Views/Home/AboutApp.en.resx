@@ -125,13 +125,16 @@ words. The words are stored in the following variants: - English version; - Russ
     <value>Viewing words</value>
   </data>
   <data name="StringFour" xml:space="preserve">
-    <value />
+    <value>To add a word, go to the tab (add a word) in the main panel or click on the button (Add a word) in the view of all words!</value>
   </data>
   <data name="StringOne" xml:space="preserve">
     <value>User Registration</value>
   </data>
+  <data name="StringSeven" xml:space="preserve">
+    <value>Training - lesson</value>
+  </data>
   <data name="StringSix" xml:space="preserve">
-    <value />
+    <value>To add a word, you need to fill out a form in which the first two fields are required! Uploading image and sound files as desired. After downloading, the added word can be seen first in the list on the All words page. In case of an error or the need to delete a word, you can delete it from the form for viewing all words by clicking (Edit) or (Delete).</value>
   </data>
   <data name="StringThree" xml:space="preserve">
     <value>Adding words</value>

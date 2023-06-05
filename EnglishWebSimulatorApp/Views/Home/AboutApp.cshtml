@@ -38,14 +38,39 @@
             </h4>
             <div id="collapseTwo" class="accordion-collapse collapse"  data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col" class="col-4">View</th>
+                                <th scope="col">Step</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td class ="col-4">
+                                    <div class="row">
+                                        <img class="img-fluid" src="/instructia/imgFour.png" alt="" />
+                                        <img class="img-fluid" src="/instructia/imgFive.png" alt="" />
+                                    </div>
+                                    </td>
+                                <td class="text-justify">@Localizer["StringFour"]</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td class="col-4"><img class="img-fluid" src="/instructia/imgSix.png" alt="" /></td>
+                                <td class="text-justify">@Localizer["StringSix"]</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
         <div class="accordion-item">
             <h4 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                   @Localizer["StringFive"]
+                   @Localizer["StringSeven"]
                 </button>
             </h4>
             <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
