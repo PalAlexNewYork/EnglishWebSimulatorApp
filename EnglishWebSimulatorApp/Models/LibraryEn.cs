@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace EnglishWebSimulatorApp.Models
 {
@@ -12,5 +13,6 @@ namespace EnglishWebSimulatorApp.Models
         public string User { get; set; }
         public byte[] Pict { get; set; }
         public string SoundFilePath { get; set; }
+        public DateTime DateTime { get; set; }
     }
 }

@@ -148,9 +148,21 @@ namespace EnglishWebSimulatorApp.Controllers
             }
             return View("StartLesson");
         }
-
-
-
+        //
+        [HttpGet]
+        [Route("UserProgres")]
+        public IActionResult UserProgres() 
+        {
+            return View();
+        }
+        //
+        [HttpGet]
+        [Route("StatisticInfo")]
+        public IActionResult StatisticInfo()
+        {
+            return View();
+        }
+        //
         public IActionResult Index()
         {
             return View();

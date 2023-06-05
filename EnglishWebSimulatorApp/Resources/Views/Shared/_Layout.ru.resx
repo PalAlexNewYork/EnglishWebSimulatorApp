@@ -138,4 +138,13 @@
   <data name="StatisticInfo" xml:space="preserve">
     <value>Результаты пользователя</value>
   </data>
+  <data name="User'sPage" xml:space="preserve">
+    <value>Страничка пользователя</value>
+  </data>
+  <data name="UserProgress" xml:space="preserve">
+    <value>Прогресс пользователя</value>
+  </data>
+  <data name="YourAccount" xml:space="preserve">
+    <value>Ваша учетная запись</value>
+  </data>
 </root>

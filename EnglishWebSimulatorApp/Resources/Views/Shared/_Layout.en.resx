@@ -138,4 +138,13 @@
   <data name="StatisticInfo" xml:space="preserve">
     <value>Results of user</value>
   </data>
+  <data name="User'sPage" xml:space="preserve">
+    <value>User's page</value>
+  </data>
+  <data name="UserProgress" xml:space="preserve">
+    <value>User progress</value>
+  </data>
+  <data name="YourAccount" xml:space="preserve">
+    <value>Your account</value>
+  </data>
 </root>

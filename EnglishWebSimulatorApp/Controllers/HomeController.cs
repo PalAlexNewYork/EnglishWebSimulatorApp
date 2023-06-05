@@ -68,6 +68,7 @@ namespace EnglishWebSimulatorApp.Controllers
             int word_id = 0;
 
             word.User = User.Identity.Name.ToString();
+            word.DateTime = DateTime.Now;
             if (word.Id == 0)
             {
                 if (file != null)
