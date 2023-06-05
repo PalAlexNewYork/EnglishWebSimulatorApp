@@ -1,9 +1,12 @@
-﻿using EnglishWebSimulatorApp.Models;
+﻿using EnglishWebSimulatorApp.Areas.Identity.Data;
+using EnglishWebSimulatorApp.Models;
 using EnglishWebSimulatorApp.Models.Interfaces;
 using EnglishWebSimulatorApp.Models.Servise;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +20,13 @@ namespace EnglishWebSimulatorApp.Controllers
     {
         ILibraryServise _servise;
         IlibraryEnShServise libraryEnShService;
+        private readonly UserManager<EnglishWebSimulatorAppUser> userManager;
 
-        public LessonController(ILibraryServise servise, IlibraryEnShServise libraryEnShService)
+        public LessonController(ILibraryServise servise, IlibraryEnShServise libraryEnShService, UserManager<EnglishWebSimulatorAppUser> userManager)
         {
             _servise = servise;
             this.libraryEnShService = libraryEnShService;
+            this.userManager = userManager;
         }
         //
         [HttpGet]
