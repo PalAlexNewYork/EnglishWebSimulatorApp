@@ -1,0 +1,69 @@
+﻿@{
+    var danat = 0;
+    var stepp = ViewBag.right + ViewBag.notRight;
+    if (ViewBag.notRight != 0)
+    {
+        danat = ViewBag.right / ViewBag.notRight;
+    }
+    else
+    {
+        danat = ViewBag.right;
+    }
+    Random rand = new Random();
+    Random randJoy = new Random();
+    Random randUpset = new Random();
+    int iRanJoy = rand.Next(0, 10);
+    int iRanUpset = rand.Next(0, 5);
+    List<string> joy = new List<string>
+    {
+    "one.webp",
+    "two.webp",
+    "three.webp",
+    "four.webp",
+    "five.webp",
+    "six.webp",
+    "seven.webp",
+    "eight.webp",
+    "nine.webp",
+    "ten.webp",
+    };
+    List<string> upset = new List<string>
+    {
+     "one.webp",
+    "two.webp",
+    "three.webp",
+    "four.webp",
+    "five.webp"
+    };
+}
+
+<div class="container-fluid m-2" style="background-color:aquamarine;">
+<h3 style="text-align:center;">@Localizer["StringOne"]</h3>
+<div class="flex-grow-1 p-3" style="border:1px solid black;">
+        <h5>@Localizer["StringTwo"] - @stepp.
+        </h5>
+        <h5>@Localizer["StringThree"] - @ViewBag.right.</h5>
+        <h5>@Localizer["StringFour"] - @ViewBag.NotRight.</h5>
+</div>
+    <div class="col text-center  m-3">
+        <h4 style="text-align:center;">@Localizer["StringFive"] -  @danat</h4>
+        <div>
+            @if (danat > 10 || ViewBag.notRight == 0)
+            {
+                <img class="img-fluid" src="/joy/@joy[iRanJoy]" />
+            }
+            else
+            {
+                <img class="img-fluid" src="/upset/@upset[iRanUpset]" />
+            }
+        </div>
+        
+        <div class="d-flex flex-row justify-content-center p-3">
+            <form method="post" asp-action="AddRezult" asp-controller="Lesson">
+                <button class="btn btn-outline-dark m-3" type="submit">@Localizer["StringSix"]</button>
+            </form>
+            <a class="btn btn-outline-dark m-3" asp-action="Index" asp-controller="Home">@Localizer["StringSeven"]</a>
+        </div>
+       
+    </div>
+   </div> 

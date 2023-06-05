@@ -1,0 +1,62 @@
+﻿<div class="container-fluid p-2" style="background-color:antiquewhite; border:1px solid black;">
+    <div class="text-center">
+        <h2>@Localizer["Title"]</h2>
+    </div>
+    <div style="text-indent:30px;">
+        @Localizer["Discrip"]
+    </div>
+    <div class="accordion p-2" id="accordionExample">
+        <div class="accordion-item">
+            <h4 class="accordion-header">
+                <button class="accordion-button"  type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    @Localizer["StringOne"]
+                </button>
+            </h4>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-4">
+                                <img src="/instructia/Registr.png" class="img-fluid m-1" style="border:1px solid black;" />
+                                <img src="/instructia/RegistrOne.png" class="img-fluid m-1" style="border:1px solid black;" />
+                                <img src="/instructia/ImgThree.png" class="img-fluid m-1" style="border:1px solid black;" />
+                            </div>
+                            <div class="col-8 text-justify">
+                                @Localizer["StringTwo"]
+                            </div>
+                        </div>
+                    </div>
+                    
+                 </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h4 class="accordion-header">
+                <button class="accordion-button collapsed"  type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    @Localizer["StringThree"]
+                </button>
+            </h4>
+            <div id="collapseTwo" class="accordion-collapse collapse"  data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h4 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                   @Localizer["StringFive"]
+                </button>
+            </h4>
+            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

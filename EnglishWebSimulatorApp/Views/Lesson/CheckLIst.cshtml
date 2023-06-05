@@ -1,0 +1,48 @@
+﻿@model IEnumerable<MyTuple>
+@{
+    int ind = 0;
+}
+
+
+
+
+<div class="container-fluid" style="background-color:antiquewhite; border: 1px solid black;">
+    <h3 class="d-flex justify-content-left m-2">@Localizer["Title"]</h3>
+
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Your choice</th>
+            </tr>
+        </thead>
+        <tbody>
+            <form asp-action="LessonFormList" asp-controller="Lesson" method="post">
+                
+                @foreach (var i in Model)
+                {
+                <tr>
+                    <th scope="row">@{
+                                ++ind;
+                            } @ind</th>
+                    <td>
+                        <p>@i.First</p>
+                        <p>@i.Second</p>
+                    </td>
+                    <td>
+                        <input type="checkbox" name="groups" value="@i.First" />
+                    </td>
+                </tr>
+                }
+            <div style ="text-align:right;">
+                    <button type="submit" class="btn btn-outline-info m-2" >Enter</button>
+                </div>
+            
+            </form>
+     
+
+        </tbody>
+    </table>
+</div>

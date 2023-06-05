@@ -1,0 +1,108 @@
+﻿@model LibraryEn
+
+@{
+    var WId = 0;
+    WId = Model == null ? 0 : Model.Id;
+}
+
+<div class="container" style="background-color:antiquewhite;">
+    @if (Model == null)
+    {
+        <div style="text-align:center"><h1>@Localizer["Tittle"]</h1></div>
+    }
+    else
+    {
+        <div class="m-2" style="text-align:center"><h1>@Localizer["Update"] - @Model.WordEng</h1></div>
+        <div class="container col-3 m-2" style="border:1px solid black;">
+            @if (Model.Pict != null)
+            {
+                <img class="card-img-top img-fluid m-2" src="@ViewBag.PathImg" >
+            }
+            @if (Model.SoundFilePath != null)
+            {
+                <audio class="testAudio" hidden src="~/sounds/@Model.SoundFilePath" type="audio/mpeg">
+                </audio>
+                <i class="bi bi-play-btn playAudio" style="font-size:30px; text-align:center;"></i>
+            }
+            
+        </div>
+    }
+   
+
+    <form method="post"
+          asp-controller="Home" asp-action="AddWordsMethod"
+          enctype="multipart/form-data" class="p-3"
+          style="border:1px solid black;"    
+    >
+        <div class="validated" asp-validation-sumary="ModelOnly"></div>
+
+        <div class="form-group" hidden>
+            @if (Model == null)
+            {
+                <input asp-for="Id" value="@WId" class="form-control" />
+            }
+            else
+            {
+                <input asp-for="Id" value="@Model.Id" class="form-control" />
+            }
+
+        </div>
+
+        <div class="form-group">
+            <label>@Localizer["WordEn"]</label>
+            <div class="col">
+                <input asp-for="@Model.WordEng" class="form-control" />
+                <span asp-validation-for="@Model.WordEng" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>@Localizer["WordRu"]</label>
+            <div class="col">
+                <input asp-for="@Model.WordRus" class="form-control" />
+                <span asp-validation-for="@Model.WordRus" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group m-2 p-2" style="background-color:aliceblue; border:1px solid black;">
+            <label class="d-flex flex-row">@Localizer["Pic"]</label>
+            <input type="file" id="file"
+                   name="file"
+                   multiple="multiple" accept=".jpg,.jpeg,.png" />
+            <span asp-validation-for="Pict" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group m-2 p-2" style="background-color:aliceblue; border:1px solid black;">
+            <label class="d-flex flex-row">@Localizer["Sound"]</label>
+            <input type="file" id="Onefile"
+                   name="fileOne"
+                   multiple="multiple" accept=".mp3, .wav, .aif, .mid" />
+            <span asp-validation-for="Pict" class="text-danger"></span>
+        </div>
+
+
+        <div class="horizontal-space-evenly pb-2">
+            <input class="btn btn-success" type="submit" value="✓" />
+            <a href="/Admin" class="btn btn-danger">✕</a>
+        </div>
+
+    </form>
+</div>
+
+
+<script type="text/javascript">
+    var elem = document.querySelector(".playAudio");
+    var audio = document.querySelector(".testAudio");
+    console.log(elem);
+    console.log(audio);
+
+        elem.addEventListener("click", function () {
+            audio.play();
+        }
+        )
+
+   
+
+</script>
+

@@ -1,0 +1,65 @@
+﻿@model List<LibraryEnShow>
+
+<div class="container" style="background-color:antiquewhite; border:1px solid black;">
+     <div style="text-align:center"><h2>@Localizer["Tittle"] @ViewBag.Tittle.</h2></div>
+     <div class="d-flex justify-content-between">
+        <a class="btn btn-warning m-1" asp-area="" asp-controller="Home" asp-action="AddWords">@Localizer["AddWord"] </a>
+        <form method="get" asp-action="FindWord" asp-controller="Home">
+            <input type="text" name="text"/>
+            <button type="submit" name="text" class="btn btn-outline-dark">Find</button>
+        </form>
+     </div>
+  
+            <div class="container d-flex justify-content-between p-2" style="flex-wrap:wrap;">
+                @foreach (var i in Model)
+                {
+                    <div class="card m-2" style="width: 12rem;">
+                        @if (i.Pict != null)
+                        {
+                            <img src="@i.Pict" class="card-img-top">
+                        }
+                        else
+                        {
+                            <img src="~/english.jpg" class="card-img-top">
+                        }
+
+                        <div class="card-body">
+                            <h5 class="card-title">@i.WordEng</h5>
+                            <h5 class="card-title">@i.WordRus</h5>
+                        </div>
+                        @if (i.Sound != null)
+                        {
+                            <audio class="testAudio" hidden src="~/sounds/@i.Sound" type="audio/mpeg">
+                            </audio>
+                    <i class="bi bi-play-btn playAudio" style="font-size:30px; text-align:center;" ></i>
+                }
+                        <div>
+                            <a class="btn btn-warning m-1" href="/AddWords?id=@i.Id">@Localizer["BtnUpdate"] </a>
+                            <a class="btn btn-danger m-1" href="/Delete?id=@i.Id">@Localizer["BtnDelete"]</a>
+                        </div>
+                    </div>
+                }
+            </div>
+            
+            
+
+          
+       
+ </div>
+
+<script type="text/javascript">
+    var elem = document.querySelectorAll(".playAudio");
+    var audio = document.querySelectorAll(".testAudio");
+    console.log(elem);
+    console.log(audio);
+    for(let i= 0; i<elem.length; i++)
+    {
+        elem[i].addEventListener("click", function()
+        {
+            audio[i].play();
+        }
+        )
+    
+    }
+   
+</script>

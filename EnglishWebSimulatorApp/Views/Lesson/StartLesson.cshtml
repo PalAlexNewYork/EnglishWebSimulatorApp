@@ -1,0 +1,41 @@
+﻿
+<form asp-action="AddBook" asp-controller="Lesson"
+     class="container-fluid p-2" style="background-color:cornsilk; border:1px solid black;"> 
+     <div style="text-align:center;"><h3>@Localizer["Title"]</h3></div>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th scope="row"><input type="checkbox" name="check" class="check" onclick="onlyOne(this)" value="tenWords" /></th>
+                <td><label>@Localizer["CheckBox"]</label></td>              
+            </tr>
+            <tr>
+                <th scope="row"><input type="checkbox" name="check" class="check" onclick="onlyOne(this)" value="fiveWords" /></th>
+                <td>@Localizer["CheckBoxOne"]</td>
+            </tr>
+            <tr>
+                <th scope="row"><input type="checkbox" name="check" class="check" onclick="onlyOne(this)" value="GetWordsUser" /></th>
+                <td>@Localizer["CheckBoxTwo"]</td>      
+            </tr>
+            <tr>
+                <th scope="row"><input type="checkbox" name="check" class="check" onclick="onlyOne(this)" value="GetWordsAllUsers" /></th>
+                <td>@Localizer["CheckBoxThree"]</td>
+            </tr>
+            <tr>
+                <th scope="row"><input type="checkbox" name="check" class="check" onclick="onlyOne(this)" value="CheckWordsListUser" /></th>
+                <td>@Localizer["CheckBoxFour"]</td>            
+            </tr>
+        </tbody>
+    </table>
+        <button class="btn btn-outline-info">@Localizer["Check"]</button>
+     </div>
+ </form>
+
+ <script>
+    function onlyOne(checkbox) {
+        var checkboxes = document.getElementsByName('check')
+        checkboxes.forEach((item) => {
+            if (item !== checkbox) item.checked = false
+        })
+    }
+ </script>
