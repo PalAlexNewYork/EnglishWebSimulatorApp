@@ -39,7 +39,26 @@
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <li class="nav-item">
-                            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                            <a id="manage" class="nav-link text-dark d-flex align-items-center" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                                @{
+                                    var pictImg = "";
+                                    var pict = SignInManager.UserManager.Users.FirstOrDefault(u => u.Email == UserManager.GetUserName(User));
+                                    if (pict.Pict != null)
+                                    {
+                                    string imageBase64Data = Convert.ToBase64String(pict.Pict);
+                                    string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
+                                    pictImg = imageDataURL;
+                                        <img src="@pictImg" class="rounded-circle mr-1" width="25">
+                                    }            
+                                }
+                                @if(!String.IsNullOrEmpty(pict.NameImg))
+                                {
+                                    @pict.NameImg
+                                }else
+                                {
+                                    @UserManager.GetUserName(User)
+                                }
+                                </a>
                         </li>
                         <li class="nav-item">
                             <form id="logoutForm" class="form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
@@ -116,7 +135,7 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" asp-controller="Lesson" asp-action="UserProgres">@Localizer["UserProgress"]</a>
                                         <a class="dropdown-item" asp-controller="Lesson" asp-action="StatisticInfo">@Localizer["StatisticInfo"]</a>
-                                        <a class="dropdown-item" href="/Identity/Account/Manage">@Localizer["YourAccount"]</a>
+                                        <a class="dropdown-item" asp-controller="Lesson" asp-action="YourAccount">@Localizer["YourAccount"]</a>
                                         
                                     </div>
                                 </div>

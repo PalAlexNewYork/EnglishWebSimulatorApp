@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using EnglishWebSimulatorApp.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace EnglishWebSimulatorApp.Models.Interfaces
 {
@@ -12,6 +14,9 @@ namespace EnglishWebSimulatorApp.Models.Interfaces
         public void Update(LibraryEn en, string us);
         public List<Rezults> Rezults(string user);
         public void AddRezult(Rezults rezults);
+        public EnglishWebSimulatorAppUser UserManager(string user);
+        public EnglishWebSimulatorAppUser UpdateUser(EnglishWebSimulatorAppUser user);
+
 
     }
 }

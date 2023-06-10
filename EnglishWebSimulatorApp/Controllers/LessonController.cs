@@ -1,17 +1,11 @@
-﻿using EnglishWebSimulatorApp.Areas.Identity.Data;
-using EnglishWebSimulatorApp.Models;
+﻿using EnglishWebSimulatorApp.Models;
 using EnglishWebSimulatorApp.Models.Interfaces;
-using EnglishWebSimulatorApp.Models.Servise;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Security.Permissions;
-using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace EnglishWebSimulatorApp.Controllers
 {
@@ -20,13 +14,12 @@ namespace EnglishWebSimulatorApp.Controllers
     {
         ILibraryServise _servise;
         IlibraryEnShServise libraryEnShService;
-        private readonly UserManager<EnglishWebSimulatorAppUser> userManager;
 
-        public LessonController(ILibraryServise servise, IlibraryEnShServise libraryEnShService, UserManager<EnglishWebSimulatorAppUser> userManager)
+
+        public LessonController(ILibraryServise servise, IlibraryEnShServise libraryEnShService)
         {
             _servise = servise;
             this.libraryEnShService = libraryEnShService;
-            this.userManager = userManager;
         }
         //
         [HttpGet]
@@ -158,6 +151,11 @@ namespace EnglishWebSimulatorApp.Controllers
         [Route("UserProgres")]
         public IActionResult UserProgres() 
         {
+            //var user = _servise.userManager(). //userManager.Users.FirstOrDefault(u=>u.Email==User.Identity.Name.ToString());
+           // user.NameImg = "sdvgsdfbsd";
+            //userManager.
+            //userManager.UpdateAsync(user);
+            //userManager.UpdateNormalizedUserNameAsync(user);
             return View();
         }
         //
@@ -168,6 +166,54 @@ namespace EnglishWebSimulatorApp.Controllers
             return View();
         }
         //
+        [HttpGet]
+        [Route("YourAccount")]
+        public IActionResult YourAccount() 
+        {
+            var user = _servise.UserManager(User.Identity.Name.ToString());
+            var words = _servise.GetAll(User.Identity.Name.ToString()).Count();
+           ViewBag.Words = words;
+            var rez = _servise.Rezults(User.Identity.Name.ToString());
+            var countRez = rez.Count();
+            ViewBag.Count = countRez;
+            var point = rez.Sum(x => x.Gold);
+            ViewBag.Point = point;
+            return View(user);
+        }
+        //
+        [HttpPost]
+        [Route("UpdateImgUser")]
+        public IActionResult UpdateImgUser(IFormFile file)
+        {
+            var user = _servise.UserManager(User.Identity.Name.ToString());
+            if (file != null)
+            {
+                MemoryStream ms = new MemoryStream();
+                file.CopyTo(ms);
+                user.Pict = ms.ToArray();
+                ms.Close();
+                ms.Dispose();
+                _servise.UpdateUser(user);
+               
+            }
+            return Redirect("YourAccount");
+        }
+        //
+        [HttpGet]
+        [Route("SetNameAvatar")]
+        public IActionResult SetNameAvatar(string text) 
+        {
+            if (!String.IsNullOrEmpty(text)) 
+            {
+            var user = _servise.UserManager(User.Identity.Name.ToString());
+            user.NameImg = text;
+            _servise.UpdateUser(user);
+            return Redirect("YourAccount");
+            }
+            return Redirect("YourAccount");
+            
+        }
+
         public IActionResult Index()
         {
             return View();

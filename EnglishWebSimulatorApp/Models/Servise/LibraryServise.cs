@@ -1,6 +1,8 @@
-﻿using EnglishWebSimulatorApp.Data;
+﻿using EnglishWebSimulatorApp.Areas.Identity.Data;
+using EnglishWebSimulatorApp.Data;
 using EnglishWebSimulatorApp.Models.Interfaces;
 using EnglishWebSimulatorApp.Models.Repository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,13 +15,15 @@ namespace EnglishWebSimulatorApp.Models.Servise
         private readonly EnglishWebSimulatorAppContext context;
         private ILibratyRepository libratyRepository;
         private IRezultsRepository rezultsRepository;
-        public LibraryServise(EnglishWebSimulatorAppContext context)
+        UserManager<EnglishWebSimulatorAppUser> _userManager;
+        public LibraryServise(EnglishWebSimulatorAppContext context, UserManager<EnglishWebSimulatorAppUser> userManager)
         {
             this.context = context;
             var words = this.context.libraryEns.ToList();
             var rezults = this.context.Rezults.ToList();
             rezultsRepository = new RezultsRepository(rezults);
             libratyRepository = new LibraryEnRepository(words);
+            _userManager = userManager;
         }
 
         public void AddWord(LibraryEn en)
@@ -87,6 +91,18 @@ namespace EnglishWebSimulatorApp.Models.Servise
         {
             this.context.Entry(rezults).State = EntityState.Added;
             this.context.SaveChanges();
+        }
+
+        public EnglishWebSimulatorAppUser UserManager(string user)
+        {
+            return  _userManager.Users.FirstOrDefault(u=>u.Email == user);
+        }
+
+        public EnglishWebSimulatorAppUser UpdateUser(EnglishWebSimulatorAppUser user)
+        { 
+        _userManager.UpdateNormalizedUserNameAsync(user);
+            this.context.SaveChanges();
+            return user;
         }
     }
 }
