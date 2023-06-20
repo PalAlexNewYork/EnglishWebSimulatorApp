@@ -15,7 +15,6 @@ namespace EnglishWebSimulatorApp.Controllers
         ILibraryServise _servise;
         IlibraryEnShServise libraryEnShService;
 
-
         public LessonController(ILibraryServise servise, IlibraryEnShServise libraryEnShService)
         {
             _servise = servise;
@@ -29,53 +28,36 @@ namespace EnglishWebSimulatorApp.Controllers
             return View();
         }
         //
-        [HttpPost]
+        [HttpGet]
         [Route("AddBook")]
-        public IActionResult AddBook(string check)
+        public IActionResult AddBook(string check, int number, string radio)
         {
-            var libraries = _servise.librariesShow(_servise.GetAll(User.Identity.Name.ToString()));
-            List<LibraryEnShow> words = new List<LibraryEnShow>();
-            if (check == "tenWords")
-            {
-                if (libraries.Count > 10)
-                {
-                    var word10 = libraries.Cast<LibraryEnShow>().Reverse().Take(10).ToList();
-                    libraries =word10.ToList();
-                }
-            }
-            else if (check == "fiveWords")
-            {
-                if (libraries.Count > 5)
-                {
-                    var word5 = libraries.Cast<LibraryEnShow>().Reverse().Take(5).ToList();
-                    libraries = word5.ToList();
-                }
-            }
-            else if (check == "GetWordsAllUsers")
-            {
-                var librariesGetUsers = _servise.librariesShow(_servise.GetAll());
-                foreach (var lib in librariesGetUsers)
-                {
-                    libraryEnShService.AddWordLibEnSh(lib);
-                }
-                return View("Lesson", librariesGetUsers);
-            }
-            else if (check == "CheckWordsListUser")
+            List<LibraryEnShow> libraries = new List<LibraryEnShow>();
+            if (check == "CheckWordsListUser")
             {
                 var wordsUser = _servise.GetAll(User.Identity.Name.ToString());
                 List<MyTuple> wordsStr = new List<MyTuple>();
                 foreach (var i in wordsUser) wordsStr.Add(new MyTuple(i.WordEng, i.WordRus));
-                
                 return View("CheckList", wordsStr);
             }
-            libraryEnShService.DeleteAllWords();
-            foreach (var lib in libraries) 
+            else
             {
-                libraryEnShService.AddWordLibEnSh(lib);
+                libraries = _servise.ChoiceOfWords(check, number, radio, User.Identity.Name.ToString());
+                if (libraries != null) 
+                {
+                libraryEnShService.DeleteAllWords();
+                foreach (var lib in libraries)
+                {
+                    libraryEnShService.AddWordLibEnSh(lib);
+                    libraryEnShService.AddIdWord(lib.Id);
+                }
+                ViewBag.right = libraryEnShService.rightAnswer;
+                ViewBag.notRight = libraryEnShService.notRightAnswer;
+                return View("Lesson", libraries);
+                }
+                else
+                    return View("StartLesson");
             }
-            ViewBag.right = libraryEnShService.rightAnswer;
-            ViewBag.notRight = libraryEnShService.notRightAnswer;
-            return View("Lesson", libraries);
         }
         //
         [HttpPost]
@@ -88,8 +70,7 @@ namespace EnglishWebSimulatorApp.Controllers
             {
                 foreach (var w in words)
                 { 
-                    if(g==w.WordEng) libraries.Add(w);
-                       
+                    if(g==w.WordEng) libraries.Add(w);              
                 }            
             }
             libraryEnShService.DeleteAllWords();
@@ -139,6 +120,7 @@ namespace EnglishWebSimulatorApp.Controllers
             if (libraryEnShService.notRightAnswer != 0)
                 rezults.Gold = libraryEnShService.rightAnswer / libraryEnShService.notRightAnswer;
             else rezults.Gold = libraryEnShService.rightAnswer;
+            rezults.IdWords = libraryEnShService.IdWords;
             rezults.Id = 0;
             if (ModelState.IsValid) 
             {
@@ -151,19 +133,33 @@ namespace EnglishWebSimulatorApp.Controllers
         [Route("UserProgres")]
         public IActionResult UserProgres() 
         {
-            //var user = _servise.userManager(). //userManager.Users.FirstOrDefault(u=>u.Email==User.Identity.Name.ToString());
-           // user.NameImg = "sdvgsdfbsd";
-            //userManager.
-            //userManager.UpdateAsync(user);
-            //userManager.UpdateNormalizedUserNameAsync(user);
-            return View();
+            var user = _servise.UserManager(User.Identity.Name.ToString());
+            if(user.NameImg ==null)
+            ViewBag.User = User.Identity.Name;
+            else ViewBag.User = user.NameImg;
+            string pict = "";
+            if (user.Pict != null) 
+            { 
+            string imageBase64Data = Convert.ToBase64String(user.Pict);
+            string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
+            pict = imageDataURL;
+            ViewBag.Pict = pict;
+            }
+            var rezults = _servise.GetRezultsWeek(User.Identity.Name.ToString());        
+            return View(rezults);
         }
         //
         [HttpGet]
         [Route("StatisticInfo")]
         public IActionResult StatisticInfo()
         {
-            return View();
+            var userRezult = _servise.GetUserRezult();
+            userRezult = userRezult.OrderByDescending(u=>u.Point).ToList();
+            // находим место в рейтинге юзера
+            var u = userRezult.FirstOrDefault(u=>u.Email == User.Identity.Name.ToString());
+            int place = userRezult.IndexOf(u);
+            ViewBag.Place = place+1;
+            return View(userRezult);
         }
         //
         [HttpGet]

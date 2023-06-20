@@ -138,6 +138,9 @@ namespace EnglishWebSimulatorApp.Migrations
                     b.Property<int>("Gold")
                         .HasColumnType("int");
 
+                    b.Property<string>("IdWords")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("User")
                         .HasColumnType("nvarchar(max)");
 

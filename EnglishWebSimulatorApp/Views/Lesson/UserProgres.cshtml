@@ -1,1 +1,183 @@
-﻿UserProgres
+﻿@model CombineResult
+
+@{
+    DateTime date1 = DateTime.Now;
+    DateTime date2 = date1.AddDays(-6);
+}
+
+<div class="container-fluid p-0" >
+    <div class="card m-0" style="background-color:floralwhite">
+            
+        <div class="backgrImg">
+            <div class="text-center text-white d-flex flex-row justify-content-center mt-2">
+                <h3 class="textFont1 mb-4 mt-4">@Localizer["String1"] @ViewBag.User</h3>      
+            @if (ViewBag.pict == null)
+            {
+                    <img src="/english.jpg" style="width:35px; height:35px;" class="rounded-circle img-fluid align-items-center ml-3 mb-4 mt-4">
+            }
+            else
+            {
+                    <img src="@ViewBag.pict" class="rounded-circle img-fluid align-items-center ml-3 mb-4 mt-4" style="width:40px; height:40px;">
+            }
+            </div>
+        </div>
+
+        <!--Отображение скеолько дней подряд занимался пользоваетель если если 0 то немного ругается! -->
+        @if(Model.Days != 0)
+        {
+            <div class="col text-center m-3">
+                     <h3>@Localizer["String2"]  @Model.Days  @Localizer["String3"]</h3>
+            </div>
+        }
+        else
+        {
+            <div class="col text-center m-3">
+                <h3>@Localizer["String4"]</h3>
+            </div>
+        }
+        <!--Отображение данных за каждый день-->
+        <div class="container-fluid d-flex justify-content-center mb-3" >
+            <img class="img-fluid col-md-7 img_back" src="~/english.jpg" alt="not found" />
+            @for (DateTime x = date2; x <= date1; x = x.AddDays(1))
+            {
+                string tmp = x.DayOfWeek.ToString();
+                string d = tmp.Substring(0, 3);
+                string day = $"/img/week/{d}.webp";
+                var words = Model.libraryEns.Where(w => w.DateTime.Day == x.Day).ToList();
+                var lessons = Model.rezults.Where(l => l.Data.Day == x.Day).ToList();
+                @if (words.Count != 0  || lessons.Count != 0)
+                {
+                    <div class="card mb-3 cardRez" 
+                id="@d" 
+                style="max-width: 540px;" 
+                hidden>
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="@day" class="img-fluid rounded-start" alt="@d">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">@Localizer[d] @x.ToLongDateString()</h5>
+                                @{
+                                    
+                                    var wordsStr = ""; foreach (var i in words)wordsStr = wordsStr + "; " + @i.WordEng;
+                                    <p class="card-text">@Localizer["String5"] - @words.Count
+                                    <small class="text-muted">@wordsStr</small></p>
+                                    List<string> words1 = new List<string>();
+                                    foreach (WordsLessonsDay w in Model.wordsLesson)
+                                    {
+                                        if (x.Day == w.date.Day) { words1 = w.words; break; }
+                                    }
+                                    string wordsLess = "";
+                                    foreach (string w in words1) wordsLess = wordsLess + w + ", ";
+                                    
+                                    var points = lessons.Sum(l => l.Gold);
+                                    var errors = lessons.Sum(l => l.Error);
+                                    var wordsLessons = words1.Count;
+                                    <p>@Localizer["String6"] - @lessons.Count. </p>
+                                    <p>@Localizer["String7"] - @points. </p>
+                                    <p>@Localizer["String8"] - @errors. </p>                                  
+                                    <p>@Localizer["String9"] - @wordsLessons: <small class="text-muted">@wordsLess</small></p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+                
+            }
+        </div>
+
+        <!--Данные в виде таблицы о результата пользователя за неделю-->
+        <table class="table-responsive-sm mb-3">
+            <tbody>
+                <tr>
+                    @for (DateTime x = date2; x <= date1; x = x.AddDays(1))
+                    {
+                        <th class="text-center mb-2 "><i class="bi bi-play-btn btn_icon" id="@x.DayOfWeek" style="font-size:30px;"></i></th>
+                    }
+                </tr>
+                <tr>
+                    @for (DateTime x = date2; x <= date1; x = x.AddDays(1))
+                    {
+                        <th class="text-center mb-2"><h4>@x.Day.@x.Month</h4></th>
+                    }
+                </tr>
+            <tr>
+                @for (DateTime x = date2; x <= date1; x = x.AddDays(1))
+                 {
+                        string tmp = x.DayOfWeek.ToString();
+                        string d = tmp.Substring(0, 3);
+                        <th class="text-center mb-2"><h4>@Localizer[d]</h4></th>
+                 }
+            </tr>
+            <tr>
+                    @for (DateTime x = date2; x <= date1; x = x.AddDays(1))
+                    {
+                        string tmp = x.DayOfWeek.ToString();
+                        string d = tmp.Substring(0, 3);
+                        string day = $"/img/week/{d}.webp";
+                        <th class="text-center"><img class="img rounded-circle mb-2 act_btn" 
+                            style="width:50px; height:50px; border:1px solid black; "
+                                 src="@day" alt="Card image cap" value="@d" />
+                        </th>
+                    }
+            </tr>
+            <tr>
+                    @for (DateTime x = date2; x <= date1; x = x.AddDays(1))
+                    {
+                        bool flg = false;
+                        foreach (Rezults r in Model.rezults)
+                        {
+                            if (x.Day == r.Data.Day && x.Month == r.Data.Month && x.Year == r.Data.Year)
+                            {
+                                <th class="text-center m-3">
+                                    <img class="img rounded-circle " style="width:50px; height:50px;"
+                                         src="https://cdn.pixabay.com/photo/2013/07/12/14/35/award-148546_1280.png" alt="Card image cap" />
+                                </th>
+                                flg = true;
+                                break;    
+                            }
+                        }
+                        if (!flg)
+                        {
+                            <th class="text-center m-3">
+                                <img class="img rounded-circle " style="width:50px; height:50px; "
+                                     src="https://cdn.pixabay.com/animation/2023/04/03/14/25/14-25-02-330_512.gif"  alt="Card image cap" />
+                            </th>
+                        }
+                    }                    
+            </tr>
+               
+            </tbody>    
+        </table>
+  
+    </div>
+</div>
+<script>
+    'strict'
+
+
+    let btn_icon = document.querySelectorAll(".btn_icon");
+    btn_icon.forEach(i=>{
+        i.addEventListener("click", function(){
+            let btn_icon = document.querySelectorAll(".cardRez");
+            btn_icon.forEach(e=>{
+                e.hidden = true;
+            });
+            document.querySelector(".img_back").hidden=true;
+            console.log(this);
+            let tmp = this.id;
+            tmp = tmp.substring(0, 3);
+
+            if(document.getElementById(tmp) != null){
+                document.getElementById(tmp).hidden = false;
+            }
+            else
+            {
+                document.querySelector(".img_back").hidden = false;
+            }
+        })
+    });
+
+</script>

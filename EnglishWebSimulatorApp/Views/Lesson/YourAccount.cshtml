@@ -23,11 +23,11 @@
             <div class="profile">
                 @if (Model.Pict == null)
                 {
-                    <img src="/img/userNull.png" width="80" class="rounded-circle img-fluid mt-3" style="border:1px solid black;">
+                    <img src="/img/userNull.png" style="width:90px; height:90px;" class="rounded-circle img-fluid mt-3border:1px solid black;" >
                 }
                 else
                 {
-                    <img src="@pict" class="rounded-circle mt-3" width="80" style="border:1px solid black;" >
+                    <img src="@pict" class="rounded-circle mt-3" style="width:90px; height:90px;border:1px solid black;" >
                 }
                 <form method="post" enctype="multipart/form-data" asp-controller="Lesson"
                 asp-action="UpdateImgUser">

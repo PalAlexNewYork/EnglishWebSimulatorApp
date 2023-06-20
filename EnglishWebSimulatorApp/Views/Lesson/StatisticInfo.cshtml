@@ -1,1 +1,263 @@
-﻿StatisticInfo
+﻿@model List<UserRezultParam>
+
+
+<div class="header_img">
+    <div class="container-fluid" >
+        <div class="row table-responsive-sm">
+            <div class="col-8">
+                <div class="row" style="height:70%;">
+                    <div class="col align-self-start">
+                        <div class="card card-style">
+                            <div class="text-center">
+                                <h3>1 место</h3>
+                            </div>
+                            <div class="upper">
+                                <img src="https://i.imgur.com/Qtrsrk5.jpg" class="img-fluid"/>
+                            </div>
+                            <div class="user text-center">
+                                <div class="profile">
+                                    
+                                    @if (Model[0].Pict == null)
+                                    {
+                                        <img src="/img/userNull.png" style="width:40px; height:40px; border:1px solid black;" class="rounded-circle img-fluid mt-3">
+                                    }
+                                    else
+                                    {
+                                        string imageBase64Data = Convert.ToBase64String(Model[0].Pict);
+                                        string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
+                                        string pict = imageDataURL;
+                                         <img src="@pict" class="rounded-circle mt-3" style="width:50px; height:50px; border:1px solid black;">
+                                    }
+                                    
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                @if (Model[0].User != null)
+                                {
+                                    <h4 class="mb-0 setNameTxt">@Model[0].User</h4>
+                                }
+                                else
+                                {
+                                    <h4 class="mb-0 setNameTxt">@Model[0].Email</h4>
+                                }
+                                <div class="d-flex justify-content-between align-items-center mt-4 px-4">
+
+                                    <div class="stats">
+                                        <h6 class="mb-0">@Localizer["Words"]</h6>
+                                        <span>@Model[0].NumberOfWords</span>
+                                    </div>
+
+                                    <div class="stats">
+                                        <h6 class="mb-0">@Localizer["Points"]</h6>
+                                        <span>@Model[0].Point</span>
+                                    </div>
+
+                                    <div class="stats">
+                                        <h6 class="mb-0">@Localizer["Lessons"]</h6>
+                                        <span>@Model[0].NumberOfLesson</span>
+                                    </div>
+
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col align-self-center">
+                         <div class="card card-style">
+                            <div class="text-center">
+                                <h3>2 место</h3>
+                            </div>
+                            <div class="upper">
+                                <img src="https://i.imgur.com/Qtrsrk5.jpg" class="img-fluid">
+                            </div>
+                            <div class="user text-center">
+                                <div class="profile">
+                                    @if (Model[1].Pict == null)
+                                    {
+                                        <img src="/img/userNull.png" style="width:40px; height:40px; border:1px solid black;" class="rounded-circle img-fluid mt-3">
+                                    }
+                                    else
+                                    {
+                                        string imageBase64Data = Convert.ToBase64String(Model[1].Pict);
+                                        string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
+                                        string pict = imageDataURL;
+                                        <img src="@pict" class="rounded-circle mt-3" style="width:50px; height:50px; border:1px solid black;">
+                                    }
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                @if (Model[1].User != null)
+                                {
+                                    <h4 class="mb-0 setNameTxt">@Model[1].User</h4>
+                                }
+                                else
+                                {
+                                    <h4 class="mb-0 setNameTxt">@Model[1].Email</h4>
+                                }
+                                <div class="d-flex justify-content-between align-items-center mt-4 px-4">
+                                    <div class="stats">
+                                        <h6 class="mb-0">@Localizer["Words"]</h6>
+                                        <span>@Model[1].NumberOfWords</span>
+                                    </div>
+                                    <div class="stats">
+                                        <h6 class="mb-0">@Localizer["Points"]</h6>
+                                        <span>@Model[1].Point</span>
+                                    </div>
+
+                                    <div class="stats">
+                                        <h6 class="mb-0">@Localizer["Lessons"]</h6>
+                                        <span>@Model[1].NumberOfLesson</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col align-self-end">
+                        <div class="card card-style">
+                            <div class="text-center">
+                                <h3>3 место</h3>
+                            </div>
+                            <div class="upper">
+                                <img src="https://i.imgur.com/Qtrsrk5.jpg" class="img-fluid">
+                            </div>
+                            <div class="user text-center">
+                                <div class="profile">
+                                    @if (Model[2].Pict == null)
+                                    {
+                                        <img src="/img/userNull.png" style="width:40px; height:40px; border:1px solid black;" class="rounded-circle img-fluid mt-3">
+                                    }
+                                    else
+                                    {
+                                        string imageBase64Data = Convert.ToBase64String(Model[2].Pict);
+                                        string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
+                                        string pict = imageDataURL;
+                                        <img src="@pict" class="rounded-circle mt-3" style="width:50px; height:50px; border:1px solid black;">
+                                    }
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="text-center">
+
+                                @if (Model[2].User != null)
+                                {
+                                    <h4 class="mb-0 setNameTxt">@Model[2].User</h4>
+                                }
+                                else
+                                {
+                                    <h4 class="mb-0 setNameTxt">@Model[2].Email</h4>
+                                }
+
+                                <div class="d-flex justify-content-between align-items-center mt-4 px-4">
+
+                                    <div class="stats">
+                                        <h6 class="mb-0">@Localizer["Words"]</h6>
+                                        <span>@Model[2].NumberOfWords</span>
+                                    </div>
+
+                                    <div class="stats">
+                                        <h6 class="mb-0">@Localizer["Points"]</h6>
+                                        <span>@Model[2].Point</span>
+                                    </div>
+
+                                    <div class="stats">
+                                        <h6 class="mb-0">@Localizer["Lessons"]</h6>
+                                        <span>@Model[2].NumberOfLesson</span>
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="horizontal-scroll-wrapper squares">
+                        @foreach(var i in Model)
+                        {
+                            <div>@i.Email</div>
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col p-0" >
+                <div class="col m-0" style="height:500px; background-color: rgba(50, 90, 50, 0.4)">
+                    <div class="textFont1" style="color:white; font-weight:bold;"><h4>@Localizer["String1"] @ViewBag.Place @Localizer["String2"].</h4></div>
+                    <div class="text-center d-flex justify-content-center align-items-center" >
+                        <div class="card card-style">
+                            <div class="text-center">
+                                <h3>@ViewBag.Place - место</h3>
+                            </div>
+                            <div class="upper">
+                                <img src="https://i.imgur.com/Qtrsrk5.jpg" class="img-fluid">
+                            </div>
+                            <div class="user text-center">
+                                <div class="profile">
+                                    @if (Model[2].Pict == null)
+                                    {
+                                        <img src="/img/userNull.png" style="width:40px; height:40px; border:1px solid black;" class="rounded-circle img-fluid mt-3">
+                                    }
+                                    else
+                                    {
+                                        string imageBase64Data = Convert.ToBase64String(Model[2].Pict);
+                                        string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
+                                        string pict = imageDataURL;
+                                        <img src="@pict" class="rounded-circle mt-3" style="width:50px; height:50px; border:1px solid black;">
+                                    }
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="text-center">
+
+                                @if (Model[ViewBag.Place - 1].User != null)
+                                {
+                                    <h4 class="mb-0 setNameTxt">@Model[ViewBag.Place-1].User</h4>
+                                }
+                                else
+                                {
+                                    <h4 class="mb-0 setNameTxt">@Model[ViewBag.Place-1].Email</h4>
+                                }
+
+                                <div class="d-flex justify-content-between align-items-center mt-4 px-4">
+
+                                    <div class="stats">
+                                        <h6 class="mb-0">@Localizer["Words"]</h6>
+                                        <span>@Model[ViewBag.Place-1].NumberOfWords</span>
+                                    </div>
+
+                                    <div class="stats">
+                                        <h6 class="mb-0">@Localizer["Points"]</h6>
+                                        <span>@Model[ViewBag.Place-1].Point</span>
+                                    </div>
+
+                                    <div class="stats">
+                                        <h6 class="mb-0">@Localizer["Lessons"]</h6>
+                                        <span>@Model[ViewBag.Place-1].NumberOfLesson</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                
+            </div>
+        </div>
+    </div>    
+</div>
+
+<script>
+    //$(document).ready(function () {
+       // $('.header_img').height($(window).height());
+    //})
+</script>

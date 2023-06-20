@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EnglishWebSimulatorApp.Models
 {
@@ -10,8 +11,9 @@ namespace EnglishWebSimulatorApp.Models
         public int Words { get; set; }
         public int Error { get; set; }
         public int Gold { get; set; }
+        public string IdWords { get; set; }
 
-        public Rezults(int id, DateTime data, string user, int words, int error, int gold)
+        public Rezults(int id, DateTime data, string user, int words, int error, int gold, string idWords)
         {
             Id = id;
             Data = data;
@@ -19,6 +21,7 @@ namespace EnglishWebSimulatorApp.Models
             Words = words;
             Error = error;
             Gold = gold;
+            IdWords = idWords;
         }
         public Rezults() { }
     }

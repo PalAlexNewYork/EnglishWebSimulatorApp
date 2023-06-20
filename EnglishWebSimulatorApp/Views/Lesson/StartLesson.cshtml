@@ -1,10 +1,22 @@
 ﻿
-<form asp-action="AddBook" asp-controller="Lesson"
+<form method="get" asp-action="AddBook" asp-controller="Lesson"
      class="container-fluid p-2" style="background-color:cornsilk; border:1px solid black;"> 
      <div style="text-align:center;"><h3>@Localizer["Title"]</h3></div>
 
     <table class="table">
         <tbody>
+            <tr>
+                <th scope="row"><input type="checkbox" name="check" class="check" onclick="onlyOne(this)" value="NumberWords" /></th>
+                <td class="d-flex justify-content-between">
+                    <label>@Localizer["String1"]</label>
+                    <div>
+                        <label>random</label>
+                        <input type="radio" name="radio" value="random" />
+                    </div>
+                    <input type="number" max="50" min="5" name="number" step="1" value="5" size="15"/>
+                    
+                </td>
+            </tr>
             <tr>
                 <th scope="row"><input type="checkbox" name="check" class="check" onclick="onlyOne(this)" value="tenWords" /></th>
                 <td><label>@Localizer["CheckBox"]</label></td>              

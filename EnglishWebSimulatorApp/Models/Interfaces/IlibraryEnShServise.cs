@@ -11,5 +11,7 @@ namespace EnglishWebSimulatorApp.Models.Interfaces
         public void DeleteAllWords();
         public int rightAnswer { get; set; }
         public int notRightAnswer { get; set; }
+        public string IdWords { get; set; }
+        public void AddIdWord(int id);
     }
 }

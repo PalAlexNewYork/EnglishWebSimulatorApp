@@ -15,8 +15,11 @@ namespace EnglishWebSimulatorApp.Models.Interfaces
         public List<Rezults> Rezults(string user);
         public void AddRezult(Rezults rezults);
         public EnglishWebSimulatorAppUser UserManager(string user);
+        public List<EnglishWebSimulatorAppUser> GetUsers();
         public EnglishWebSimulatorAppUser UpdateUser(EnglishWebSimulatorAppUser user);
-
+        public CombineResult GetRezultsWeek(string user);
+        public List<LibraryEnShow> ChoiceOfWords(string check, int number, string radio, string user);
+        public List<UserRezultParam> GetUserRezult();
 
     }
 }
