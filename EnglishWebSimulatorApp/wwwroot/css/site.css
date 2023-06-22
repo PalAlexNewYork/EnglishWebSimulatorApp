@@ -155,4 +155,17 @@ body {
         transform-origin: right top;
 }
 
+@media screen and (max-width: 480px) {
+    .card-style {
+        max-width: 120px;
+        margin:0;
+    }
+    .card-style {
+        max-width: 120px;
+    }
+    .row-style {
+        display:flex;
+        flex-wrap:wrap;
+    }
+}
 

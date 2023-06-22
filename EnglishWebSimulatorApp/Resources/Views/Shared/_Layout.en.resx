@@ -138,6 +138,18 @@
   <data name="StatisticInfo" xml:space="preserve">
     <value>Results of user</value>
   </data>
+  <data name="String1" xml:space="preserve">
+    <value>lesson 1 - a word by ear</value>
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value>lesson 2 - a word in English</value>
+  </data>
+  <data name="String3" xml:space="preserve">
+    <value>lesson 3 - the word in Russian</value>
+  </data>
+  <data name="String4" xml:space="preserve">
+    <value>Lessons</value>
+  </data>
   <data name="User'sPage" xml:space="preserve">
     <value>User's page</value>
   </data>

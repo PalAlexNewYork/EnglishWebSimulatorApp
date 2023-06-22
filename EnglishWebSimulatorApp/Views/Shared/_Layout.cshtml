@@ -125,10 +125,17 @@
 
                             </li>
 
-                            <li class="nav-item">
-
-                                <a class="btn btn-outline-dark m-1" asp-area="" asp-controller="Lesson" asp-action="StartLesson">@Localizer["navStartsApp"]</a>
-
+                            <li class="nav-item mr-1">
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @Localizer["String4"]
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" asp-controller="Lesson" asp-action="#">@Localizer["String1"]</a>
+                                        <a class="dropdown-item" asp-controller="Lesson" asp-action="#">@Localizer["String2"]</a>
+                                        <a class="dropdown-item" asp-controller="Lesson" asp-action="StartLesson">@Localizer["String3"]</a>
+                                    </div>
+                                </div>
                             </li>
 
                             <li class="nav-item">
