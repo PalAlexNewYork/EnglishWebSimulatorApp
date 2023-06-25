@@ -131,9 +131,9 @@
                                         @Localizer["String4"]
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" asp-controller="Lesson" asp-action="#">@Localizer["String1"]</a>
-                                        <a class="dropdown-item" asp-controller="Lesson" asp-action="#">@Localizer["String2"]</a>
-                                        <a class="dropdown-item" asp-controller="Lesson" asp-action="StartLesson">@Localizer["String3"]</a>
+                                        <a class="dropdown-item" asp-controller="Lesson" asp-action="StartLesson" asp-route-param="ear">@Localizer["String1"]</a>
+                                        <a class="dropdown-item" asp-controller="Lesson" asp-action="StartLesson" asp-route-param="wordEng">@Localizer["String2"]</a>
+                                        <a class="dropdown-item" asp-controller="Lesson" asp-action="StartLesson" asp-route-param="wordRu">@Localizer["String3"]</a>
                                     </div>
                                 </div>
                             </li>

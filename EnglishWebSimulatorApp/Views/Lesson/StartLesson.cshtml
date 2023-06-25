@@ -1,7 +1,14 @@
 ﻿
-<form method="get" asp-action="AddBook" asp-controller="Lesson"
+@{
+    var param = ViewBag.StartLesson;
+}
+
+
+<form method="get" asp-action="AddBook" asp-controller="Lesson" asp-route-param="@param"
      class="container-fluid p-2" style="background-color:cornsilk; border:1px solid black;"> 
      <div style="text-align:center;"><h3>@Localizer["Title"]</h3></div>
+
+     <input name="param" value="@param" hidden />
 
     <table class="table">
         <tbody>

@@ -20,17 +20,19 @@ namespace EnglishWebSimulatorApp.Controllers
             _servise = servise;
             this.libraryEnShService = libraryEnShService;
         }
+        
         //
         [HttpGet]
         [Route("StartLesson")]
-        public IActionResult StartLesson()
+        public IActionResult StartLesson(string param)
         {
+            ViewBag.StartLesson = param;
             return View();
         }
         //
         [HttpGet]
         [Route("AddBook")]
-        public IActionResult AddBook(string check, int number, string radio)
+        public IActionResult AddBook(string check, int number, string radio, string param)
         {
             List<LibraryEnShow> libraries = new List<LibraryEnShow>();
             if (check == "CheckWordsListUser")
@@ -53,12 +55,23 @@ namespace EnglishWebSimulatorApp.Controllers
                 }
                 ViewBag.right = libraryEnShService.rightAnswer;
                 ViewBag.notRight = libraryEnShService.notRightAnswer;
-                return View("Lesson", libraries);
+                    if (param == "ear")
+                    {
+                          return View("LessonEar", libraries);
+                    }
+                    else if (param == "wordEng")
+                    {
+                          return View("LessonWordEng", libraries);
+                    }
+                    else return View("Lesson", libraries);
+
                 }
                 else
                     return View("StartLesson");
             }
         }
+        //
+        
         //
         [HttpPost]
         [Route("LessonFormList")]
@@ -209,6 +222,10 @@ namespace EnglishWebSimulatorApp.Controllers
             return Redirect("YourAccount");
             
         }
+
+
+
+
 
         public IActionResult Index()
         {

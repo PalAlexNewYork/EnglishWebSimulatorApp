@@ -14,5 +14,6 @@ namespace EnglishWebSimulatorApp.Models
         public byte[] Pict { get; set; }
         public string SoundFilePath { get; set; }
         public DateTime DateTime { get; set; }
+        //public  string Thema { get; set; }
     }
 }
