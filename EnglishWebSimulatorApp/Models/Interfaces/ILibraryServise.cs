@@ -20,6 +20,7 @@ namespace EnglishWebSimulatorApp.Models.Interfaces
         public CombineResult GetRezultsWeek(string user);
         public List<LibraryEnShow> ChoiceOfWords(string check, int number, string radio, string user);
         public List<UserRezultParam> GetUserRezult();
+        public bool CompareWords(string word, LibraryEnShow wordObj, string lesson);
 
     }
 }

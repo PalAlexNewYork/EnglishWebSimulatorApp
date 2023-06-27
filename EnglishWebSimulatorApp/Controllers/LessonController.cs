@@ -40,7 +40,8 @@ namespace EnglishWebSimulatorApp.Controllers
                 var wordsUser = _servise.GetAll(User.Identity.Name.ToString());
                 List<MyTuple> wordsStr = new List<MyTuple>();
                 foreach (var i in wordsUser) wordsStr.Add(new MyTuple(i.WordEng, i.WordRus));
-                return View("CheckList", wordsStr);
+                if (param == "ear") ViewBag.lesson = "ear";
+                    return View("CheckList", wordsStr);
             }
             else
             {
@@ -57,11 +58,13 @@ namespace EnglishWebSimulatorApp.Controllers
                 ViewBag.notRight = libraryEnShService.notRightAnswer;
                     if (param == "ear")
                     {
-                          return View("LessonEar", libraries);
+                        ViewBag.lesson = "ear";
+                          return View("Lesson", libraries);
                     }
                     else if (param == "wordEng")
                     {
-                          return View("LessonWordEng", libraries);
+                        ViewBag.lesson = "WEng";
+                        return View("LessonWordEng", libraries);
                     }
                     else return View("Lesson", libraries);
 
@@ -71,11 +74,9 @@ namespace EnglishWebSimulatorApp.Controllers
             }
         }
         //
-        
-        //
         [HttpPost]
         [Route("LessonFormList")]
-        public IActionResult LessonFormList(IEnumerable<string> groups)
+        public IActionResult LessonFormList(IEnumerable<string> groups, string lesson)
         {
             var words = _servise.librariesShow(_servise.GetAll(User.Identity.Name.ToString()));
             List<LibraryEnShow> libraries = new List<LibraryEnShow>();
@@ -87,18 +88,19 @@ namespace EnglishWebSimulatorApp.Controllers
                 }            
             }
             libraryEnShService.DeleteAllWords();
-            foreach (var lib in libraries) libraryEnShService.AddWordLibEnSh(lib);  
-            return View("Lesson", libraries);
+            foreach (var lib in libraries) libraryEnShService.AddWordLibEnSh(lib);
+            if (lesson == "ear") ViewBag.lesson = lesson;
+                return View("Lesson", libraries);
         }
-        //
+
         [HttpPost]
         [Route("Check")]
-        public IActionResult Check(string word, string wordRu)
+        public IActionResult Check(string word, string wordRu, string lesson)
         {
             var libraries = libraryEnShService.GetAll();
             var wordObj = libraries.FirstOrDefault(w => w.WordRus == wordRu);
             bool isError = false;
-            if (wordObj.WordEng.Equals(word, System.StringComparison.OrdinalIgnoreCase)) 
+            if (_servise.CompareWords(word, wordObj, lesson))
             {
                 libraryEnShService.rightAnswer += 1;
                 libraryEnShService.DeleteWord(wordObj);
@@ -113,12 +115,24 @@ namespace EnglishWebSimulatorApp.Controllers
             ViewBag.right = libraryEnShService.rightAnswer;
             ViewBag.notRight = libraryEnShService.notRightAnswer;
             ViewBag.isError = isError;
+
             if (libraryEnShService.GetCountWords() == 0)
             {
                 return View("EndLesson");
             }
             else
-            return View("Lesson", libraries_redirect);
+            {
+                if (lesson == "ear") {
+                    ViewBag.lesson = "ear";
+                    return View("Lesson", libraries_redirect); 
+                }
+                else if(lesson == "WEng")
+                {
+                    ViewBag.lesson = "WEng";
+                    return View("LessonWordEng", libraries_redirect);
+                }
+                else return View("Lesson", libraries_redirect);
+            } 
         }
         //
         [HttpPost]

@@ -19,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            <form asp-action="LessonFormList" asp-controller="Lesson" method="post">
+            <form asp-action="LessonFormList" asp-controller="Lesson" asp-route-lesson="@ViewBag.lesson" method="post">
                 
                 @foreach (var i in Model)
                 {

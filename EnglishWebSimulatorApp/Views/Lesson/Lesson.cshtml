@@ -28,13 +28,36 @@
     "four.webp",
     "five.webp"
     };
-
 }
 
 <div class="container-fluid m-2" style="background-color:lightblue; border:1px solid black;">
     <h3 class="d-flex justify-content-center m-2">@Localizer["TitleThree"]</h3>
-  <div class="container-fluid" style="text-align:center;">
-      <div class="row">
+    <div class="m-2" style="text-align:center;">
+
+        @if (ViewBag.lesson != null && Model[index].Sound != null)
+        {
+            <audio autoplay="autoplay" class="testAudio" hidden src="~/sounds/@Model[index].Sound" type="audio/mpeg">
+            </audio>
+            <i class="bi bi-play-btn playAudio" style="font-size:30px; text-align:center;"></i>
+        }
+        else
+        {
+            <div class="m-2" style="text-align:center;">
+                <h4>@Model[index].WordRus</h4>
+            </div>
+        }
+
+        <form method="post" asp-controller="Lesson" asp-action="Check" asp-route-wordRu="@Model[index].WordRus" 
+        asp-route-lesson="@ViewBag.lesson">
+            <input type="text" name="word">
+            <div>
+                <button type="submit" class="btn btn-outline-dark m-2">@Localizer["Check"]</button>
+            </div>
+        </form>
+
+    </div>
+    <div class="container-fluid" style="text-align:center;">
+        <div class="row">
             <div class="col-md-6">
                 <table class="table">
                     <thead class="thead-dark">
@@ -66,95 +89,102 @@
                                 {
                                     @if (!ViewBag.IsError)
                                     {
-                                        <img src="/upset/@upset[iRanUpset]" class="img-fluid"/>
+                                        <img src="/upset/@upset[iRanUpset]" class="img-fluid" />
                                     }
                                 }
                             </td>
 
-                            
+
                         </tr>
                     </tbody>
                 </table>
                 <div class="row d-flex justify-content-center"><h6>Help. Click!</h6></div>
-                <div class="row d-flex justify-content-center"><i class="bi bi-question-octagon-fill icon" style="font-size:20px;"></i></div>
+                <div class="row d-flex justify-content-center"><i class="bi bi-question-octagon-fill icon_help" style="font-size:20px;"></i></div>
             </div>
-            <div class="col-md-6" style="border:1px solid black;">
-                @if (Model[index].Pict != null)
+            <div class="col-md-6 d-flex flex-column justify-content-center" style="border:1px solid black;">
+
+                @if(ViewBag.lesson == "ear")
                 {
-                    <img src="@Model[index].Pict" class="img-fluid imgFront" hidden/>
+                    <div class="d-flex justify-content-center">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-chevron-expand icon_wordRus" hidden style="font-size: 35px;"></i>
+                        <span class="text-center align-items-center text_wordRus" hidden>@Model[index].WordRus</span>
+                    </div>
+                    </div>
                 }
-                
-                    <img src="/english.jpg" class="img-fluid imgBack"/>
-                
-                
-                @if (Model[index].Sound != null)
+                else
                 {
                     <audio class="testAudio" hidden src="~/sounds/@Model[index].Sound" type="audio/mpeg">
                     </audio>
                     <i class="bi bi-play-btn playAudio" hidden style="font-size:30px; text-align:center;"></i>
                 }
-                <div>
-                    <i class="bi bi-arrow-repeat text-center help" hidden style="font-size:30px;"></i>
-                    <p class="text-center text-help" hidden>@Model[index].WordEng</p>
+
+
+                <div class="d-flex justify-content-center">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-arrow-repeat text-center help" hidden style="font-size:35px;"></i>
+                        <span class="text-center align-items-center  text-help " hidden>@Model[index].WordEng</span>
+                    </div>
                 </div>
                 
-                
-            </div>
-    
+                @if (Model[index].Pict != null)
+                {
+                    <img src="@Model[index].Pict" class="img-fluid imgFront" hidden />
+                }
+
+                <img src="/english.jpg" class="img-fluid imgBack" />
             
-      </div>
-       
-  </div>
-   <div class="m-2" style="text-align:center;">
-        <h4>@Model[index].WordRus</h4>
-        @{
-            ViewBag.wordRu = Model[index].WordRus;
-        }
-        <form method="post" asp-controller="Lesson" asp-action="Check" asp-route-wordRu="@ViewBag.wordRu">
-            <input type="text" name="word">
-            <div>
-                <button type="submit" class="btn btn-outline-dark m-2">@Localizer["Check"]</button>
             </div>
-        </form>
-   </div>
-  
+        </div>
+    </div>
+    
+
 </div>
 
-            <script>
+<script>
 
-                let icon = document.querySelector(".icon");
-                let imgBack = document.querySelector(".imgBack");
-                let imgFront = document.querySelector(".imgFront");
-                let playAudio = document.querySelector(".playAudio");
-                let help = document.querySelector(".help");
-                let text_help = document.querySelector(".text-help");
-         
-                if(imgFront!=null || playAudio!=null)
-                {
-                        console.log(icon);
-                        icon.addEventListener("click", ()=>{
-                       //console.log(playAudio);
-                        imgBack.hidden = true;
-                        imgFront.hidden = false;
-                        playAudio.hidden = false;
-                        help.hidden= false;
-                        });
-                        let audio = document.querySelector(".testAudio");
-                        //console.log(audio);
+    let icon_help = document.querySelector(".icon_help");
+    let imgBack = document.querySelector(".imgBack");
+    let imgFront = document.querySelector(".imgFront");
+    let playAudio = document.querySelector(".playAudio");
+    let help = document.querySelector(".help");
+    let text_help = document.querySelector(".text-help");
+    let icon_wordRus = document.querySelector(".icon_wordRus");
+    let text_wordRus = document.querySelector(".text_wordRus");
+    let audio = document.querySelector(".testAudio");
 
-                        help.addEventListener("click", ()=>{
-                            if (!text_help.hidden)
-                            text_help.hidden = true;
-                            else 
-                            text_help.hidden = false;
-                        });
+    if (imgFront != null || playAudio != null) {
+        console.log(icon_wordRus);
+        icon_help.addEventListener("click", () => {
+            imgBack.hidden = true;
+            imgFront.hidden = false;
+            playAudio.hidden = false;
+            help.hidden = false;
+            if (icon_wordRus!=null)
+            icon_wordRus.hidden = false;
+        });
 
-                        playAudio.addEventListener("click", function () {
-                        audio.play();
-                                 });
-                         }
-                   
+        help.addEventListener("click", () => {
+            if (!text_help.hidden)
+                text_help.hidden = true;
+            else
+                text_help.hidden = false;
+        });
 
-    
-
-            </script>
+        if (icon_wordRus != null)
+        {
+        icon_wordRus.addEventListener("click", ()=>{
+            if (!text_wordRus.hidden)
+                text_wordRus.hidden = true;
+            else
+                text_wordRus.hidden = false;
+        });
+        }
+        
+        console.log(playAudio);
+        playAudio.addEventListener("click", function () {
+            console.log(audio);
+            audio.play();
+        });  
+    }
+</script>
