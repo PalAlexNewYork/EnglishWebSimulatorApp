@@ -1,5 +1,6 @@
 ﻿using EnglishWebSimulatorApp.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 
 namespace EnglishWebSimulatorApp.Models.Interfaces
@@ -21,6 +22,7 @@ namespace EnglishWebSimulatorApp.Models.Interfaces
         public List<LibraryEnShow> ChoiceOfWords(string check, int number, string radio, string user);
         public List<UserRezultParam> GetUserRezult();
         public bool CompareWords(string word, LibraryEnShow wordObj, string lesson);
-
+        public LibraryEn GetWordsId(int id, string user);
+        public Tuple<int, List<string>> SetSelectDateTheme(string theme, string user);
     }
 }

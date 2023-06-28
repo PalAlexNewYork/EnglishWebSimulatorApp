@@ -3,6 +3,13 @@
 @{
     var WId = 0;
     WId = Model == null ? 0 : Model.Id;
+    string pict = "";
+}
+@if (Model.Pict != null)
+{
+    string imageBase64Data = Convert.ToBase64String(Model.Pict);
+    string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
+    pict = imageDataURL;
 }
 
 <div class="container" style="background-color:antiquewhite;">
@@ -16,7 +23,7 @@
         <div class="container col-3 m-2" style="border:1px solid black;">
             @if (Model.Pict != null)
             {
-                <img class="card-img-top img-fluid m-2" src="@ViewBag.PathImg" >
+                <img class="card-img-top img-fluid m-2" src="@pict" >
             }
             @if (Model.SoundFilePath != null)
             {
@@ -81,27 +88,68 @@
             <span asp-validation-for="Pict" class="text-danger"></span>
         </div>
 
-
-        <div class="horizontal-space-evenly pb-2">
-            <input class="btn btn-success" type="submit" value="✓" />
-            <a href="/ShowWords" class="btn btn-danger">✕</a>
+        <div class="form-group">
+            <label>@Localizer["Thema"]</label>
+            <div class="d-flex justify-content-between">
+                <div class="d-flex align-items-center">
+                    <select name="Thema" asp-items="@ViewBag.SelectList" class="mr-2">
+                    </select>
+                    <i class="bi bi-pencil-square pencil" style="font-size:30px;" id="bi_pensil"></i>
+                </div>
+                
+                <div class="horizontal-space-evenly pb-2">
+                    <input class="btn btn-success" type="submit" value="✓" />
+                    <a href="/ShowWords" class="btn btn-danger">✕</a>
+                </div>
+            </div>
         </div>
-
+       
     </form>
+    <form method="get" asp-controller="Home"
+          asp-action="AddWords"  
+    >
+        <label hidden id="label">@Localizer["Adding a new themes!"]</label>
+        <input type="text" id="name_theme" hidden
+               name="name" />
+        @if (Model != null)
+        {
+             <input type="number" id="name_theme" hidden
+               name="id" value="@Model.Id" />      
+        }
+       
+        <button hidden class="btn btn-success" id="btn_themes" type="submit">✓</button>
+    </form>
+
 </div>
 
 
 <script type="text/javascript">
-    var elem = document.querySelector(".playAudio");
-    var audio = document.querySelector(".testAudio");
+    let elem = document.querySelector(".playAudio");
+    let audio = document.querySelector(".testAudio");
+    let pensil = document.getElementById("bi_pensil");
+    
+
+    pensil.addEventListener("click", function(){
+        console.log(pensil);
+    console.log(document.getElementById('file'));
+    console.log(document.getElementById('btn_themes'));
+        console.log(document.getElementById('label'));
+        document.getElementById('name_theme').hidden = false;
+        document.getElementById('btn_themes').hidden = false;
+        document.getElementById('label').hidden = false;
+    });
+    
     console.log(elem);
     console.log(audio);
 
-        elem.addEventListener("click", function () {
-            audio.play();
-        }
-        )
+ 
 
+    if(elem!=null){
+    elem.addEventListener("click", function () {
+            audio.play();
+        });
+    }
+        
    
 
 </script>

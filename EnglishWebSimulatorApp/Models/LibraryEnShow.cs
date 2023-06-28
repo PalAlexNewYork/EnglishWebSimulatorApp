@@ -8,5 +8,6 @@
         public string User { get; set; }
         public string Pict { get; set; }
         public string Sound { get; set; }
+        public string Thema { get; set; }
     }
 }

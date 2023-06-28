@@ -3,12 +3,16 @@ using EnglishWebSimulatorApp.Models.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace EnglishWebSimulatorApp.Controllers
 {
@@ -48,16 +52,25 @@ namespace EnglishWebSimulatorApp.Controllers
         //
         [HttpGet]
         [Route("AddWords")]
-        public IActionResult AddWords(int id) 
+        public IActionResult AddWords(int id, string name) 
         {
-            var word = _servise.GetAll(User.Identity.Name.ToString()).FirstOrDefault(w => w.Id == id);
-            var wordShow = _servise.librariesShow(_servise.GetAll(User.Identity.Name.ToString())).FirstOrDefault(w => w.Id == id);
-            if (word == null)
-                return View("AddWords");
+            if (id != 0)
+            {
+                var word = _servise.GetWordsId(id, User.Identity.Name.ToString());
+                var turple = _servise.SetSelectDateTheme(word.Thema, User.Identity.Name.ToString());
+                if (name != null) turple.Item2.Add(name);
+                SelectList selects = new SelectList(turple.Item2, turple.Item2[turple.Item1]);
+                ViewBag.SelectList = selects;
+                ViewBag.PathImg = word.Pict;
+                return View("AddWords", word);
+            }
             else 
             {
-                ViewBag.PathImg = wordShow.Pict;
-                return View("AddWords", word);
+                var turple = _servise.SetSelectDateTheme(null, User.Identity.Name.ToString());
+                if (name != null) turple.Item2.Add(name);
+                SelectList selects = new SelectList(turple.Item2, turple.Item2[turple.Item1]);
+                ViewBag.SelectList = selects;
+                return View("AddWords");
             }
         }
         //
@@ -66,7 +79,6 @@ namespace EnglishWebSimulatorApp.Controllers
         public async Task<IActionResult> AddWordsMethod(LibraryEn word, IFormFile file, IFormFile fileOne) 
         {
             int word_id = 0;
-
             word.User = User.Identity.Name.ToString();
             word.DateTime = DateTime.Now;
             if (word.Id == 0)
@@ -146,7 +158,7 @@ namespace EnglishWebSimulatorApp.Controllers
         [Route("ShowWords")]
         public IActionResult ShowWords(int word_id) 
         {
-          var words =   _servise.GetAll(User.Identity.Name.ToString());
+            var words =   _servise.GetAll(User.Identity.Name.ToString());
             var list = _servise.librariesShow(words);
             var rnd = new Random();
             var randomized = list.OrderBy(item => rnd.Next()).ToList();
@@ -157,6 +169,9 @@ namespace EnglishWebSimulatorApp.Controllers
                 randomized[index] = randomized[0];
                 randomized[0] = item;
             }
+            var turple = _servise.SetSelectDateTheme(null, User.Identity.Name.ToString());
+            SelectList selects = new SelectList(turple.Item2, turple.Item2[turple.Item1]);
+            ViewBag.SelectList = selects;
             return View("ShowWords", randomized);
         }
         //

@@ -8,6 +8,13 @@
             <input type="text" name="text"/>
             <button type="submit" name="text" class="btn btn-outline-dark">Find</button>
         </form>
+        <form method="get" asp-controller="Home" asp-action="FineWordsTheme">
+            <div class="d-flex align-items-center">
+                <select name="Thema" asp-items="@ViewBag.SelectList" class="mr-2">
+                </select>
+            </div>
+            <button type="submit" name="text" class="btn btn-outline-dark">Find</button>
+        </form>
      </div>
   
             <div class="container d-flex justify-content-between p-2" style="flex-wrap:wrap;">

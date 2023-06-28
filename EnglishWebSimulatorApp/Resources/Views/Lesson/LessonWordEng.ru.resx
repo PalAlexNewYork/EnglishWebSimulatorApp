@@ -117,28 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Adding a new themes!" xml:space="preserve">
-    <value>Добавление новой темы!</value>
+  <data name="Check" xml:space="preserve">
+    <value>Проверить</value>
   </data>
-  <data name="Pic" xml:space="preserve">
-    <value>Введите изображение для запоминания (не обязательно)</value>
+  <data name="False" xml:space="preserve">
+    <value>Не верно</value>
   </data>
-  <data name="Sound" xml:space="preserve">
-    <value>Введие произношение слова (не обязательно)</value>
+  <data name="TitleThree" xml:space="preserve">
+    <value>Образовательный процесс</value>
   </data>
-  <data name="Thema" xml:space="preserve">
-    <value>Тема</value>
+  <data name="True" xml:space="preserve">
+    <value>Верно</value>
   </data>
-  <data name="Tittle" xml:space="preserve">
-    <value>Заполните форму для добавления слова</value>
-  </data>
-  <data name="Update" xml:space="preserve">
-    <value>Форма для изменения слова</value>
-  </data>
-  <data name="WordEn" xml:space="preserve">
-    <value>Введите английское слово</value>
-  </data>
-  <data name="WordRu" xml:space="preserve">
-    <value>Введите русское слово</value>
+  <data name="Words" xml:space="preserve">
+    <value>Слова</value>
   </data>
 </root>

@@ -4,14 +4,16 @@ using EnglishWebSimulatorApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EnglishWebSimulatorApp.Migrations
 {
     [DbContext(typeof(EnglishWebSimulatorAppContext))]
-    partial class EnglishWebSimulatorAppContextModelSnapshot : ModelSnapshot
+    [Migration("20230627164227_eight_initial")]
+    partial class eight_initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

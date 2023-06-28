@@ -71,6 +71,7 @@ namespace EnglishWebSimulatorApp.Models.Servise
                 }
                 if (word.SoundFilePath != null)
                     tmp.Sound = word.SoundFilePath;
+                    tmp.Thema = word.Thema;
                 list.Add(tmp);
             }
             return list;
@@ -297,6 +298,17 @@ namespace EnglishWebSimulatorApp.Models.Servise
                 else
                     return false;
             }
+        }
+
+        public LibraryEn GetWordsId(int id, string user) =>libratyRepository.GetAll().Where(w => w.User == user).ToList().FirstOrDefault(w => w.Id == id);
+
+        public Tuple<int, List<string>> SetSelectDateTheme(string theme, string user)
+        {
+            var themas_tmp = libratyRepository.GetAll().Where(w => w.User == user).ToList().Select(x => x.Thema);
+            List<string> themas = new HashSet<string>(themas_tmp).ToList();
+            int ind = 0;
+            if (theme != null) foreach (var i in themas) { if (i == theme) break; ++ind; }
+            return Tuple.Create(ind, themas);
         }
     }
 }
