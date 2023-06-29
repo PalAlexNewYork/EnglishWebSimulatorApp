@@ -44,10 +44,19 @@
                 <th scope="row"><input type="checkbox" name="check" class="check" onclick="onlyOne(this)" value="CheckWordsListUser" /></th>
                 <td>@Localizer["CheckBoxFour"]</td>            
             </tr>
+            <tr>
+                <th scope="row"><input type="checkbox" name="check" class="check" onclick="onlyOne(this)" value="WordsThemes"/></th>
+                <td class="d-flex justify-content-between">
+                    <label>@Localizer["CheckThemes"]</label>
+                    <div class="d-flex align-items-center">
+                        <img src="/img/icons/searchmagnifierinterfacesymbol_79894.png" class="btn_icon mr-1" />
+                        <select name="Theme" name="text" asp-items="@ViewBag.Select" class="mr-2"></select>
+                    </div>
+                </td>
+            </tr>
         </tbody>
     </table>
         <button class="btn btn-outline-info">@Localizer["Check"]</button>
-     </div>
  </form>
 
  <script>

@@ -135,6 +135,9 @@
   <data name="CheckBoxTwo" xml:space="preserve">
     <value>Загрузить все слова данного пользователя</value>
   </data>
+  <data name="CheckThemes" xml:space="preserve">
+    <value>Слова по выбранной теме</value>
+  </data>
   <data name="String1" xml:space="preserve">
     <value>Выбери нужное количество слов</value>
   </data>

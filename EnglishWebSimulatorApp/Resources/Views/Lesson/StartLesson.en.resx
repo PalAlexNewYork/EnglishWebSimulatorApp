@@ -135,6 +135,9 @@
   <data name="CheckBoxTwo" xml:space="preserve">
     <value>Download all the words of this user</value>
   </data>
+  <data name="CheckThemes" xml:space="preserve">
+    <value>Words on the selected topic</value>
+  </data>
   <data name="String1" xml:space="preserve">
     <value>Choose the number of words</value>
   </data>

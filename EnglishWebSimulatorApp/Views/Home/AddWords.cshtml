@@ -5,12 +5,6 @@
     WId = Model == null ? 0 : Model.Id;
     string pict = "";
 }
-@if (Model.Pict != null)
-{
-    string imageBase64Data = Convert.ToBase64String(Model.Pict);
-    string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
-    pict = imageDataURL;
-}
 
 <div class="container" style="background-color:antiquewhite;">
     @if (Model == null)
@@ -23,6 +17,9 @@
         <div class="container col-3 m-2" style="border:1px solid black;">
             @if (Model.Pict != null)
             {
+                string imageBase64Data = Convert.ToBase64String(Model.Pict);
+                string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
+                pict = imageDataURL;
                 <img class="card-img-top img-fluid m-2" src="@pict" >
             }
             @if (Model.SoundFilePath != null)

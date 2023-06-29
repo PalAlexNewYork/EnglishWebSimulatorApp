@@ -3,6 +3,7 @@ using EnglishWebSimulatorApp.Data;
 using EnglishWebSimulatorApp.Models.Interfaces;
 using EnglishWebSimulatorApp.Models.Repository;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Microsoft.VisualBasic;
@@ -49,6 +50,7 @@ namespace EnglishWebSimulatorApp.Models.Servise
             w.WordEng = en.WordEng;
             w.SoundFilePath = en.SoundFilePath;
             w.Pict = en.Pict;
+            w.Thema = en.Thema;
             this.context.Entry(w).State = EntityState.Modified;
             context.SaveChanges();
         }
@@ -71,7 +73,7 @@ namespace EnglishWebSimulatorApp.Models.Servise
                 }
                 if (word.SoundFilePath != null)
                     tmp.Sound = word.SoundFilePath;
-                    tmp.Thema = word.Thema;
+                tmp.Thema = word.Thema;
                 list.Add(tmp);
             }
             return list;
@@ -194,7 +196,7 @@ namespace EnglishWebSimulatorApp.Models.Servise
             return rezultDay;
         }
 
-        public List<LibraryEnShow> ChoiceOfWords(string check, int number, string radio, string user)
+        public List<LibraryEnShow> ChoiceOfWords(string check, int number, string radio, string user, string text)
         {
             var l = libratyRepository.GetAll().Where(w => w.User == user).ToList();
             var libraries = this.librariesShow(l);
@@ -241,6 +243,8 @@ namespace EnglishWebSimulatorApp.Models.Servise
             }
             else if (check == "GetWordsUser")
                 return libraries;
+            else if (check == "WordsThemes")  
+                libraries = libraries.Where(w => w.Thema == text).ToList();
             else
                 libraries = null;
             return libraries;
@@ -291,7 +295,7 @@ namespace EnglishWebSimulatorApp.Models.Servise
                         return false;
                 }
             }
-            else 
+            else
             {
                 if (wordObj.WordEng.Equals(word, System.StringComparison.OrdinalIgnoreCase))
                     return true;
@@ -300,15 +304,20 @@ namespace EnglishWebSimulatorApp.Models.Servise
             }
         }
 
-        public LibraryEn GetWordsId(int id, string user) =>libratyRepository.GetAll().Where(w => w.User == user).ToList().FirstOrDefault(w => w.Id == id);
+        public LibraryEn GetWordsId(int id, string user) => libratyRepository.GetAll().Where(w => w.User == user).ToList().FirstOrDefault(w => w.Id == id);
 
-        public Tuple<int, List<string>> SetSelectDateTheme(string theme, string user)
+        public SelectList SetSelectDateTheme(string theme, string user, string name)
         {
             var themas_tmp = libratyRepository.GetAll().Where(w => w.User == user).ToList().Select(x => x.Thema);
             List<string> themas = new HashSet<string>(themas_tmp).ToList();
+            if (name != null) themas.Add(name);
             int ind = 0;
             if (theme != null) foreach (var i in themas) { if (i == theme) break; ++ind; }
-            return Tuple.Create(ind, themas);
+            return new SelectList(themas, themas[ind]);
         }
+
+        public List<LibraryEnShow> GetLibrariesShowThema(string text, string user) =>
+                                            this.librariesShow(libratyRepository.GetAll().Where(w => w.User == user && w.Thema == text).ToList());
+    
     }
 }

@@ -144,6 +144,9 @@
   <data name="Sound" xml:space="preserve">
     <value>Sound</value>
   </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Words on the topic of</value>
+  </data>
   <data name="Tittle" xml:space="preserve">
     <value>Dictionary Library</value>
   </data>

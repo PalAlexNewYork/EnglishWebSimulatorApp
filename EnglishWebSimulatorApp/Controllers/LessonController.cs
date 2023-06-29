@@ -2,6 +2,7 @@
 using EnglishWebSimulatorApp.Models.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,13 +27,15 @@ namespace EnglishWebSimulatorApp.Controllers
         [Route("StartLesson")]
         public IActionResult StartLesson(string param)
         {
-            ViewBag.StartLesson = param;
+           ViewBag.StartLesson = param;
+           var selects =  _servise.SetSelectDateTheme(null, User.Identity.Name.ToString(), null); 
+           ViewBag.Select = selects;
             return View();
         }
         //
         [HttpGet]
         [Route("AddBook")]
-        public IActionResult AddBook(string check, int number, string radio, string param)
+        public IActionResult AddBook(string check, int number, string radio, string param, string text)
         {
             List<LibraryEnShow> libraries = new List<LibraryEnShow>();
             if (check == "CheckWordsListUser")
@@ -45,7 +48,7 @@ namespace EnglishWebSimulatorApp.Controllers
             }
             else
             {
-                libraries = _servise.ChoiceOfWords(check, number, radio, User.Identity.Name.ToString());
+                libraries = _servise.ChoiceOfWords(check, number, radio, User.Identity.Name.ToString(), text);
                 if (libraries != null) 
                 {
                 libraryEnShService.DeleteAllWords();
@@ -153,6 +156,8 @@ namespace EnglishWebSimulatorApp.Controllers
             {
                 _servise.AddRezult(rezults);
             }
+            var selects = _servise.SetSelectDateTheme(null, User.Identity.Name.ToString(), null);
+            ViewBag.Select = selects;
             return View("StartLesson");
         }
         //

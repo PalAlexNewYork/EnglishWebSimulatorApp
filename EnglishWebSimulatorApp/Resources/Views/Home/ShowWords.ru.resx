@@ -147,6 +147,9 @@
   <data name="Sound" xml:space="preserve">
     <value>Произношение</value>
   </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Слова по теме</value>
+  </data>
   <data name="Tittle" xml:space="preserve">
     <value>Словарная библиотека </value>
   </data>

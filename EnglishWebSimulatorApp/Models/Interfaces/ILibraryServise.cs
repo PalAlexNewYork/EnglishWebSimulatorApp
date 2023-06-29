@@ -1,5 +1,6 @@
 ﻿using EnglishWebSimulatorApp.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 
@@ -19,10 +20,11 @@ namespace EnglishWebSimulatorApp.Models.Interfaces
         public List<EnglishWebSimulatorAppUser> GetUsers();
         public EnglishWebSimulatorAppUser UpdateUser(EnglishWebSimulatorAppUser user);
         public CombineResult GetRezultsWeek(string user);
-        public List<LibraryEnShow> ChoiceOfWords(string check, int number, string radio, string user);
+        public List<LibraryEnShow> ChoiceOfWords(string check, int number, string radio, string user, string text);
         public List<UserRezultParam> GetUserRezult();
         public bool CompareWords(string word, LibraryEnShow wordObj, string lesson);
         public LibraryEn GetWordsId(int id, string user);
-        public Tuple<int, List<string>> SetSelectDateTheme(string theme, string user);
+        public SelectList SetSelectDateTheme(string theme, string user, string name);
+        public List<LibraryEnShow> GetLibrariesShowThema(string text, string user);
     }
 }

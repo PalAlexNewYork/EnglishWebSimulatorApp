@@ -8,16 +8,24 @@
             <input type="text" name="text"/>
             <button type="submit" name="text" class="btn btn-outline-dark">Find</button>
         </form>
-        <form method="get" asp-controller="Home" asp-action="FineWordsTheme">
+        @if (@ViewBag.SelectList != null)
+        {
+            <form method="get" asp-controller="Home" asp-action="FineWordsTheme">
             <div class="d-flex align-items-center">
-                <select name="Thema" asp-items="@ViewBag.SelectList" class="mr-2">
-                </select>
+                <img src="/img/icons/searchmagnifierinterfacesymbol_79894.png" class="btn_icon mr-1" />
+                <select name="Thema" name="text" asp-items="@ViewBag.SelectList" class="mr-2"></select>
             </div>
-            <button type="submit" name="text" class="btn btn-outline-dark">Find</button>
-        </form>
+            <button type="submit" hidden name="text" class="btn btn-outline-dark btn_find">Find</button>
+        </form>   
+        }
+        
      </div>
   
-            <div class="container d-flex justify-content-between p-2" style="flex-wrap:wrap;">
+    @if (ViewBag.Theme != null)
+    {
+        <div class="d-flex justify-content-center"><h3>@Localizer["Theme"] - @ViewBag.Theme</h3></div>
+    }
+    <div class="container d-flex justify-content-between p-2" style="flex-wrap:wrap;">
                 @foreach (var i in Model)
                 {
                     <div class="card m-2" style="width: 12rem;">
@@ -55,10 +63,11 @@
  </div>
 
 <script type="text/javascript">
-    var elem = document.querySelectorAll(".playAudio");
-    var audio = document.querySelectorAll(".testAudio");
-    console.log(elem);
-    console.log(audio);
+    let elem = document.querySelectorAll(".playAudio");
+    let audio = document.querySelectorAll(".testAudio");
+    
+    //console.log(elem);
+    //console.log(audio);
     for(let i= 0; i<elem.length; i++)
     {
         elem[i].addEventListener("click", function()
@@ -66,7 +75,12 @@
             audio[i].play();
         }
         )
-    
+    }
+
+    if (document.querySelector(".btn_icon") != null){
+        document.querySelector(".btn_icon").addEventListener("click", function(){
+            document.querySelector(".btn_find").click();
+       }); 
     }
    
 </script>

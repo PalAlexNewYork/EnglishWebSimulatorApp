@@ -57,19 +57,13 @@ namespace EnglishWebSimulatorApp.Controllers
             if (id != 0)
             {
                 var word = _servise.GetWordsId(id, User.Identity.Name.ToString());
-                var turple = _servise.SetSelectDateTheme(word.Thema, User.Identity.Name.ToString());
-                if (name != null) turple.Item2.Add(name);
-                SelectList selects = new SelectList(turple.Item2, turple.Item2[turple.Item1]);
-                ViewBag.SelectList = selects;
+                ViewBag.SelectList = _servise.SetSelectDateTheme(word.Thema, User.Identity.Name.ToString(), name);
                 ViewBag.PathImg = word.Pict;
                 return View("AddWords", word);
             }
             else 
             {
-                var turple = _servise.SetSelectDateTheme(null, User.Identity.Name.ToString());
-                if (name != null) turple.Item2.Add(name);
-                SelectList selects = new SelectList(turple.Item2, turple.Item2[turple.Item1]);
-                ViewBag.SelectList = selects;
+                ViewBag.SelectList = _servise.SetSelectDateTheme(null, User.Identity.Name.ToString(), name);
                 return View("AddWords");
             }
         }
@@ -169,9 +163,7 @@ namespace EnglishWebSimulatorApp.Controllers
                 randomized[index] = randomized[0];
                 randomized[0] = item;
             }
-            var turple = _servise.SetSelectDateTheme(null, User.Identity.Name.ToString());
-            SelectList selects = new SelectList(turple.Item2, turple.Item2[turple.Item1]);
-            ViewBag.SelectList = selects;
+            ViewBag.SelectList = _servise.SetSelectDateTheme(null, User.Identity.Name.ToString(), null);
             return View("ShowWords", randomized);
         }
         //
@@ -195,7 +187,14 @@ namespace EnglishWebSimulatorApp.Controllers
             var list = _servise.librariesShow(words);
             return View("ShowWords", list);
         }
-
-
+        //
+        [HttpGet]
+        [Route("FineWordsTheme")]
+        public IActionResult FineWordsTheme (string text) 
+        {
+            var list = _servise.GetLibrariesShowThema(text, User.Identity.Name.ToString());
+            ViewBag.Theme = list[0].Thema;
+            return View("ShowWords", list);
+        }
     }
 }
