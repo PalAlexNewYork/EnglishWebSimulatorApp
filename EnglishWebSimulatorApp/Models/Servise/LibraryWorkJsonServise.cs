@@ -40,7 +40,7 @@ namespace EnglishWebSimulatorApp.Models.Servise
             }
             else if (check == "IdNumberWords") 
             {
-                if ((numberFrom - numberTo) > 3 && numberTo<workJsonRepository.GetAll().Count)
+                if ((numberTo - numberFrom) > 3 && numberTo<workJsonRepository.GetAll().Count)
                 {
                     for(int i = numberFrom; i<=numberTo; i++)
                     {

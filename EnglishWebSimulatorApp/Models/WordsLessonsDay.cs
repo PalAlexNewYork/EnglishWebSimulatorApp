@@ -7,5 +7,6 @@ namespace EnglishWebSimulatorApp.Models
     {
         public DateTime date { get; set; }
         public List<string> words { get; set; }
+        public List<string> wordsJson { get; set; }
     }
 }

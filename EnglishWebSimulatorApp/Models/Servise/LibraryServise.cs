@@ -17,7 +17,8 @@ namespace EnglishWebSimulatorApp.Models.Servise
         private ILibratyRepository libratyRepository;
         private IRezultsRepository rezultsRepository;
         UserManager<EnglishWebSimulatorAppUser> _userManager;
-        public LibraryServise(EnglishWebSimulatorAppContext context, UserManager<EnglishWebSimulatorAppUser> userManager)
+        private ILibraryWorkJson libraryWork { get; }
+        public LibraryServise(EnglishWebSimulatorAppContext context, UserManager<EnglishWebSimulatorAppUser> userManager, ILibraryWorkJson libraryWork)
         {
             this.context = context;
             var words = this.context.libraryEns.ToList();
@@ -25,10 +26,12 @@ namespace EnglishWebSimulatorApp.Models.Servise
             rezultsRepository = new RezultsRepository(rezults);
             libratyRepository = new LibraryEnRepository(words);
             _userManager = userManager;
+            this.libraryWork = libraryWork;
         }
 
         public void AddWord(LibraryEn en)
         {
+            var t = this.libraryWork.workJsonRepository.GetAll();
             this.context.Entry(en).State = EntityState.Added;
             context.SaveChanges();
         }
@@ -129,6 +132,7 @@ namespace EnglishWebSimulatorApp.Models.Servise
             //Считаем слова добавленные за неделю
             List<LibraryEn> libraries = new List<LibraryEn>();
             var words = libratyRepository.GetAll().Where(w => w.User == user).ToList();
+            var words_json = this.libraryWork.workJsonRepository.GetAll();
             for (DateTime x = date1; x >= date2; x = x.AddDays(-1))
             {
                 foreach (LibraryEn item in words)
@@ -166,29 +170,51 @@ namespace EnglishWebSimulatorApp.Models.Servise
             {
                 WordsLessonsDay tmp = new WordsLessonsDay();
                 tmp.date = x;
-                List<string> tmpStr = new List<string>();
-                string tmp_string = "";
+                List<string> tmpStr = new List<string>(); List<string> tmpStr_json = new List<string>();
+                string tmp_string = ""; string tmp_string_json = "";
                 foreach (var i in rezults)
                 {
-                    if (x.Day == i.Data.Day) tmp_string += i.IdWords;
+                    if (x.Day == i.Data.Day)
+                    {
+                        if (i.IsIdWordsDatabase) tmp_string += i.IdWords;
+                        else tmp_string_json += i.IdWords;
+                    }
                 }
                 if (tmp_string != "")
                 {
                     var strings = tmp_string.Split('%').ToList();
-                    strings.Remove("");
-                    List<int> stringsId = strings.Select(i => Int32.Parse(i)).ToList();
+                    strings.Remove(""); List<int> stringsId = strings.Select(i => Int32.Parse(i)).ToList();
                     var IdWord = new HashSet<int>(stringsId).ToList();
                     foreach (int id in IdWord)
                     {
                         foreach (LibraryEn i in words)
                         {
                             if (id == i.Id)
-                                tmpStr.Add(i.WordEng);
+                            {
+                                tmpStr.Add(i.WordEng);break;
+                            }                              
                         }
                     }
-                    tmp.words = tmpStr;
-                    wordsLessons.Add(tmp);
+                if (tmp_string_json != "")
+                {
+                    var strings_json = tmp_string_json.Split('%').ToList();
+                    strings_json.Remove("");
+                    List<int> stringsId_json = strings_json.Select(i => Int32.Parse(i)).ToList();
+                    var IdWord_Json = new HashSet<int>(stringsId_json).ToList();
+                    foreach (int id in IdWord_Json)
+                    {
+                        foreach (LibraryWordsJson i in words_json)
+                        {
+                            if (id == i.Id)
+                            {
+                                 tmpStr_json.Add(i.En); break;
+                            }
+                        }
+                    }       
                 }
+                    tmp.words = tmpStr;tmp.wordsJson = tmpStr_json;
+                    wordsLessons.Add(tmp);
+                }          
             }
             rezultDay.wordsLesson = wordsLessons;
             return rezultDay;

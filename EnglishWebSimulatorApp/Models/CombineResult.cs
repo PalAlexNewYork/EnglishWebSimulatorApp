@@ -10,6 +10,5 @@ namespace EnglishWebSimulatorApp.Models
         public List<LibraryEn> libraryEns { get; set; }
         public int Days { get; set; } 
         public List<WordsLessonsDay> wordsLesson { get; set; }
-
     }
 }

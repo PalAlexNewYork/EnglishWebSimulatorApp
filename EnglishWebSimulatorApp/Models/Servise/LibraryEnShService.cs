@@ -41,6 +41,7 @@ namespace EnglishWebSimulatorApp.Models.Servise
             this.wordsJson.Clear();
             rightAnswer = 0;
             notRightAnswer = 0;
+            IdWords = "";
             //IdWords.RemoveAll(x=>x>=0);
         }
         public void AddIdWord(int id)

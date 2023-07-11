@@ -47,7 +47,7 @@
                 var lessons = Model.rezults.Where(l => l.Data.Day == x.Day).ToList();
                 @if (words.Count != 0  || lessons.Count != 0)
                 {
-                    <div class="card mb-3 cardRez" 
+                <div class="card mb-3 cardRez" 
                 id="@d" 
                 style="max-width: 540px;" 
                 hidden>
@@ -58,22 +58,22 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title">@Localizer[d] @x.ToLongDateString()</h5>
-                                @{
-                                    
+                                @{                      
                                     var wordsStr = ""; foreach (var i in words)wordsStr = wordsStr + "; " + @i.WordEng;
                                     <p class="card-text">@Localizer["String5"] - @words.Count
                                     <small class="text-muted">@wordsStr</small></p>
-                                    List<string> words1 = new List<string>();
+                                        List<string> words1 = new List<string>(); List<string> words2 = new List<string>();
                                     foreach (WordsLessonsDay w in Model.wordsLesson)
                                     {
-                                        if (x.Day == w.date.Day) { words1 = w.words; break; }
+                                            if (x.Day == w.date.Day) { words1 = w.words; words2 = w.wordsJson; break; }
                                     }
                                     string wordsLess = "";
                                     foreach (string w in words1) wordsLess = wordsLess + w + ", ";
+                                    foreach (string w in words2) wordsLess = wordsLess + w + ", ";
                                     
                                     var points = lessons.Sum(l => l.Gold);
                                     var errors = lessons.Sum(l => l.Error);
-                                    var wordsLessons = words1.Count;
+                                    var wordsLessons = words1.Count + words2.Count;
                                     <p>@Localizer["String6"] - @lessons.Count. </p>
                                     <p>@Localizer["String7"] - @points. </p>
                                     <p>@Localizer["String8"] - @errors. </p>                                  

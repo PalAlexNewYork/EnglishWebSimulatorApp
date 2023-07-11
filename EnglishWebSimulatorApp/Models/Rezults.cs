@@ -12,7 +12,7 @@ namespace EnglishWebSimulatorApp.Models
         public int Error { get; set; }
         public int Gold { get; set; }
         public string IdWords { get; set; }
-
+        public bool IsIdWordsDatabase { get; set; }
         public Rezults(int id, DateTime data, string user, int words, int error, int gold, string idWords)
         {
             Id = id;

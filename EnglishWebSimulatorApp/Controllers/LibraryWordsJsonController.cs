@@ -166,6 +166,7 @@ namespace EnglishWebSimulatorApp.Controllers
             else rezults.Gold = libraryEnShService.rightAnswer;
             rezults.IdWords = libraryEnShService.IdWords;
             rezults.Id = 0;
+            rezults.IsIdWordsDatabase = false;
             if (ModelState.IsValid) this.libraryServise.AddRezult(rezults);
             if (rezults.Error != 0) ViewBag.danat = rezults.Words / rezults.Error;
             else ViewBag.danat = rezults.Words;

@@ -151,7 +151,7 @@ namespace EnglishWebSimulatorApp.Controllers
                 rezults.Gold = libraryEnShService.rightAnswer / libraryEnShService.notRightAnswer;
             else rezults.Gold = libraryEnShService.rightAnswer;
             rezults.IdWords = libraryEnShService.IdWords;
-            rezults.Id = 0;
+            rezults.Id = 0; rezults.IsIdWordsDatabase = true;
             if (ModelState.IsValid) 
             {
                 _servise.AddRezult(rezults);
