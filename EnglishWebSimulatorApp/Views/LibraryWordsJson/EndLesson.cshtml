@@ -1,0 +1,92 @@
+﻿@model Rezults;
+@{
+    Random rand = new Random();
+    Random randJoy = new Random();
+    Random randUpset = new Random();
+    int iRanJoy = rand.Next(0, 10);
+    int iRanUpset = rand.Next(0, 5);
+    List<string> joy = new List<string>
+    {
+    "one.webp",
+    "two.webp",
+    "three.webp",
+    "four.webp",
+    "five.webp",
+    "six.webp",
+    "seven.webp",
+    "eight.webp",
+    "nine.webp",
+    "ten.webp",
+    };
+    List<string> upset = new List<string>
+    {
+     "one.webp",
+    "two.webp",
+    "three.webp",
+    "four.webp",
+    "five.webp"
+    };
+}
+
+<div class="container-fluid m-2" style="background-color:aquamarine;">
+    @if (Model != null)
+    {
+        <h3 class="textFont1" style="text-align:center;">@Localizer["Results of the"] @Model.User @Localizer["knowledge test"] @Model.Data.</h3>
+        <div class="flex-grow-1 p-3" style="border:1px solid black;">
+            <h5>@Localizer["The number of checked words was"] - @Model.Words;</h5>
+            <p>@ViewBag.Words</p>
+            <h5>@Localizer["The number of correct answers is"] - @ViewBag.rightAnsw;</h5>
+            <h5>@Localizer["StringFour"] - @Model.Error;</h5>
+            <h5>@Localizer["Percent of correct answers"] - @ViewBag.precentage %</h5>
+        </div>
+    }
+    else
+    {
+        <h5 class="textFont1" style="text-align:center;">@Localizer["StringOne"]</h5>
+        <div class="flex-grow-1 p-3" style="border:1px solid black;">
+            <h5>
+                @Localizer["StringTwo"] - @ViewBag.stepp.
+            </h5>
+            <h5>@Localizer["StringThree"] - @ViewBag.right.</h5>
+            <h5>@Localizer["StringFour"] - @ViewBag.NotRight.</h5>
+            <h5>@Localizer["StringEight"] - @ViewBag.precentage %</h5>
+        </div>
+    }
+    <div class="col text-center  m-3 textFont1">
+        <h4 class="textFont1" style="text-align:center;">@Localizer["StringFive"] -  @ViewBag.danat</h4>
+        <div>
+            @if (ViewBag.precentage>=80)
+            {
+                if (ViewBag.precentage >= 90)
+                {
+                    <h3>@Localizer["Excellent result!"]</h3>
+                }
+                else
+                {
+                    <h3>@Localizer["Good result!"]</h3>
+                }
+
+                <img class="img-fluid" src="/joy/@joy[iRanJoy]" />
+            }
+            else
+            {
+                if (ViewBag.precentage >= 50)
+                {
+                    <h3>@Localizer["Satisfactory result!"]</h3>
+                }
+                else
+                {
+                    <h3>@Localizer["Unsatisfactory result!"]</h3>
+                }
+                <img class="img-fluid" src="/upset/@upset[iRanUpset]" />
+            }
+        </div>
+            <div class="d-flex flex-row justify-content-center p-3">
+            @if (Model != null)
+            {
+                <h3>@Localizer["Result saved."]</h3>
+            }
+            <a class="btn btn-outline-dark m-3" asp-action="MainLessonLibrary" asp-controller="LibraryWordsJson">@Localizer["StringSeven"]</a>
+            </div>
+    </div>
+   </div> 

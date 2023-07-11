@@ -1,0 +1,38 @@
+﻿@model List<LibraryWordsJson>
+
+<div class="container-fluid" style="background-color:antiquewhite; border: 1px solid black;">
+    <h3 class="d-flex justify-content-left m-2">@Localizer["Title"]</h3>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Your choice</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <form method="post" asp-action="PreselectionWordsEnd" asp-controller="LibraryWordsJson" asp-route-namePage="@ViewBag.Name">
+                @foreach (var i in Model)
+                {
+                <tr>
+                    <th scope="row">@i.Id</th>
+                    <td>
+                        <p>@i.En</p>
+                        <p>@i.Ru</p>
+                    </td>
+                    <td>
+                        <input type="checkbox" name="groups" value="@i.En" />
+                    </td>
+                </tr>
+                }
+            <div style ="text-align:right;">
+                    <button type="submit" class="btn btn-outline-info m-2" >Enter</button>
+                </div>
+            </form>
+     
+
+        </tbody>
+    </table>
+</div>

@@ -43,7 +43,16 @@ a.navbar-brand {
   text-align: center;
   word-break: break-all;
 }
-
+/*beautiful title*/
+.title {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    background-image: linear-gradient(to left, #493ade, #14a36c);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
 /* Provide sufficient contrast against white background */
 a {
   color: #0366d6;
@@ -169,3 +178,7 @@ body {
     }
 }
 
+.bg-great{
+    background-color: aliceblue;
+    border: 1px solid black;
+}

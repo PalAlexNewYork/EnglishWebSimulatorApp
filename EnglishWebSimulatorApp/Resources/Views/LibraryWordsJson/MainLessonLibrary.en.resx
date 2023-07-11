@@ -117,55 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Dictionary" xml:space="preserve">
-    <value>Dictionary</value>
-  </data>
-  <data name="Header" xml:space="preserve">
-    <value>EnglishWebSimulatorApp</value>
-  </data>
-  <data name="KnowledgeTesting" xml:space="preserve">
-    <value>Knowledge testing</value>
-  </data>
-  <data name="navAbout" xml:space="preserve">
-    <value>All about program!</value>
-  </data>
-  <data name="navAddWords" xml:space="preserve">
-    <value>Add words!</value>
-  </data>
-  <data name="navDeveloper" xml:space="preserve">
-    <value>Program developer!</value>
-  </data>
-  <data name="navStartsApp" xml:space="preserve">
-    <value>Start the lesson!</value>
-  </data>
-  <data name="ShowWords" xml:space="preserve">
-    <value>Show Words!</value>
-  </data>
-  <data name="StatisticInfo" xml:space="preserve">
-    <value>Results of user</value>
-  </data>
   <data name="String1" xml:space="preserve">
-    <value>lesson 1 - a word by ear</value>
+    <value>Check your knowledge!</value>
   </data>
   <data name="String2" xml:space="preserve">
-    <value>lesson 2 - a word in English</value>
+    <value>The check is carried out by words from the library, which currently has a total of </value>
   </data>
   <data name="String3" xml:space="preserve">
-    <value>lesson 3 - the word in Russian</value>
+    <value> words, it is constantly replenished and improved.</value>
   </data>
   <data name="String4" xml:space="preserve">
-    <value>Lessons</value>
+    <value>Word selection:</value>
   </data>
-  <data name="User'sPage" xml:space="preserve">
-    <value>User's page</value>
+  <data name="String5" xml:space="preserve">
+    <value>1. by the number of words</value>
   </data>
-  <data name="UserProgress" xml:space="preserve">
-    <value>User progress</value>
+  <data name="String6" xml:space="preserve">
+    <value>2. by symbol or string fragment</value>
   </data>
-  <data name="workout" xml:space="preserve">
-    <value>Workout</value>
+  <data name="String7" xml:space="preserve">
+    <value>3. choose from the list manually</value>
   </data>
-  <data name="YourAccount" xml:space="preserve">
-    <value>Your account</value>
+  <data name="String8" xml:space="preserve">
+    <value>enter string</value>
   </data>
 </root>

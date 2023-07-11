@@ -117,55 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Dictionary" xml:space="preserve">
-    <value>Dictionary</value>
+  <data name="Excellent result!" xml:space="preserve">
+    <value>Отличный результат!</value>
   </data>
-  <data name="Header" xml:space="preserve">
-    <value>EnglishWebSimulatorApp</value>
+  <data name="Good result!" xml:space="preserve">
+    <value>Хороший результат!</value>
   </data>
-  <data name="KnowledgeTesting" xml:space="preserve">
-    <value>Knowledge testing</value>
+  <data name="knowledge test" xml:space="preserve">
+    <value>по проверке знаний, от </value>
   </data>
-  <data name="navAbout" xml:space="preserve">
-    <value>All about program!</value>
+  <data name="Percent of correct answers" xml:space="preserve">
+    <value>Процент правильных ответов</value>
   </data>
-  <data name="navAddWords" xml:space="preserve">
-    <value>Add words!</value>
+  <data name="Result saved." xml:space="preserve">
+    <value>Результат сохранён.</value>
   </data>
-  <data name="navDeveloper" xml:space="preserve">
-    <value>Program developer!</value>
+  <data name="Results of the" xml:space="preserve">
+    <value>Результат пользователя</value>
   </data>
-  <data name="navStartsApp" xml:space="preserve">
-    <value>Start the lesson!</value>
+  <data name="Satisfactory result!" xml:space="preserve">
+    <value>Удовлетворительный результат!</value>
   </data>
-  <data name="ShowWords" xml:space="preserve">
-    <value>Show Words!</value>
+  <data name="StringEight" xml:space="preserve">
+    <value>Процент правильных ответов</value>
   </data>
-  <data name="StatisticInfo" xml:space="preserve">
-    <value>Results of user</value>
+  <data name="StringFive" xml:space="preserve">
+    <value>Количество полученных очков </value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value>lesson 1 - a word by ear</value>
+  <data name="StringFour" xml:space="preserve">
+    <value>Количество ошибок</value>
   </data>
-  <data name="String2" xml:space="preserve">
-    <value>lesson 2 - a word in English</value>
+  <data name="StringOne" xml:space="preserve">
+    <value>Урок окончен, ознакомьтесь с результатами!</value>
   </data>
-  <data name="String3" xml:space="preserve">
-    <value>lesson 3 - the word in Russian</value>
+  <data name="StringSeven" xml:space="preserve">
+    <value>Выйти</value>
   </data>
-  <data name="String4" xml:space="preserve">
-    <value>Lessons</value>
+  <data name="StringSix" xml:space="preserve">
+    <value>Записать</value>
   </data>
-  <data name="User'sPage" xml:space="preserve">
-    <value>User's page</value>
+  <data name="StringThree" xml:space="preserve">
+    <value>Количество изученных слов и правильных ответов</value>
   </data>
-  <data name="UserProgress" xml:space="preserve">
-    <value>User progress</value>
+  <data name="StringTwo" xml:space="preserve">
+    <value>Количество пройденных шагов</value>
   </data>
-  <data name="workout" xml:space="preserve">
-    <value>Workout</value>
+  <data name="The number of checked words was" xml:space="preserve">
+    <value>Колличество слов при проверке </value>
   </data>
-  <data name="YourAccount" xml:space="preserve">
-    <value>Your account</value>
+  <data name="The number of correct answers is" xml:space="preserve">
+    <value>Колличество правильных ответов</value>
+  </data>
+  <data name="Unsatisfactory result!" xml:space="preserve">
+    <value>Неудовлетворительный результат!</value>
   </data>
 </root>

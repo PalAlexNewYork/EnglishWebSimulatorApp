@@ -57,13 +57,23 @@
                 <img class="img-fluid" src="/upset/@upset[iRanUpset]" />
             }
         </div>
-        
-        <div class="d-flex flex-row justify-content-center p-3">
+        @if (ViewBag.Name == null)
+        {
+         <div class="d-flex flex-row justify-content-center p-3">
             <form method="post" asp-action="AddRezult" asp-controller="Lesson">
                 <button class="btn btn-outline-dark m-3" type="submit">@Localizer["StringSix"]</button>
             </form>
             <a class="btn btn-outline-dark m-3" asp-action="Index" asp-controller="Home">@Localizer["StringSeven"]</a>
-        </div>
-       
+            </div>
+        }else
+        {
+            <div class="d-flex flex-row justify-content-center p-3">
+                <form method="post" asp-action="AddRezult" asp-controller="LibraryWordsJson">
+                    <button class="btn btn-outline-dark m-3" type="submit">@Localizer["StringSix"]</button>
+                </form>
+                <a class="btn btn-outline-dark m-3" asp-action="Index" asp-controller="Home">@Localizer["StringSeven"]</a>
+            </div>
+        }
+
     </div>
    </div> 

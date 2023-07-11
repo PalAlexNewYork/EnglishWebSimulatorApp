@@ -3,6 +3,7 @@ using EnglishWebSimulatorApp.Data;
 using EnglishWebSimulatorApp.Models.Interfaces;
 using EnglishWebSimulatorApp.Models.Repository;
 using EnglishWebSimulatorApp.Models.Servise;
+using EnglishWebSimulatorApp.Models.WorkJson;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -34,6 +35,8 @@ namespace EnglishWebSimulatorApp
                 .WithRazorPagesRoot("/Areas");
             services.AddScoped<ILibraryServise, LibraryServise>();
             services.AddSingleton<IlibraryEnShServise, LibraryEnShService>();
+            services.AddSingleton<ILibraryWorkJson, LibraryWorkJson>();
+            services.AddSingleton<ILibraryWorkJsonServise, LibraryWorkJsonServise>();
             services.AddControllersWithViews();
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddControllersWithViews()

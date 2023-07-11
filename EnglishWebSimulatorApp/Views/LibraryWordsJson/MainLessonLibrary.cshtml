@@ -1,0 +1,376 @@
+﻿@model List<LibraryWordsJson>
+
+@{
+    Random rand = new Random();
+    Random randJoy = new Random();
+    Random randUpset = new Random();
+    int iRanJoy = rand.Next(0, 10);
+    int iRanUpset = rand.Next(0, 5);
+    List<string> joy = new List<string>
+    {
+    "one.webp",
+    "two.webp",
+    "three.webp",
+    "four.webp",
+    "five.webp",
+    "six.webp",
+    "seven.webp",
+    "eight.webp",
+    "nine.webp",
+    "ten.webp",
+    };
+    List<string> upset = new List<string>
+    {
+     "one.webp",
+    "two.webp",
+    "three.webp",
+    "four.webp",
+    "five.webp"
+    };
+}
+
+<div class="container-fluid  mt-3 d-flex flex-column justify-content-center" style="background-color:aliceblue; border:1px solid black;">
+    <div class="title textFont1"><h2>@Localizer["String1"]</h2></div>
+
+    @if (ViewBag.flag == null)
+    {
+        <div class="col-10" style="margin: 0 auto;">
+            <p style="text-align:justify; text-indent:30px;">@Localizer["String2"] @ViewBag.CountWord @Localizer["String3"]</p>
+        </div>
+
+        <form method="post" asp-controller="LibraryWordsJson" asp-action="SelectWords" asp-route-namePage="@ViewBag.Name">
+            <div class="d-flex flex-row align-items-center">
+                <h5 class="mr-2">@Localizer["String4"]</h5>
+                <button class="btn btn-outline-info">@Localizer["Check"]</button>
+            </div>
+
+            <table class="table">
+                <tbody>
+
+                    <tr>
+                        <th scope="row"><input type="checkbox" name="check" class="check" onclick="onlyOne(this)" value="NumberWords" /></th>
+                        <td class="d-flex justify-content-between">
+                            <label>@Localizer["String5"]</label>
+                            <input type="number" max="200" min="5" name="number" step="1" value="5" size="15" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row"><input type="checkbox" name="check" class="check" onclick="onlyOne(this)" value="FragmentString" /></th>
+                        <td class="d-flex justify-content-between" style="display:flex; flex-wrap:wrap;">
+                            <label>@Localizer["String6"]</label>
+                            <div>
+                                <label>@Localizer["String8"]</label>
+                                <input type="text" name="str" />
+                            </div>           
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row"><input type="checkbox" name="check" class="check" onclick="onlyOne(this)" value="HeadSelectWords" /></th>
+                        <td>@Localizer["String7"]</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row"><input type="checkbox" name="check" class="check" onclick="onlyOne(this)" value="IdNumberWords" /></th>
+                        <td class="d-flex justify-content-between" style="display:flex; flex-wrap:wrap;">
+                            <label>@Localizer["4. сhoose words by id from to"]</label>
+                            <div><label class="mr-1">@Localizer["from"]</label><input type="number" min="0" name="numberFrom" step="1" value="5" size="15" /></div>
+                            <div><label class="mr-1">@Localizer["to"]</label><input type="number" name="numberTo" step="1" value="5" size="15" /></div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </form>
+    }
+    else
+    {
+        int index = rand.Next(0, Model.Count);
+
+        if (ViewBag.Name == "workout")
+        {
+        <div class="container-fluid m-2" style="background-color:lightblue; border:1px solid black;">
+            <div>
+                <h3>@Model[index].Ru</h3>
+            </div>
+            <div class="m-2" style="text-align:center;">
+                <form method="post" asp-controller="LibraryWordsJson" asp-action="Check" 
+                asp-route-wordRight="@Model[index].En"
+                asp-route-namePage="@ViewBag.Name">
+                    <input type="text" name="word">
+                    <div>
+                        <button type="submit" class="btn btn-outline-dark m-2">@Localizer["Check"]</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="container-fluid" style="text-align:center;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">@Localizer["Words"]</th>
+                                    <th scope="col">@Localizer["True"]</th>
+                                    <th scope="col">@Localizer["False"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@Model.Count</td>
+                                    <td>@ViewBag.right</td>
+                                    <td>@ViewBag.NotRight</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td class="col-4">
+                                        @if (ViewBag.isError != null)
+                                        {
+                                            @if (ViewBag.IsError)
+                                            {
+                                                <img src="/joy/@joy[iRanJoy]" class="img-fluid" />
+                                            }
+                                        }
+                                    </td>
+                                    <td class="col-4">
+                                        @if (ViewBag.isError != null)
+                                        {
+                                            @if (!ViewBag.IsError)
+                                            {
+                                                <img src="/upset/@upset[iRanUpset]" class="img-fluid" />
+                                            }
+                                        }
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>                     
+                            <div class="row d-flex justify-content-center"><h6>Help. Click!</h6></div>
+                            <div class="row d-flex justify-content-center"><i class="bi bi-question-octagon-fill icon_help" style="font-size:20px;"></i></div>
+                    </div>
+                    <div class="col-md-6 d-flex flex-column justify-content-center" style="border:1px solid black;">
+
+                            <div class="d-flex flex-column ">
+
+                                <div class="d-flex flex-column">
+
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <img src="/img/icons/transcription_2qtqap01bq3v.svg" id="icon_wordTr" style="width:30px; margin-right:8px;" />
+                                        <span class="text-center align-items-center text_wordTr" hidden>@Model[index].Tr</span>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <i class="bi bi-arrow-repeat text-center mr-2 IconTextEn" hidden style="font-size:35px;"></i>
+                                        <span class="text-center align-items-center textEn " hidden>@Model[index].En</span>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        @if (Model[index].PathSound != null)
+                                        {
+                                            <audio class="testAudio" hidden src="~/sounds/@Model[index].PathSound" type="audio/mpeg">
+                                            </audio>
+                                            <i class="bi bi-play-btn iconAudio" hidden style="font-size:30px; text-align:center;"></i>
+                                        }
+                                    </div>
+                                </div>
+
+                                <div>
+                                    @if (Model[index].PathPict != null)
+                                    {
+                                        <img src="/img/words/@Model[index].PathPict" id="img_word" hidden class="img-fluid" />
+                                    }
+                                </div>   
+                            </div>
+                        
+                                <img src="/english.jpg" class="img-fluid imgBack" />               
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+        else
+        {
+            <div class="container-fluid m-2" style="background-color:lightblue; border:1px solid black;">
+               
+                <div class="m-2" style="text-align:center;">
+                    @if (ViewBag.isError == true || ViewBag.isError == null)
+                    { 
+                      <div>
+                            <h3>@Model[index].Ru</h3>
+                     </div>
+                        <form method="post" asp-controller="LibraryWordsJson" asp-action="Check"
+                  asp-route-wordRight="@Model[index].En"
+                  asp-route-namePage="@ViewBag.Name">
+                        <input type="text" id="text" name="word">
+                        <div>
+                            <button type="submit" class="btn btn-outline-dark m-2">@Localizer["Check"]</button>
+                        </div>
+                        </form>
+                    }
+                    else
+                    {
+                        <form method="post" asp-controller="LibraryWordsJson" asp-action="Check"
+                  asp-route-namePage="@ViewBag.Name">
+                            <input type="text" id="text" hidden name="word">
+                            <div>
+                                <button type="submit" class="btn btn-outline-dark m-2">@Localizer["Next"]</button>
+                            </div>
+                        </form>
+                    }
+
+                </div>
+
+                <div class="container-fluid" style="text-align:center;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">@Localizer["Words"]</th>
+                                        <th scope="col">@Localizer["True"]</th>
+                                        <th scope="col">@Localizer["False"]</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>@Model.Count</td>
+                                        <td>@ViewBag.right</td>
+                                        <td>@ViewBag.NotRight</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="col-4">
+                                            @if (ViewBag.isError != null)
+                                            {
+                                                @if (ViewBag.IsError)
+                                                {
+                                                    <img src="/joy/@joy[iRanJoy]" class="img-fluid" />
+                                                }
+                                            }
+                                        </td>
+                                        <td class="col-4">
+                                            @if (ViewBag.isError != null)
+                                            {
+                                                @if (!ViewBag.IsError)
+                                                {
+                                                    <img src="/upset/@upset[iRanUpset]" class="img-fluid" />
+                                                }
+                                            }
+                                        </td>
+
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6 d-flex flex-column justify-content-center" style="border:1px solid black;">
+
+                                    <div class="d-flex flex-column">
+                                        <div class="d-flex flex-column">
+
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <h4 class="text-center align-items-center text_wordTr">@ViewBag.Tr</h4>
+                                            </div>
+
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <h4 class="text-center align-items-center textEn ">@ViewBag.En</h4>
+                                            </div>
+
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <h4 class="text-center align-items-center textEn ">@ViewBag.Ru</h4>
+                                            </div>
+
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                @if (ViewBag.Sound != null)
+                                                {
+                                                    <audio class="testAudio" hidden src="~/sounds/@ViewBag.Sound" type="audio/mpeg">
+                                                    </audio>
+                                                    <i class="bi bi-play-btn iconAudio" style="font-size:30px; text-align:center;"></i>
+                                                }
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            @if (ViewBag.Img != null)
+                                            {
+                                                <img src="/img/words/@ViewBag.Img" id="img_word" class="img-fluid" />
+                                            }
+                                        </div>
+                                    </div>
+                            @if (ViewBag.isError == true || ViewBag.isError == null)
+                            {
+                               <img src="/english.jpg" class="img-fluid imgBack" />
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+       
+        
+    }
+</div>
+
+
+
+<script>
+    "strict"
+    function onlyOne(checkbox) {
+        let checkboxes = document.getElementsByName('check')
+        checkboxes.forEach((item) => {
+        if (item !== checkbox) item.checked = false
+        })};
+
+    //animations
+    let img_word = document.getElementById("img_word");
+    let testAudio = document.querySelector(".testAudio");
+    let iconAudio = document.querySelector(".iconAudio");
+    let frontImg = document.querySelector(".imgBack");
+    let textEn = document.querySelector(".textEn");
+    let IconTextEn = document.querySelector(".IconTextEn");
+    let icon_wordTr = document.getElementById("icon_wordTr");
+    let icon_help = document.querySelector(".icon_help");
+    console.log(img_word);
+    console.log(testAudio);
+    console.log(iconAudio);
+    console.log(icon_wordTr);
+
+    if (icon_wordTr != null){
+    icon_wordTr.addEventListener("click", function(){
+        document.querySelector(".text_wordTr").hidden=false;
+    });
+
+    }
+    
+    if(icon_help != null)
+    {
+    icon_help.addEventListener('click', function(){
+        if (img_word!=null)
+        img_word.hidden = false;
+        if(iconAudio!=null)
+            iconAudio.hidden = false;
+        if (frontImg != null)
+            frontImg.hidden=true;
+        if (IconTextEn != null)
+            IconTextEn.hidden=false;
+    });
+    }
+    
+
+    if (IconTextEn!= null){
+        IconTextEn.addEventListener('click', ()=>{
+        textEn.hidden= false;
+    });
+    };
+     
+    if(iconAudio!=null){
+     iconAudio.addEventListener('click', function(){
+        testAudio.play();
+    });
+    }
+</script>

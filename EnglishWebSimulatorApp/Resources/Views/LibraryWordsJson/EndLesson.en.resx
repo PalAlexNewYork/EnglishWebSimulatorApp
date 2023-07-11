@@ -117,55 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Dictionary" xml:space="preserve">
-    <value>Dictionary</value>
+  <data name="StringEight" xml:space="preserve">
+    <value>Percentage of correct answers</value>
   </data>
-  <data name="Header" xml:space="preserve">
-    <value>EnglishWebSimulatorApp</value>
+  <data name="StringFive" xml:space="preserve">
+    <value>Number of points received</value>
   </data>
-  <data name="KnowledgeTesting" xml:space="preserve">
-    <value>Knowledge testing</value>
+  <data name="StringFour" xml:space="preserve">
+    <value>Number of errors</value>
   </data>
-  <data name="navAbout" xml:space="preserve">
-    <value>All about program!</value>
+  <data name="StringOne" xml:space="preserve">
+    <value>The lesson is over, check out the results!</value>
   </data>
-  <data name="navAddWords" xml:space="preserve">
-    <value>Add words!</value>
+  <data name="StringSeven" xml:space="preserve">
+    <value>Exite</value>
   </data>
-  <data name="navDeveloper" xml:space="preserve">
-    <value>Program developer!</value>
+  <data name="StringSix" xml:space="preserve">
+    <value>Record</value>
   </data>
-  <data name="navStartsApp" xml:space="preserve">
-    <value>Start the lesson!</value>
+  <data name="StringThree" xml:space="preserve">
+    <value>The number of words studied and correct answers</value>
   </data>
-  <data name="ShowWords" xml:space="preserve">
-    <value>Show Words!</value>
-  </data>
-  <data name="StatisticInfo" xml:space="preserve">
-    <value>Results of user</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value>lesson 1 - a word by ear</value>
-  </data>
-  <data name="String2" xml:space="preserve">
-    <value>lesson 2 - a word in English</value>
-  </data>
-  <data name="String3" xml:space="preserve">
-    <value>lesson 3 - the word in Russian</value>
-  </data>
-  <data name="String4" xml:space="preserve">
-    <value>Lessons</value>
-  </data>
-  <data name="User'sPage" xml:space="preserve">
-    <value>User's page</value>
-  </data>
-  <data name="UserProgress" xml:space="preserve">
-    <value>User progress</value>
-  </data>
-  <data name="workout" xml:space="preserve">
-    <value>Workout</value>
-  </data>
-  <data name="YourAccount" xml:space="preserve">
-    <value>Your account</value>
+  <data name="StringTwo" xml:space="preserve">
+    <value>Number of steps completed</value>
   </data>
 </root>

@@ -134,10 +134,27 @@
                                         <a class="dropdown-item" asp-controller="Lesson" asp-action="StartLesson" asp-route-param="ear">@Localizer["String1"]</a>
                                         <a class="dropdown-item" asp-controller="Lesson" asp-action="StartLesson" asp-route-param="wordEng">@Localizer["String2"]</a>
                                         <a class="dropdown-item" asp-controller="Lesson" asp-action="StartLesson" asp-route-param="wordRu">@Localizer["String3"]</a>
+                                        <a class="dropdown-item" asp-controller="LibraryWordsJson" asp-action="MainLessonLibrary">Temp</a>
                                     </div>
                                 </div>
                             </li>
-
+                            <li class="nav-item mr-1">
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @Localizer["Dictionary"]
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" asp-controller="LibraryWordsJson" 
+                                        asp-action="MainLessonLibrary" 
+                                        asp-route-namePage="workout"
+                                        >@Localizer["workout"]</a>
+                                        <a class="dropdown-item" asp-controller="LibraryWordsJson" 
+                                        asp-action="MainLessonLibrary"
+                                       asp-route-namePage="knowledgeTesting"
+                                        >@Localizer["KnowledgeTesting"]</a>
+                                    </div>
+                                </div>
+                            </li>
                             <li class="nav-item">
                                 <div class="dropdown">
                                     <button class="btn btn-outline-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -146,8 +163,7 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" asp-controller="Lesson" asp-action="UserProgres">@Localizer["UserProgress"]</a>
                                         <a class="dropdown-item" asp-controller="Lesson" asp-action="StatisticInfo">@Localizer["StatisticInfo"]</a>
-                                        <a class="dropdown-item" asp-controller="Lesson" asp-action="YourAccount">@Localizer["YourAccount"]</a>
-                                        
+                                        <a class="dropdown-item" asp-controller="Lesson" asp-action="YourAccount">@Localizer["YourAccount"]</a>       
                                     </div>
                                 </div>
                             </li>                          
