@@ -2,12 +2,15 @@
 
 <div class="container" style="background-color:antiquewhite; border:1px solid black;">
      <div style="text-align:center"><h2>@Localizer["Tittle"] @ViewBag.Tittle.</h2></div>
-     <div class="d-flex justify-content-between">
-        <a class="btn btn-warning m-1" asp-area="" asp-controller="Home" asp-action="AddWords">@Localizer["AddWord"] </a>
+     <div class="d-flex justify-content-between" style="flex-wrap:wrap;">
+
+        <a class="btn btn-warning m-1" asp-controller="Home" asp-action="AddWords">@Localizer["AddWord"] </a>
+
         <form method="get" asp-action="FindWord" asp-controller="Home">
             <input type="text" name="text"/>
             <button type="submit" name="text" class="btn btn-outline-dark">Find</button>
         </form>
+
         @if (@ViewBag.SelectList != null)
         {
             <form method="get" asp-controller="Home" asp-action="FineWordsTheme">
@@ -18,7 +21,7 @@
             <button type="submit" hidden name="text" class="btn btn-outline-dark btn_find">Find</button>
         </form>   
         }
-        
+
      </div>
   
     @if (ViewBag.Theme != null)

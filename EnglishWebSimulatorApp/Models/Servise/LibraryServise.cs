@@ -165,7 +165,6 @@ namespace EnglishWebSimulatorApp.Models.Servise
             rezultDay.Days = countDay;
             //Считаем слова пройденные за неделю
             List<WordsLessonsDay> wordsLessons = new List<WordsLessonsDay>();
-
             for (DateTime x = date1; x >= date2; x = x.AddDays(-1))
             {
                 WordsLessonsDay tmp = new WordsLessonsDay();
@@ -191,10 +190,11 @@ namespace EnglishWebSimulatorApp.Models.Servise
                         {
                             if (id == i.Id)
                             {
-                                tmpStr.Add(i.WordEng);break;
-                            }                              
+                                tmpStr.Add(i.WordEng); break;
+                            }
                         }
                     }
+                }
                 if (tmp_string_json != "")
                 {
                     var strings_json = tmp_string_json.Split('%').ToList();
@@ -207,14 +207,13 @@ namespace EnglishWebSimulatorApp.Models.Servise
                         {
                             if (id == i.Id)
                             {
-                                 tmpStr_json.Add(i.En); break;
+                                tmpStr_json.Add(i.En); break;
                             }
                         }
-                    }       
+                    }
                 }
                     tmp.words = tmpStr;tmp.wordsJson = tmpStr_json;
-                    wordsLessons.Add(tmp);
-                }          
+                    wordsLessons.Add(tmp);    
             }
             rezultDay.wordsLesson = wordsLessons;
             return rezultDay;

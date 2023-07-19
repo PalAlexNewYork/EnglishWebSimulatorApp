@@ -98,7 +98,6 @@ namespace EnglishWebSimulatorApp.Controllers
                     string NameFile = Path.GetFileName(fileOne.FileName);
                     word.SoundFilePath = NameFile;
                 }
-
                 if (ModelState.IsValid) 
                 {
                     if (!(_servise.GetAll(User.Identity.Name.ToString()).All(w => w.WordEng.Equals(word.WordEng, StringComparison.OrdinalIgnoreCase))))

@@ -1,0 +1,101 @@
+﻿@model List<LibraryWordsJson>
+
+<div class="container-fluid">
+    <div class="title textFont3"><h3>@Localizer["Show words dictionary!"]</h3></div>
+
+    <div class="nav_panel_admin">
+        <div class="bg-info p-2">
+            <form method="get" asp-action="SearchFragmentStr" asp-controller="Admin">
+                <span>@Localizer["Search for a word by a fragment of a string!"]</span>
+                <input type="text" name="str"/>
+                <button name="str" class="btn btn-outline-warning">✓</button>
+            </form>
+        </div>
+        <div class="bg-warning p-2" >
+            <form method="get" asp-action="SearchFromToId" asp-controller="Admin" class=" d-flex flex-row" style="flex-wrap:wrap;">
+                <label class="mr-1">@Localizer["Words in the range,"]</label>
+                <div><label class="mr-1">@Localizer["from"]</label><input class="mr-1" type="number" min="0" name="numberFrom" step="1" value="5" size="15" /></div>
+                <div><label class="mr-1">@Localizer["to"]</label><input class="mr-1" type="number" name="numberTo" step="1" value="5" size="15" /></div>
+                <button name="str" class="btn btn-outline-info">✓</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-11">
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">№</th>
+                    <th scope="col">@Localizer["English"]</th>
+                    <th scope="col">@Localizer["Russian"]</th>
+                    <th scope="col">@Localizer["Img"]</th>
+                    <th scope="col">@Localizer["Sound"]</th>
+                    <th scope="col">@Localizer["Change"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (LibraryWordsJson w in Model)
+                {
+                    <tr>
+                        <th scope="row">@w.Id</th>
+                        <td>@w.En</td>
+                        <td>@w.Ru</td>
+
+                        <td>
+                            @if (w.PathPict != null)
+                            {
+                                <img class="img_word" src="/img/words/@w.PathPict" hidden alt="not img" style="max-width:100px; max-height:70px; object-fit:cover;" />
+                                <i class="bi bi-image-fill iconImg" style="font-size:30px; text-align:center;"></i>
+                            }
+                            else
+                            {
+                                <i class="bi bi-0-circle" style="font-size:30px; text-align:center;"></i>
+                            }
+
+                        </td>
+
+                        <td>
+                            @if (w.PathSound != null)
+                            {
+                                <audio class="testAudio" hidden src="~/sounds/@w.PathSound" type="audio/mpeg"></audio>
+                                <i class="bi bi-filetype-mp3 iconAudio" style="font-size:30px; text-align:center;"></i>
+                            }
+                            else
+                            {
+                                <i class="bi bi-0-circle" style="font-size:30px; text-align:center;"></i>
+                            }
+                        </td>
+
+                        <td>
+                            <a href="/Admin/AddWordDictionary?objId=@w.Id" class="btn btn-outline-primary">@Localizer["Update"]</a>
+                        </td>
+                    </tr>
+                }
+            <tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    'strict'
+    let Icon_audio = document.querySelectorAll(".iconAudio");
+    let Audio_play = document.querySelectorAll(".testAudio");
+    let img_word = document.querySelectorAll(".img_word");
+    let icon_img = document.querySelectorAll(".iconImg");
+
+
+    for (let i = 0; i < Icon_audio.length; i++) {
+        Icon_audio[i].addEventListener("click", function () {
+            Audio_play[i].play();
+        });
+    }
+
+    for (let i = 0; i < icon_img.length; i++) {
+        icon_img[i].addEventListener('click', function () {
+            if (img_word[i].hidden) img_word[i].hidden = false;
+            else img_word[i].hidden = true;
+        });
+    }
+</script>
+

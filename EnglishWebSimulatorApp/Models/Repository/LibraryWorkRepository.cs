@@ -1,6 +1,10 @@
 ﻿using EnglishWebSimulatorApp.Models.Interfaces;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace EnglishWebSimulatorApp.Models.Repository
 {
@@ -31,6 +35,17 @@ namespace EnglishWebSimulatorApp.Models.Repository
 
         public List<LibraryWordsJson> GetAll() => wordsJsons;
 
-        public LibraryWordsJson Update(LibraryWordsJson category) => throw new System.NotImplementedException();
+        public LibraryWordsJson Update(LibraryWordsJson word)
+        {
+            var wordList = wordsJsons.FirstOrDefault(w => w.Id == word.Id);
+            wordList.En = word.En;
+            wordList.Ru = word.Ru;
+            wordList.Tr = word.Tr;
+            wordList.PathSound = word.PathSound;
+            wordList.PathPict = word.PathPict;
+            var words = wordsJsons;
+            return wordList;
+        }
+
     }
 }

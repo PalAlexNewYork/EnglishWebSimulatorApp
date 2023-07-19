@@ -1,0 +1,143 @@
+﻿@model LibraryWordsJson
+
+@{
+    var WId = 0;
+    WId = Model == null ? 0 : Model.Id;
+    string pict = "";
+}
+
+<div class="container" style="background-color:antiquewhite;">
+    @if (ViewBag.Mes != null)
+    {
+        if (ViewBag.Mes == "HasAlready")
+        {
+            <div style="text-align:center; color:red;"><h3>@Localizer["The added word is already in the list, try another new word!"]</h3></div>
+        }
+        else
+        {
+            <div style="text-align:center; color:red;"><h3>@Localizer["Recording error try again!"]</h3></div>
+        }
+    }
+    @if (Model == null)
+    {
+        <div style="text-align:center"><h3>@Localizer["Tittle"]</h3></div>
+    }
+    else
+    {
+        <div class="m-2" style="text-align:center"><h1>@Localizer["Update"] - @Model.En</h1></div>
+        <div class="container col-3 m-2" style="border:1px solid black;">
+            @if (Model.PathPict != null)
+            {
+                <img class="card-img-top img-fluid m-2" src="/img/words/@Model.PathPict">
+            }
+            @if (Model.PathSound != null)
+            {
+                <audio class="testAudio" hidden src="~/sounds/@Model.PathSound" type="audio/mpeg">
+                </audio>
+                <i class="bi bi-play-btn playAudio" style="font-size:30px; text-align:center;"></i>
+            }
+
+        </div>
+    }
+
+
+    <form method="post"
+          asp-controller="Admin" asp-action="AddWordJson"
+          enctype="multipart/form-data" class="p-3"
+          style="border:1px solid black;">
+        <div class="validated" asp-validation-sumary="ModelOnly"></div>
+
+        <div class="form-group" hidden>
+            @if (Model == null)
+            {
+                <input asp-for="Id" value="@WId" class="form-control" />
+            }
+            else
+            {
+                <input asp-for="Id" value="@Model.Id" class="form-control" />
+            }
+
+        </div>
+
+        <div class="form-group">
+            <label>@Localizer["WordEn"]</label>
+            <div class="col">
+                <input asp-for="@Model.En" class="form-control" />
+                <span asp-validation-for="@Model.En" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>@Localizer["WordRu"]</label>
+            <div class="col">
+                <input asp-for="@Model.Ru" class="form-control" />
+                <span asp-validation-for="@Model.Ru" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>@Localizer["Tr"]</label>
+            <div class="col">
+                <input asp-for="@Model.Tr" class="form-control" />
+                <span asp-validation-for="@Model.Tr" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group m-2 p-2" style="background-color:aliceblue; border:1px solid black;">
+            <label class="d-flex flex-row">@Localizer["Pic"]</label>
+            <input type="file" id="file"
+                   name="file"
+                   multiple="multiple" accept=".jpg,.jpeg,.png" />
+            <!--
+            <span asp-validation-for="" class="text-danger"></span>
+            -->
+        </div>
+
+
+        <div class="form-group m-2 p-2" style="background-color:aliceblue; border:1px solid black;">
+            <label class="d-flex flex-row">@Localizer["Sound"]</label>
+            <input type="file" id="Onefile"
+                   name="fileOne"
+                   multiple="multiple" accept=".mp3, .wav, .aif, .mid" />
+        </div>
+
+        <div class="horizontal-space-evenly pb-2">
+            <input class="btn btn-success" type="submit" value="✓" />
+            <a href="/ShowWords" class="btn btn-danger">✕</a>
+        </div>
+
+    </form>
+</div>
+
+
+<script type="text/javascript">
+    /*let elem = document.querySelector(".playAudio");
+    let audio = document.querySelector(".testAudio");
+    let pensil = document.getElementById("bi_pensil");
+
+
+    pensil.addEventListener("click", function () {
+        console.log(pensil);
+        console.log(document.getElementById('file'));
+        console.log(document.getElementById('btn_themes'));
+        console.log(document.getElementById('label'));
+        document.getElementById('name_theme').hidden = false;
+        document.getElementById('btn_themes').hidden = false;
+        document.getElementById('label').hidden = false;
+    });
+
+    console.log(elem);
+    console.log(audio);
+
+
+
+    if (elem != null) {
+        elem.addEventListener("click", function () {
+            audio.play();
+        });
+    }
+
+    */
+
+</script>
+

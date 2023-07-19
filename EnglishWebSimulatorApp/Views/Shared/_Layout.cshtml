@@ -22,164 +22,168 @@
         .Select(c => new SelectListItem { Value = c.Name, Text = c.NativeName })
         .ToList();
     }
-            
-    <header class="m-2">
-        <div class="container-fluid m-3 d-flex flex-row justify-content-between flex-lg-wrap">
-            <div class="row ml-2">
-                <form asp-controller="Home" asp-action="SetLanguage" style="margin-top:20px;"
-                      asp-route-returnUrl="@Context.Request.Path"
-                      method="post" class="form-horizontal">
-                    <div>Language:</div>
-                    <select name="culture" onchange="this.form.submit();"
-                                      asp-for="@requestCulture.RequestCulture.UICulture.Name"
-                                      asp-items="cultureItems">
-                                  </select>
-                </form>
-            </div>
-            <div class="text-right">
-                <ul class="navbar-nav">
-                    @if (SignInManager.IsSignedIn(User))
-                    {
-                        <li class="nav-item">
-                            <a id="manage" class="nav-link text-dark d-flex align-items-center" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                                @{
-                                    var pictImg = "";
-                                    var pict = SignInManager.UserManager.Users.FirstOrDefault(u => u.Email == UserManager.GetUserName(User));
-                                    if (pict.Pict != null)
-                                    {
-                                    string imageBase64Data = Convert.ToBase64String(pict.Pict);
-                                    string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
-                                    pictImg = imageDataURL;
-                                        <img src="@pictImg" class="rounded-circle mr-1" style="width:35px; height:35px;">
-                                    }            
-                                }
-                                @if(!String.IsNullOrEmpty(pict.NameImg))
-                                {
-                                    @pict.NameImg
-                                }else
-                                {
-                                    @UserManager.GetUserName(User)
-                                }
-                                </a>
-                        </li>
-                        <li class="nav-item">
-                            <form id="logoutForm" class="form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                <button id="logout" type="submit" class="btn btn-outline-info text-dark">Logout</button>
-                            </form>
-                        </li>  
-                    }
-                    else
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
-                        </li>
-                    }
-                </ul>
-            </div>
-        </div>
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3"
-        style="width:100%; position:absolute; z-index:50;"
-        >
-            <div class="container-fluid">
+        <header class="m-2">
 
-                <a class="navbar-brand text" asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Header"]</a>
-                
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="background-color:white;">
+            <div class="container-fluid m-3 d-flex flex-row justify-content-between flex-lg-wrap">
+                <div class="row ml-2">
+                    <form asp-controller="Home" asp-action="SetLanguage" style="margin-top:20px;"
+                          asp-route-returnUrl="@Context.Request.Path"
+                          method="post" class="form-horizontal">
+                        <div>Language:</div>
+                        <select name="culture" onchange="this.form.submit();"
+                                asp-for="@requestCulture.RequestCulture.UICulture.Name"
+                                asp-items="cultureItems">
+                        </select>
+                    </form>
+                </div>
+                <div class="text-right">
                     <ul class="navbar-nav">
-                        @if (User.IsInRole(Role.Admin.ToString()))
+                        @if (SignInManager.IsSignedIn(User))
                         {
-                         <li class="nav-item">
-                                <a class="btn btn-outline-dark m-1" asp-area="" asp-controller="Admin" asp-action="Index">Page for administration</a>
-                        </li>
+                            <li class="nav-item">
+                                <a id="manage" class="nav-link text-dark d-flex align-items-center" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                                    @{
+                                        var pictImg = "";
+                                        var pict = SignInManager.UserManager.Users.FirstOrDefault(u => u.Email == UserManager.GetUserName(User));
+                                        if (pict.Pict != null)
+                                        {
+                                            string imageBase64Data = Convert.ToBase64String(pict.Pict);
+                                            string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
+                                            pictImg = imageDataURL;
+                                            <img src="@pictImg" class="rounded-circle mr-1" style="width:35px; height:35px;">
+                                        }
+                                    }
+                                    @if (!String.IsNullOrEmpty(pict.NameImg))
+                                    {
+                                        @pict.NameImg
+                                    }
+                                    else
+                                    {
+                                        @UserManager.GetUserName(User)
+                                    }
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <form id="logoutForm" class="form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                    <button id="logout" type="submit" class="btn btn-outline-info text-dark">Logout</button>
+                                </form>
+                            </li>
                         }
-                        <li class="nav-item">
-
-                            <a class="btn btn-outline-dark m-1" asp-area="" asp-controller="Home" asp-action="AboutApp">@Localizer["navAbout"]</a>
-
-                         </li>
-                        @if (User.IsInRole(Role.User.ToString()))
+                        else
                         {
                             <li class="nav-item">
-
-                                <a class="btn btn-outline-dark m-1" href="http://w44766vr.beget.tech/">@Localizer["navDeveloper"]</a>
-                    
-                            </li>
-
-                            <li class="nav-item">
-
-                                <a class="btn btn-outline-dark m-1" asp-area="" asp-controller="Home" asp-action="AddWords">@Localizer["navAddWords"]</a>
-
-                            </li>
-
-                            <li class="nav-item">
-
-                                <a class="btn btn-outline-dark m-1" asp-area="" asp-controller="Home" asp-action="ShowWords">@Localizer["ShowWords"]</a>
-
-                            </li>
-
-                            <li class="nav-item mr-1">
-                                <div class="dropdown">
-                                    <button class="btn btn-outline-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        @Localizer["String4"]
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" asp-controller="Lesson" asp-action="StartLesson" asp-route-param="ear">@Localizer["String1"]</a>
-                                        <a class="dropdown-item" asp-controller="Lesson" asp-action="StartLesson" asp-route-param="wordEng">@Localizer["String2"]</a>
-                                        <a class="dropdown-item" asp-controller="Lesson" asp-action="StartLesson" asp-route-param="wordRu">@Localizer["String3"]</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="nav-item mr-1">
-                                <div class="dropdown">
-                                    <button class="btn btn-outline-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        @Localizer["Dictionary"]
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" asp-controller="LibraryWordsJson" 
-                                        asp-action="MainLessonLibrary" 
-                                        asp-route-namePage="workout"
-                                        >@Localizer["workout"]</a>
-                                        <a class="dropdown-item" asp-controller="LibraryWordsJson" 
-                                        asp-action="MainLessonLibrary"
-                                       asp-route-namePage="knowledgeTesting"
-                                        >@Localizer["KnowledgeTesting"]</a>
-                                    </div>
-                                </div>
+                                <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
                             </li>
                             <li class="nav-item">
-                                <div class="dropdown">
-                                    <button class="btn btn-outline-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        @Localizer["User'sPage"]
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" asp-controller="Lesson" asp-action="UserProgres">@Localizer["UserProgress"]</a>
-                                        <a class="dropdown-item" asp-controller="Lesson" asp-action="StatisticInfo">@Localizer["StatisticInfo"]</a>
-                                        <a class="dropdown-item" asp-controller="Lesson" asp-action="YourAccount">@Localizer["YourAccount"]</a>       
-                                    </div>
-                                </div>
-                            </li>                          
+                                <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                            </li>
                         }
                     </ul>
                 </div>
             </div>
-            
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3 pt-5">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3"
+                 style="width:100%; z-index:50;">
+                <div class="container-fluid">
+
+                    <a class="navbar-brand text" asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Header"]</a>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" style="background-color:white;">
+                        <ul class="navbar-nav">
+                            @if (User.IsInRole(Role.Admin.ToString()))
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-dark m-1" asp-area="" asp-controller="Admin" asp-action="AdminsMainPage">Page for administration</a>
+                                </li>
+                            }
+                            <li class="nav-item">
+
+                                <a class="btn btn-outline-dark m-1" asp-area="" asp-controller="Home" asp-action="AboutApp">@Localizer["navAbout"]</a>
+
+                            </li>
+                            @if (User.IsInRole(Role.User.ToString()))
+                            {
+                                <li class="nav-item">
+
+                                    <a class="btn btn-outline-dark m-1" href="http://w44766vr.beget.tech/">@Localizer["navDeveloper"]</a>
+
+                                </li>
+
+                                <li class="nav-item">
+
+                                    <a class="btn btn-outline-dark m-1" asp-area="" asp-controller="Home" asp-action="AddWords">@Localizer["navAddWords"]</a>
+
+                                </li>
+
+                                <li class="nav-item">
+
+                                    <a class="btn btn-outline-dark m-1" asp-area="" asp-controller="Home" asp-action="ShowWords">@Localizer["ShowWords"]</a>
+
+                                </li>
+
+                                <li class="nav-item mr-1">
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            @Localizer["String4"]
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" asp-controller="Lesson" asp-action="StartLesson" asp-route-param="ear">@Localizer["String1"]</a>
+                                            <a class="dropdown-item" asp-controller="Lesson" asp-action="StartLesson" asp-route-param="wordEng">@Localizer["String2"]</a>
+                                            <a class="dropdown-item" asp-controller="Lesson" asp-action="StartLesson" asp-route-param="wordRu">@Localizer["String3"]</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="nav-item mr-1">
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            @Localizer["Dictionary"]
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" asp-controller="LibraryWordsJson"
+                                           asp-action="MainLessonLibrary"
+                                           asp-route-namePage="workout">@Localizer["workout"]</a>
+                                            <a class="dropdown-item" asp-controller="LibraryWordsJson"
+                                           asp-action="MainLessonLibrary"
+                                           asp-route-namePage="knowledgeTesting">@Localizer["KnowledgeTesting"]</a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            @Localizer["User'sPage"]
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" asp-controller="Lesson" asp-action="UserProgres">@Localizer["UserProgress"]</a>
+                                            <a class="dropdown-item" asp-controller="Lesson" asp-action="StatisticInfo">@Localizer["StatisticInfo"]</a>
+                                            <a class="dropdown-item" asp-controller="Lesson" asp-action="YourAccount">@Localizer["YourAccount"]</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+        </header>
+
+        <div class="container">
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+
+    
+
+    
+
+    <footer class="border-top text-muted">
         <div class="container">
             &copy; 2023 - EnglishWebSimulatorApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

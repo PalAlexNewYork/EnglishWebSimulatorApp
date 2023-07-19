@@ -1,10 +1,13 @@
 ﻿using EnglishWebSimulatorApp.Data;
 using EnglishWebSimulatorApp.Models.Interfaces;
 using EnglishWebSimulatorApp.Models.Repository;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Web;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -15,14 +18,11 @@ namespace EnglishWebSimulatorApp.Models.Servise
         private readonly EnglishWebSimulatorAppContext context;
         private ILibraryWorkJson libraryWork  {get;}
         public ILybraryWorkJsonRepository workJsonRepository { get; set; }
-        private IRezultsRepository rezultsRepository;
         public LibraryWorkJsonServise(ILibraryWorkJson LibraryWorkJson)
         {
             this.libraryWork = LibraryWorkJson;
             workJsonRepository = this.libraryWork.workJsonRepository;
         }
-
-        public IRezultsRepository RezultsRepository { get; set; }
 
         public List<LibraryWordsJson> GetAllWords() => workJsonRepository.GetAll();
         public List<LibraryWordsJson> SelectWordsServise(string check, int number, string str, int numberFrom, int numberTo) 
@@ -67,7 +67,6 @@ namespace EnglishWebSimulatorApp.Models.Servise
             }else 
                 return false;
         }
-
         public string GetWordsEnStr(string idWords)
         {
             var idArr = idWords.Split("%");
@@ -85,6 +84,42 @@ namespace EnglishWebSimulatorApp.Models.Servise
             }
             return str;
         }
+        public LibraryWordsJson AddWord(LibraryWordsJson word) 
+        {
+            var words = this.libraryWork.workJsonRepository.GetAll();
+            if (!words.Any(w => w.En.Equals(word.En, StringComparison.OrdinalIgnoreCase)))
+            {
+                int maxId = words.Select(w => w.Id).ToList().Max();
+                word.Id = maxId + 1;
+                this.libraryWork.workJsonRepository.GetAll().Add(word);
+                this.libraryWork.SaveChange();
+                return word;
+            }
+            else
+                return null; 
+        }
+        public LibraryWordsJson UpdateWord(LibraryWordsJson word) 
+        {
+            LibraryWordsJson wordList =  libraryWork.workJsonRepository.Update(word);
+            this.libraryWork.SaveChange();
+            return wordList;
+        }
+        public List<LibraryWordsJson> GetFragmentWords(string str, bool isCyrilic) 
+        {
+            List<LibraryWordsJson> list = new List<LibraryWordsJson>();
+            if (!isCyrilic)
+            {
+                list = workJsonRepository.GetAll().Where(w => w.En.Contains(str)).ToList();
+            }
+            else 
+            {
+                list = workJsonRepository.GetAll().Where(w => w.Ru.Contains(str)).ToList();
+            }
+            return list;
+        }
+
+        public List<LibraryWordsJson> SearchFromToId(int numberFrom, int numberTo) =>
+            workJsonRepository.GetAll().Where(w => w.Id >= numberFrom && w.Id <= numberTo).ToList();
 
     }
 }

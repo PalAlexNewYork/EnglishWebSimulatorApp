@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EnglishWebSimulatorApp.Models.Interfaces
 {
@@ -7,7 +9,7 @@ namespace EnglishWebSimulatorApp.Models.Interfaces
         public List<LibraryWordsJson> GetAll();
         public List<LibraryWordsJson> GetWordsHand(IEnumerable<string> groups);
         public LibraryWordsJson Create(LibraryWordsJson category);
-        public LibraryWordsJson Update(LibraryWordsJson category);
+        public LibraryWordsJson Update(LibraryWordsJson word);
         public LibraryWordsJson Delete(int id);
     }
 }

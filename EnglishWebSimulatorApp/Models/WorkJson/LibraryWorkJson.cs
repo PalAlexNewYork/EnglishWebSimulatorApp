@@ -9,13 +9,10 @@ namespace EnglishWebSimulatorApp.Models.WorkJson
     public class LibraryWorkJson : ILibraryWorkJson
     {
         public ILybraryWorkJsonRepository workJsonRepository { get; set; }
-
         private const string FilePath = "words.json";
-
         public LibraryWorkJson() 
         {
             var words_tmp = new List<LibraryWordsJson>();
-            
             if (File.Exists(FilePath))
             {
                 var json = File.ReadAllText(FilePath);
@@ -25,7 +22,9 @@ namespace EnglishWebSimulatorApp.Models.WorkJson
         }
         public void SaveChange()
         {
-            throw new System.NotImplementedException();
+            var words = workJsonRepository.GetAll();
+            var words_json = JsonSerializer.Serialize(words);
+            File.WriteAllText(FilePath, words_json);
         }
     }
 }
