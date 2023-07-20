@@ -109,11 +109,11 @@ namespace EnglishWebSimulatorApp.Models.Servise
             List<LibraryWordsJson> list = new List<LibraryWordsJson>();
             if (!isCyrilic)
             {
-                list = workJsonRepository.GetAll().Where(w => w.En.Contains(str)).ToList();
+                list = workJsonRepository.GetAll().Where(w => w.En.Contains(str, StringComparison.OrdinalIgnoreCase)).ToList();
             }
             else 
             {
-                list = workJsonRepository.GetAll().Where(w => w.Ru.Contains(str)).ToList();
+                list = workJsonRepository.GetAll().Where(w => w.Ru.Contains(str, StringComparison.OrdinalIgnoreCase)).ToList();
             }
             return list;
         }

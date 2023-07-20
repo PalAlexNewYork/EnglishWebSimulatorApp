@@ -26,5 +26,6 @@ namespace EnglishWebSimulatorApp.Models.Interfaces
         public LibraryEn GetWordsId(int id, string user);
         public SelectList SetSelectDateTheme(string theme, string user, string name);
         public List<LibraryEnShow> GetLibrariesShowThema(string text, string user);
+        public List<LibraryEnShow> GetWordsFragmentStr(string user, string text, bool flag);
     }
 }

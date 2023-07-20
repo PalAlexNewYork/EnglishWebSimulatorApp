@@ -341,6 +341,18 @@ namespace EnglishWebSimulatorApp.Models.Servise
 
         public List<LibraryEnShow> GetLibrariesShowThema(string text, string user) =>
                                             this.librariesShow(libratyRepository.GetAll().Where(w => w.User == user && w.Thema == text).ToList());
-    
+
+        public List<LibraryEnShow> GetWordsFragmentStr(string user, string text, bool flag)
+        {
+            if (!flag) 
+            {
+                return this.librariesShow( this.GetAll(user).Where(w => w.WordEng.Contains(text, StringComparison.OrdinalIgnoreCase)).ToList());
+            }
+            else 
+            {
+                return this.librariesShow(this.GetAll(user).Where(w => w.WordRus.Contains(text, StringComparison.OrdinalIgnoreCase)).ToList());
+            }
+        }
+
     }
 }

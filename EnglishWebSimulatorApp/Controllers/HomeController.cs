@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -178,13 +179,12 @@ namespace EnglishWebSimulatorApp.Controllers
         [Route("FindWord")]
         public IActionResult FindWord(string text)
         {
-            List<LibraryEn> words=new List<LibraryEn>();
             if (!string.IsNullOrEmpty(text)) 
             {
-                words = _servise.GetAll(User.Identity.Name.ToString()).Where(w=>w.WordEng.Contains(text)).ToList();
+                string pattern = @"\p{IsCyrillic}";
+                var words = _servise.GetWordsFragmentStr(User.Identity.Name, text, (Regex.Matches(text, pattern).Count > 0)); return View("ShowWords", words);
             }
-            var list = _servise.librariesShow(words);
-            return View("ShowWords", list);
+            return Redirect("ShowWords");
         }
         //
         [HttpGet]
