@@ -42,20 +42,7 @@ namespace EnglishWebSimulatorApp.Controllers
         [Route("ShowCardsWords")]
         public IActionResult ShowCardsWords(int id, string flag) 
         {
-            LibraryWordsJson word = null; 
-            if (flag == "flag_id") 
-            {
-                word = this.library.GetAllWords().FirstOrDefault(w => w.Id == id); 
-            }
-            else
-            {
-                word = this.library.GetAllWords().FirstOrDefault(w => w.Id == (id + 1)); 
-            }
-            if (word == null)
-            {
-                var word_default = this.library.GetAllWords().FirstOrDefault(w => w.Id == 1); return View(word_default);
-            }
-            else
+            var word = this.library.GetNextOrIdWord(id, flag);
             return View(word);
         }
         //
@@ -132,6 +119,8 @@ namespace EnglishWebSimulatorApp.Controllers
         {
             return View();
         }
+        //
+
         //
         public bool isCyrillic(string textInput)
         {

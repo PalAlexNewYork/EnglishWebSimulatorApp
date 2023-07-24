@@ -144,8 +144,14 @@
                                             @Localizer["Dictionary"]
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="/LibraryWordsJson/MainLessonLibrary?namePage="workout">@Localizer["workout"]</a>
-                                            <a class="dropdown-item" href="/LibraryWordsJson/MainLessonLibrary?namePage="knowledgeTesting">@Localizer["KnowledgeTesting"]</a>
+                                            <a class="dropdown-item" asp-controller="LibraryWordsJson"
+                                           asp-action="MainLessonLibrary"
+                                           asp-route-namePage="workout">@Localizer["workout"]</a>
+                                            <a class="dropdown-item" asp-controller="LibraryWordsJson"
+                                           asp-action="MainLessonLibrary"
+                                           asp-route-namePage="knowledgeTesting">@Localizer["KnowledgeTesting"]</a>
+                                        <a class="dropdown-item" asp-controller="Admin"
+                                       asp-action="ShowCardsWords">@Localizer["Viewing dictionary words"]</a>
                                         </div>
                                     </div>
                                 </li>

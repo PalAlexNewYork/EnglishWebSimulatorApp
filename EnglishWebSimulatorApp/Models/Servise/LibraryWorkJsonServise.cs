@@ -121,5 +121,35 @@ namespace EnglishWebSimulatorApp.Models.Servise
         public List<LibraryWordsJson> SearchFromToId(int numberFrom, int numberTo) =>
             workJsonRepository.GetAll().Where(w => w.Id >= numberFrom && w.Id <= numberTo).ToList();
 
+        public LibraryWordsJson GetNextOrIdWord(int id, string flag) 
+        {
+            LibraryWordsJson word = null; 
+            var words = workJsonRepository.GetAll();
+            if (flag == "flag_id") 
+            {
+                do 
+                { 
+                word = words.FirstOrDefault(w => w.Id == id);
+                    if (id <= (words.Max(w => w.Id))) ++id;
+                    else break;
+                }while (word == null);     
+            }
+            else
+            {
+                do
+                {
+                    ++id;
+                    if(id <= words.Max(w => w.Id))
+                    word = words.FirstOrDefault(w => w.Id == id);
+                    else break;
+                } while (word == null);
+
+            }
+
+       if (word == null) return words.FirstOrDefault(w => w.Id == 1); 
+       else
+       return word;
+        }
+
     }
 }

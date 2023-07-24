@@ -162,6 +162,9 @@
   <data name="UserProgress" xml:space="preserve">
     <value>Прогресс пользователя</value>
   </data>
+  <data name="Viewing dictionary words" xml:space="preserve">
+    <value>Просмотр словаря</value>
+  </data>
   <data name="workout" xml:space="preserve">
     <value>Тренировка</value>
   </data>

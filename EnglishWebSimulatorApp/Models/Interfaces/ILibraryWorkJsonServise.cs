@@ -17,5 +17,6 @@ namespace EnglishWebSimulatorApp.Models.Interfaces
         public LibraryWordsJson UpdateWord(LibraryWordsJson word);
         public List<LibraryWordsJson> GetFragmentWords(string str, bool isCyrilic);
         public List<LibraryWordsJson> SearchFromToId(int numberFrom, int nubberTo);
+        public LibraryWordsJson GetNextOrIdWord(int id, string flag);
     }
 }
