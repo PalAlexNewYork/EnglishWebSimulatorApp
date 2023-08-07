@@ -1,18 +1,18 @@
 ﻿@model LibraryWordsJson
 
-<div class="d-flex justify-content-center align-items-center" style="background:  url(https://catherineasquithgallery.com/uploads/posts/2021-03/1614857389_17-p-fon-okeana-20.jpg)  no-repeat fixed; height:100vh;">
+<div class="d-flex justify-content-center align-items-center" 
+style="background:  url(https://catherineasquithgallery.com/uploads/posts/2021-03/1614857389_17-p-fon-okeana-20.jpg)  no-repeat fixed; height:85vh;">
     <div class="card" style="width: 22rem;">
         @if (Model.PathPict != null)
         {
-            <img src="~/img/words/@Model.PathPict" class="card-img-top" style="max-height:350px;" alt="...">
+            <img src="~/img/words/@Model.PathPict" class="card-img-top" style="max-height:300px;" alt="...">
         }
         else
         {
             <img src="~/english.jpg" class="card-img-top" alt="...">
         }
         <ul class="list-group list-group-flush">
-            <li class="list-group-item"><h4 class="card-title">@Model.Id</h4></li>
-            <li class="list-group-item"><h4 class="card-title">@Model.En</h4></li>
+            <li class="list-group-item"><h4 class="card-title">@Model.Id. @Model.En </h4></li>
             <li class="list-group-item"> <h4 class="card-title">@Model.Ru</h4></li>
             <li class="list-group-item"> <h4 class="card-title">@Model.Tr</h4></li>
             @if (Model.PathSound!= null)
@@ -36,15 +36,11 @@
                 </li>
             }
 
-            @if (User.Identity.Name.ToString() == Role.Admin.ToString())
+            @if(User.IsInRole(Role.Admin.ToString()))
             {
              <li class="list-group-item">
                 <a href="/Admin/AddWordDictionary?objId=@Model.Id" class="btn btn-outline-warning">Update word</a>
             </li>
-            }
-            else
-            {
-               
             }
         </ul>
     </div>

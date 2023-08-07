@@ -11,74 +11,68 @@
 
 
 
-<div class="container d-flex justify-content-center align-items-center pt-3 pb-3" style="background-color:lightgray;" >
-    <div class="card">
+<div class="container d-flex justify-content-center align-items-center pt-3 pb-3"
+     style="background:  url(https://catherineasquithgallery.com/uploads/posts/2021-03/1614764896_123-p-zadnie-foni-dlya-fotoshopa-183.jpg)  no-repeat fixed; height:85vh;">
+    <div class="card" style="min-width:300px; min-height:500px;">
 
         <div class="upper">       
                 <img src="https://i.imgur.com/Qtrsrk5.jpg" class="img-fluid">
         </div>
 
-        <div class="user text-center">
-
-            <div class="profile">
+        <div class="user text-center mb-4">
+            <div class="profile mb-4">
                 @if (Model.Pict == null)
                 {
                     <img src="/img/userNull.png" style="width:90px; height:90px;" class="rounded-circle img-fluid mt-3border:1px solid black;" >
                 }
                 else
                 {
-                    <img src="@pict" class="rounded-circle mt-3" style="width:90px; height:90px;border:1px solid black;" >
+                    <img src="@pict" class="rounded-circle mt-3" style="width:110px; height:110px;border:1px solid black;" >
                 }
                 <form method="post" enctype="multipart/form-data" asp-controller="Lesson"
                 asp-action="UpdateImgUser">
                     <input type="file" id="file" hidden
                            name="file"
                            multiple="multiple" accept=".jpg,.jpeg,.png" />
-                    <i class="bi bi-pencil-square pencil" style="font-size:30px;"></i>
+                    <i class="bi bi-pencil-square pencil" style="font-size:20px;"></i>
                     <button hidden class="btn_click" type="submit"></button>
                 </form>
-                
-            </div>
+             </diV>
 
+            <div class="profile mb-4">
+                @if (Model.NameImg == null)
+                {
+                    <div class="mb-0 setNameTxt">
+                        <p>@Localizer["String1"]</p>
+                    </div>
+                }
+                else
+                {
+                    <h4 class="mb-0 setNameTxt">@Model.NameImg</h4>
+                }
+                 <form method="get" hidden asp-controller="Lesson" asp-action="SetNameAvatar"  id="formNameImg">
+                <div class ="p-3 d-flex flex-row">
+                    <div class="mr-2">
+                        <input type="text" name="text" class="form-control"/>
+                    </div>
+                    <button type="submit" class="btn btn-info">✓</button>
+                </div>        
+                </form>
+                <i class="bi bi-pencil-fill setName mt-0" style="font-size:20px;"></i>
+            </div>
         </div>
 
 
         <div class="text-center">
-
-            @if (Model.NameImg == null)
-            {
-                <div class="m-3 mb-0 setNameTxt">
-                    <p>@Localizer["String1"]</p>
-                </div>
-            }
-            else
-            {
-                <h4 class="mb-0 setNameTxt">@Model.NameImg</h4>
-            }
-            <form method="get" hidden asp-controller="Lesson" asp-action="SetNameAvatar"  id="formNameImg">
-                <div class ="p-3 d-flex flex-row">
-                    <div class="mr-2">
-                        <input type="text" name="text" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-primary">✓</button>
-                </div>        
-            </form>
-            <i class="bi bi-pencil-fill setName mt-0"></i>
-            <!--
-            <span class="text-muted d-block mb-2">Los Angles</span>
-            <button class="btn btn-primary btn-sm follow">Follow</button>
-            -->
             @if (!String.IsNullOrEmpty(Model.PhoneNumber))
             {
-                <div class="d-flex flex-row justify-content-center">
-                    <i class="bi bi-telephone"></i>
+                <div class="d-flex flex-row justify-content-center" style="font-size:20px;">
+                    <i class="bi bi-telephone setName" ></i>
                     <span class="text-muted d-block mb-2">@Model.PhoneNumber</span>
                 </div>
             }
            
-
-
-            <div class="d-flex justify-content-between align-items-center mt-4 px-4">
+            <div class="d-flex justify-content-between align-items-center mt-5 px-4">
 
                 <div class="stats">
                     <h6 class="mb-0">@Localizer["String2"]</h6>

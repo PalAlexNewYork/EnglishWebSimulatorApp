@@ -33,6 +33,7 @@ namespace EnglishWebSimulatorApp.Controllers
         public IActionResult SelectWords(string check, int number, int numberFrom, int numberTo, string str, string namePage)
         {
             List<LibraryWordsJson> list = new List<LibraryWordsJson>();
+            ViewBag.Name = namePage;
             if (check != "HeadSelectWords") 
             {
                 list = this.library.SelectWordsServise(check, number, str, numberFrom, numberTo);
@@ -42,14 +43,14 @@ namespace EnglishWebSimulatorApp.Controllers
                     libraryEnShService.AddAllWordsJson(list);
                     ViewBag.right = libraryEnShService.rightAnswer;
                     ViewBag.notRight = libraryEnShService.notRightAnswer;
-                    ViewBag.flag = true; ViewBag.Name=namePage;
+                    ViewBag.flag = true; 
                     return View("MainLessonLibrary", list);
                 }
                 else return View("MainLessonLibrary");
             }        
             else 
             {
-                list = this.library.GetAllWords(); ViewBag.Name = namePage;
+                list = this.library.GetAllWords(); 
                 if (list.Count != 0) return View("PreselectionWords", list);
                 else return View("MainLessonLibrary");              
             }

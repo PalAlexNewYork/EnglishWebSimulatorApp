@@ -21,7 +21,6 @@ namespace EnglishWebSimulatorApp.Controllers
             _servise = servise;
             this.libraryEnShService = libraryEnShService;
         }
-        
         //
         [HttpGet]
         [Route("StartLesson")]
@@ -238,14 +237,9 @@ namespace EnglishWebSimulatorApp.Controllers
             _servise.UpdateUser(user);
             return Redirect("YourAccount");
             }
-            return Redirect("YourAccount");
-            
+            return Redirect("YourAccount");         
         }
-
-
-
-
-
+//
         public IActionResult Index()
         {
             return View();

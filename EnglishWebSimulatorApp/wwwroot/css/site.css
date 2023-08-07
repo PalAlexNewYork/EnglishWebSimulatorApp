@@ -15,8 +15,17 @@ for details on configuring this project to bundle and minify static web assets. 
     font-family: 'Caprasimo', cursive;
 }
 
+.background_main {
+    background: url(https://top-fon.com/uploads/posts/2023-01/1674929011_top-fon-com-p-foni-dlya-prezentatsii-na-angliiskuyu-tema-116.jpg) repeat;
+}
+
+.style_log_reg {
+    background-color:aliceblue;
+    padding:30px;
+}
+
 .style_border {
-    border:1px solid black;
+    border: 1px solid black;
 }
 
 nav {
@@ -132,11 +141,8 @@ body {
 
 /*страница вывода победителей*/
 .header_img {
-    padding-top: 10px;
-    background-image: url('../img/1619312722_6-phonoteka_org-p-fon-pobediteli-konkursa-8.jpg');
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
+    background: url('https://top-fon.com/uploads/posts/2023-02/1675262568_top-fon-com-p-fon-dlya-prezentatsii-moi-dostizheniya-18.jpg') repeat fixed;
+    height: 90vh;
 }
 
 .winners-case {
@@ -203,3 +209,69 @@ body {
     border:1px solid black;
 }
 
+.place_winner{
+    width:5vh;
+    margin: 0 auto;
+}
+
+.img_winner {
+    border: 1px solid black;
+}
+.card_winner {
+    border: 1px solid black;
+    border-radius:20px;
+}
+
+.text-img {
+    display:flex;
+}
+.img {
+    width: 40%;
+    object-fit:cover;
+    margin-bottom:1em;
+}
+.text {
+    width:60%;
+    padding:1vh;
+    text-align:justify;
+    text-indent: 2em;
+    font-size:18px;
+}
+.text_row {
+    padding: 1vh;
+    text-align: justify;
+    text-indent: 2em;
+    font-size: 18px;
+}
+.list_title {
+    text-align: left;
+    font-size: 18px;
+    list-style-type:none;
+}
+.imgPic {
+    width: 500px;
+    height: 500px;
+    margin-bottom:1em;
+}
+
+
+@media screen and (max-width: 480px) {
+    .table_place th {
+        padding:0;
+    }
+    .card_winner {
+        width:190px;
+    }
+    .text-img {
+        display:flex;
+        flex-direction:column;
+    }
+    .img, .text {
+        width: 100%;
+    }
+    .imgPic {
+        width: 100%;
+        height:auto;
+    }
+    
+}

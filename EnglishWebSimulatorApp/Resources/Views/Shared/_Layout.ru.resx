@@ -138,6 +138,12 @@
   <data name="navStartsApp" xml:space="preserve">
     <value>Начать урок!</value>
   </data>
+  <data name="Show cards words" xml:space="preserve">
+    <value>Просмотр карточек со словами</value>
+  </data>
+  <data name="Show words" xml:space="preserve">
+    <value>Просмотр слов</value>
+  </data>
   <data name="ShowWords" xml:space="preserve">
     <value>Показать все слова!</value>
   </data>

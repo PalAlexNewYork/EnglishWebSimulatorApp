@@ -117,15 +117,33 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="dictionary1" xml:space="preserve">
+    <value>The application has the ability to work with a dictionary, which at the initial stage has 8000 words, replenished by the site administrator. The user's work with the dictionary includes two training modes, which differ in that in the knowledge test mode at the end of the lesson, the result is automatically saved and the incorrectly entered word is no longer repeated, a page with an error notification is displayed.</value>
+  </data>
+  <data name="dictionary2" xml:space="preserve">
+    <value>It is also possible to view words in the form of cards, to go to the next one you need to press the NEXT button, to go to a certain word you need to enter a number and click on the bird.</value>
+  </data>
+  <data name="dictionary3" xml:space="preserve">
+    <value>Regardless of your choice of training or knowledge testing, in any case, you will be directed to a page with the settings for selecting a list of words.</value>
+  </data>
+  <data name="dictionary4" xml:space="preserve">
+    <value>The training mode with a dictionary is similar to the training mode with the user's words, there is also a panel for displaying the remaining words, correct answers, errors, with the output of animations depending on the correctness of the answer. There is a panel with image prompts, audio playback, and transcription added.</value>
+  </data>
   <data name="Discrip" xml:space="preserve">
     <value>The application is designed for memorizing and learning English words. The user is given the opportunity to add, save and use certain
 words. The words are stored in the following variants: - English version; - Russian version; -image visualization; - sound format.</value>
+  </data>
+  <data name="StringEight" xml:space="preserve">
+    <value>Working with the dictionary</value>
   </data>
   <data name="StringFive" xml:space="preserve">
     <value>Viewing words</value>
   </data>
   <data name="StringFour" xml:space="preserve">
     <value>To add a word, go to the tab (add a word) in the main panel or click on the button (Add a word) in the view of all words!</value>
+  </data>
+  <data name="StringNine" xml:space="preserve">
+    <value>User`s page</value>
   </data>
   <data name="StringOne" xml:space="preserve">
     <value>User Registration</value>
@@ -140,9 +158,90 @@ words. The words are stored in the following variants: - English version; - Russ
     <value>Adding words</value>
   </data>
   <data name="StringTwo" xml:space="preserve">
-    <value>For authorization and registration in the upper right corner of the application there is a form with registration and authorization buttons (fig1). The functionality of the application is not available without user registration. After clicking on the registration button, we get to the form (Fig.2), where you need to enter an email address and come up with a password. The password must contain Latin alphabet characters in both uppercase and lowercase, special characters, numbers. After registration, a link will appear to which you need to click (Fig.3) to confirm registration. To log in, follow the Login link, where you also need to enter your email address and password. And if everything is fine, navigation buttons appear in the panel.</value>
+    <value> After registration, a link will appear to which you need to click (Fig.3) to confirm registration. To log in, follow the Login link, where you also need to enter your email address and password. And if everything is fine, navigation buttons appear in the panel.</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Guide to using the application.</value>
+  </data>
+  <data name="Title1" xml:space="preserve">
+    <value>A WEB application for learning and replenishing the vocabulary of the English language.</value>
+  </data>
+  <data name="Title10" xml:space="preserve">
+    <value>The application is designed to add and memorize English words, for each user there is a library of words with which he can periodically work to replenish, repeat, view. If you are lazy to constantly replenish new words, then you can work with a shared library of words, without the possibility of replenishment, but you can also view words, repeat, and train. The training results are recorded, and the user can view the results of his work for the week.</value>
+  </data>
+  <data name="Title11" xml:space="preserve">
+    <value>For authorization and registration in the upper right corner of the application there is a form with registration and authorization buttons (fig1). The functionality of the application is not available without user registration.</value>
+  </data>
+  <data name="Title12" xml:space="preserve">
+    <value>After clicking on the registration button, we get to the form (Fig.2), where you need to enter an email address and come up with a password. The password must contain Latin alphabet characters in both uppercase and lowercase, special characters, numbers.</value>
+  </data>
+  <data name="Title13" xml:space="preserve">
+    <value>In the training mode, you can click on the Lessons button in the navigation panel. There are three types of classes to choose from in the drop-down list:</value>
+  </data>
+  <data name="Title14" xml:space="preserve">
+    <value>1. The word by ear, according to the word pronounced by the computer, it is necessary to enter it in English;</value>
+  </data>
+  <data name="Title15" xml:space="preserve">
+    <value>2. The word in English, for the specified English word, you must enter a translation in Russian;</value>
+  </data>
+  <data name="Title16" xml:space="preserve">
+    <value>Russian Russian word, for the specified Russian word, it is necessary to enter a translation in English.;</value>
+  </data>
+  <data name="Title17" xml:space="preserve">
+    <value>Whatever you choose, in any case you will be redirected to the page with the word selection settings, where you can choose any option for choosing the number of words and their location, as well as choose words on the topics you set.</value>
+  </data>
+  <data name="Title18" xml:space="preserve">
+    <value>The interface of the training page is very informative and simple, there is a panel for displaying the remaining words, correct answers and incorrect answers. The user enters the intended word into the form and after clicking, a check is performed. If the answer is correct, a joyful animation appears, if the answer is incorrect, a sad icon appears.</value>
+  </data>
+  <data name="Title19" xml:space="preserve">
+    <value>There is also the possibility of a hint by clicking on the icon with a question, depending on the available data, an image appears, an icon for audio listening to the word, and finally an icon for viewing the correct answer.</value>
+  </data>
+  <data name="Title2" xml:space="preserve">
+    <value>When learning a foreign language, it is very important to constantly replenish your vocabulary — to learn new and new words. However, not everyone succeeds in doing this with success. To successfully memorize new words, it is better to use an associative image, it is better if the image is bright, strange or funny — so it will be more reliably remembered. another assistant in the study is the auditory perception and pronunciation of the studied word, a ready-made illustration or sound file can be picked up in Google.</value>
+  </data>
+  <data name="Title20" xml:space="preserve">
+    <value>At the end of the words, the lesson ends and you get to the page with the results of the lesson. You are offered the choice of saving the lesson results.</value>
+  </data>
+  <data name="Title3" xml:space="preserve">
+    <value>This probably happened to you at school: you learned a dozen new English words, did your homework, wrote a dictation… And a month later, everyone forgot. This is because new vocabulary needs to be repeated periodically and refreshed in memory. There is even a recommended schedule of repetitions of English words, compiled on the basis of the works of German psychologist Hermann Ebbinghaus:</value>
+  </data>
+  <data name="Title4" xml:space="preserve">
+    <value>- use the word again in 20-30 minutes;</value>
+  </data>
+  <data name="Title5" xml:space="preserve">
+    <value>- repeat the word every other day;</value>
+  </data>
+  <data name="Title6" xml:space="preserve">
+    <value>- return to a new word after 2-3 weeks;</value>
+  </data>
+  <data name="Title7" xml:space="preserve">
+    <value>- repeat the word in 2-3 months;</value>
+  </data>
+  <data name="Title8" xml:space="preserve">
+    <value>- fix the word after 2-3 years.</value>
+  </data>
+  <data name="Title9" xml:space="preserve">
+    <value>It is on this method of memorization that the application for learning English words is based. The user is given an individual opportunity to digitally store foreign words with an image and sound accompaniment. Conducting study classes by constantly browsing in training mode. Adding five words every day, and conducting daily training for a short period of time, your vocabulary will be significantly replenished, and most importantly, it will be stored digitally, and at any moment it can be recalled, repeated, refreshed in your memory.</value>
+  </data>
+  <data name="UserPage" xml:space="preserve">
+    <value>The user's page includes three modes:</value>
+  </data>
+  <data name="UserPage1" xml:space="preserve">
+    <value>1.The user's progress is designed to view the user's results for the week;</value>
+  </data>
+  <data name="UserPage2" xml:space="preserve">
+    <value>2.The user's result shows what place the user occupies between all users of the application;</value>
+  </data>
+  <data name="UserPage3" xml:space="preserve">
+    <value>3.Your account displays user information;</value>
+  </data>
+  <data name="UserPage4" xml:space="preserve">
+    <value>In the user's results viewing mode, you can view the progress on a certain day during the week by clicking on the play icon, of course only if there is data about the user's active lessons. The animated icon at the bottom indicates the presence of a result, the fire indicates the absence of a result, the award cup indicates the presence of a result.</value>
+  </data>
+  <data name="UserPage5" xml:space="preserve">
+    <value>In the user results mode, you can see what place the current user occupies among users in terms of word skills. In addition, the top three winners are displayed.</value>
+  </data>
+  <data name="UserPage6" xml:space="preserve">
+    <value>In your account, you can not only view data about yourself, but also change the avatar image, username instead of email address, all this can be done by clicking on certain Pencil icons.</value>
   </data>
 </root>

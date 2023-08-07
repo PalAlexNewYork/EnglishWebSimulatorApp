@@ -195,5 +195,12 @@ namespace EnglishWebSimulatorApp.Controllers
             ViewBag.Theme = list[0].Thema;
             return View("ShowWords", list);
         }
+        //
+        [HttpGet]
+        [Route("ShowCardsWords")]
+        public IActionResult ShowCardsWords() 
+        {
+            return View();
+        }
     }
 }

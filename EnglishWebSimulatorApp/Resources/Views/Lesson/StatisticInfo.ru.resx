@@ -120,6 +120,9 @@
   <data name="Lessons" xml:space="preserve">
     <value>Уроки</value>
   </data>
+  <data name="Place" xml:space="preserve">
+    <value>Место</value>
+  </data>
   <data name="Points" xml:space="preserve">
     <value>Баллы</value>
   </data>
@@ -128,6 +131,9 @@
   </data>
   <data name="String2" xml:space="preserve">
     <value>место в рейтинге пользователей</value>
+  </data>
+  <data name="Three winners!" xml:space="preserve">
+    <value>Тройка победителей!</value>
   </data>
   <data name="Words" xml:space="preserve">
     <value>Слова</value>

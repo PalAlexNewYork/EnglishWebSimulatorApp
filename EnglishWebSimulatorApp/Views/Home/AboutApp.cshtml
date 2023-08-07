@@ -1,81 +1,256 @@
-﻿<div class="container-fluid p-2" style="background-color:antiquewhite; border:1px solid black;">
+﻿<></>
+
+<div class="style_log_reg">
     <div class="text-center">
-        <h2>@Localizer["Title"]</h2>
+        <div class="title textFont3">
+            <h2>@Localizer["Title1"]</h2>
+        </div>
+        <div>
+            <div class="text-img">
+                <img class="img" src="http://newtvnews.ru/wp-content/uploads/2022/09/10-1-2.jpg" alt="not img" />
+                <div class="text">
+                    <p>
+                        @Localizer["Title2"]
+                    </p>
+                </div>
+            </div>
+            <div class="text_row"><p>@Localizer["Title3"]</p></div>
+            <ul class="list_title">
+                <li>@Localizer["Title4"]</li>
+                <li>@Localizer["Title5"]</li>
+                <li>@Localizer["Title6"]</li>
+                <li>@Localizer["Title7"]</li>
+                <li>@Localizer["Title8"]</li>
+            </ul>
+            <div class="text_row">
+                <p>@Localizer["Title9"]</p>
+            </div>
+            <div class="text_row">
+                <p>@Localizer["Title10"]</p>
+            </div>
+        </div>
     </div>
-    <div style="text-indent:30px;">
-        @Localizer["Discrip"]
+
+
+<div class="text-center">
+        <h2>@Localizer["Title"]</h2>
     </div>
     <div class="accordion p-2" id="accordionExample">
         <div class="accordion-item">
             <h4 class="accordion-header">
-                <button class="accordion-button"  type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <button class="btn btn-outline-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     @Localizer["StringOne"]
                 </button>
             </h4>
             <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-4">
-                                <img src="/instructia/Registr.png" class="img-fluid m-1" style="border:1px solid black;" />
-                                <img src="/instructia/RegistrOne.png" class="img-fluid m-1" style="border:1px solid black;" />
-                                <img src="/instructia/ImgThree.png" class="img-fluid m-1" style="border:1px solid black;" />
+                        <div class="text-img">
+                            <img src="/instructia/Registr.png" class="img" style="border:1px solid black;" />
+                            <div class="text">
+                                <p>
+                                    @Localizer["Title11"]
+                                </p>
                             </div>
-                            <div class="col-8 text-justify">
-                                @Localizer["StringTwo"]
+                        </div>
+
+                        <div class="text-img">
+                            <img src="/instructia/RegistrOne.png" class="img" style="border:1px solid black;" />
+                            <div class="text">
+                                <p>
+                                    @Localizer["Title12"]
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="text-img">
+                                <img src="/instructia/ImgThree.png" class="img" style="border:1px solid black;" />
+                            
+                            <div class="text">
+                                <p>
+                                    @Localizer["StringTwo"]
+                                </p>    
                             </div>
                         </div>
                     </div>
-                    
-                 </div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h4 class="accordion-header">
-                <button class="accordion-button collapsed"  type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    @Localizer["StringThree"]
-                </button>
-            </h4>
-            <div id="collapseTwo" class="accordion-collapse collapse"  data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col" class="col-4">View</th>
-                                <th scope="col">Step</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td class ="col-4">
-                                    <div class="row">
-                                        <img class="img-fluid" src="/instructia/imgFour.png" alt="" />
-                                        <img class="img-fluid" src="/instructia/imgFive.png" alt="" />
-                                    </div>
-                                    </td>
-                                <td class="text-justify">@Localizer["StringFour"]</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td class="col-4"><img class="img-fluid" src="/instructia/imgSix.png" alt="" /></td>
-                                <td class="text-justify">@Localizer["StringSix"]</td>
-                            </tr>
-                        </tbody>
-                    </table>
+
                 </div>
             </div>
         </div>
         <div class="accordion-item">
             <h4 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                   @Localizer["StringSeven"]
+                <button class="btn btn-outline-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    @Localizer["StringThree"]
+                </button>
+            </h4>
+            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+
+                    <div class="text-img">
+                        <div class="img">
+                            <img class="img" src="/instructia/imgFour.png" alt="" />
+                            <img class="img" src="/instructia/imgFive.png" alt="" />
+                        </div>
+                        
+                        <div class="text">
+                            <p>
+                                @Localizer["StringFour"]
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="text-img">
+                        <img class="img" src="/instructia/imgSix.png" alt="" />
+                        <div class="text">
+                            <p>
+                                @Localizer["StringSix"]
+                            </p>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h4 class="accordion-header">
+                <button class="btn btn-outline-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    @Localizer["StringSeven"]
                 </button>
             </h4>
             <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+
+                    <div class="text-img">
+                        <img class="img" src="~/instructia/LessonStart.png" alt=""/>
+                        <div class="text"><p>
+                            @Localizer["Title13"]
+                        </p>
+                        <ul class="list_title">
+                            <li>@Localizer["Title14"]</li>
+                            <li>@Localizer["Title15"]</li>
+                            <li>@Localizer["Title16"]</li>
+                        </ul>
+                    </div>
+                    </div>
+
+                    <div class="text-img">
+                        <div class="text">
+                            <p>@Localizer["Title17"]</p>
+                        </div>
+                        <img class="img" src="~/instructia/LessonChoose.png" alt="" />
+                    </div>
+
+                    <div class="text-img">
+                        <img class="img" src="~/instructia/Lesson.png" alt="" />
+                        <div class="text">
+                            <p>@Localizer["Title18"]</p>
+                        </div>
+                    </div>
+
+                    <div class="text-img">
+                        <div class="text">
+                            <p>@Localizer["Title19"]</p>
+                        </div>
+                        <img class="img" src="~/instructia/LessonHelp.png" alt="" />
+                    </div>
+
+                    <div class="text-img">
+                        <img class="img" src="~/instructia/rezult.png" alt="" />
+                        <div class="text">
+                            <p>@Localizer["Title20"]</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h4 class="accordion-header">
+                <button class="btn btn-outline-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                    @Localizer["StringEight"]
+                </button>
+            </h4>
+            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    
+                    <div class="text-img">
+                        <img src="~/instructia/Dictionary.png" class="img" />
+                        <div class="text"><p>
+                            @Localizer["dictionary1"]
+                        </p></div>
+                    </div>
+
+                    <div class="text-img">
+                        <div class="text">
+                            <p>
+                                @Localizer["dictionary2"]
+                            </p>
+                        </div>
+                        <img src="~/instructia/ShowCardDictionary.png" class="img" />
+                    </div>
+
+                    <div class="text-img">
+                        <img src="~/instructia/DictionaryBeginTraning.png" class="img" />
+                        <div class="text">
+                            <p>@Localizer["dictionary3"]</p>
+                        </div>
+                    </div>
+
+                    <div class="text-img">             
+                        <div class="text">
+                            <p>@Localizer["dictionary4"]</p>
+                        </div>
+                        <img src="~/instructia/DictionaryLesson.png" class="img" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h4 class="accordion-header">
+                <button class="btn btn-outline-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
+                    @Localizer["StringNine"]
+                </button>
+            </h4>
+            <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+
+                    <div class="text-img">
+                         <img src="~/instructia/UsersPage.png" class="img" />
+                        <div class="text">
+                            <p>
+                                @Localizer["UserPage"]
+                            </p>
+                            <ul class="list_title">
+                                <li>@Localizer["UserPage1"]</li>
+                                <li>@Localizer["UserPage2"]</li>
+                                <li>@Localizer["UserPage3"]</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="text-img">
+                        <div class="text">
+                            <p>
+                                @Localizer["UserPage4"]
+                            </p>
+                        </div>
+                        <img src="~/instructia/UserRezult.png" class="img" />
+                    </div>
+
+                    <div class="text-img">
+                        <img src="~/instructia/UserProgress.png" class="img" />
+                        <div class="text">
+                            <p>@Localizer["UserPage5"]</p>
+                        </div>
+                    </div>
+
+                    <div class="text-img">
+                        <div class="text">
+                            <p>@Localizer["UserPage6"]</p>
+                        </div>
+                        <img src="~/instructia/UserAcount.png" class="img" />
+                    </div>
+
                 </div>
             </div>
         </div>
