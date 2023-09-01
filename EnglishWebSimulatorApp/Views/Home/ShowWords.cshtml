@@ -31,10 +31,10 @@
     <div class="container d-flex justify-content-between p-2" style="flex-wrap:wrap;">
                 @foreach (var i in Model)
                 {
-                    <div class="card m-2" style="width: 12rem;">
+                    <div class="card m-2" style="width: 12rem; border-radius:3px;">
                         @if (i.Pict != null)
                         {
-                            <img src="@i.Pict" class="card-img-top">
+                            <img src="~/img/words/@i.Pict" class="card-img-top">
                         }
                         else
                         {
@@ -49,20 +49,17 @@
                         {
                             <audio class="testAudio" hidden src="~/sounds/@i.Sound" type="audio/mpeg">
                             </audio>
-                    <i class="bi bi-play-btn playAudio" style="font-size:30px; text-align:center;" ></i>
-                }
+                            <div class="elem-center">
+                                <i class="bi bi-play-btn playAudio" style="font-size:30px; text-align:center;"></i>
+                           </div> 
+                        }       
                         <div>
                             <a class="btn btn-warning m-1" href="/AddWords?id=@i.Id">@Localizer["BtnUpdate"] </a>
                             <a class="btn btn-danger m-1" href="/Delete?id=@i.Id">@Localizer["BtnDelete"]</a>
                         </div>
                     </div>
                 }
-            </div>
-            
-            
-
-          
-       
+    </div>
  </div>
 
 <script type="text/javascript">

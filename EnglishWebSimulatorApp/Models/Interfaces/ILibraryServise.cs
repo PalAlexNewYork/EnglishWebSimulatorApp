@@ -8,6 +8,7 @@ namespace EnglishWebSimulatorApp.Models.Interfaces
 {
     public interface ILibraryServise
     {
+        public List<LibraryEn> libraryEns();
         public List<LibraryEn> GetAll();
         public List<LibraryEn> GetAll(string user);
         public List<LibraryEnShow> librariesShow(List<LibraryEn> libraries);
@@ -27,5 +28,6 @@ namespace EnglishWebSimulatorApp.Models.Interfaces
         public SelectList SetSelectDateTheme(string theme, string user, string name);
         public List<LibraryEnShow> GetLibrariesShowThema(string text, string user);
         public List<LibraryEnShow> GetWordsFragmentStr(string user, string text, bool flag);
+        public bool WordVerification(string user, LibraryEn word);
     }
 }

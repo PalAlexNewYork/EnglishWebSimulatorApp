@@ -1,0 +1,79 @@
+﻿@model List<LibraryEn>
+@{
+    int count = ViewBag.CountCard;
+    int strPoint = ViewBag.PointStart;
+
+}
+
+<div class="background_All_word">
+
+    <div class="d-flex flex-column">
+        <div class="title"><h1>The words of all users</h1></div>
+        <div class="container d-flex justify-content-between p-2" style="flex-wrap:wrap;">
+            @for (var i = strPoint; i < count; i++)
+            {
+                <div class="d-flex">
+                    <div class="card m-2" style="width: 12rem; border-radius:3px;">
+                        @if (Model[i].Pict != null)
+                        {
+                            <img src="~/img/words/@Model[i].Pict" class="card-img-top">
+                        }
+                        else
+                        {
+                            <img src="~/english.jpg" class="card-img-top">
+                        }
+
+                        <div class="card-body">
+                            <h5 class="card-title">@Model[i].WordEng</h5>
+                            <h5 class="card-title">@Model[i].WordRus</h5>
+                        </div>
+                        @if (Model[i].SoundFilePath != null)
+                        {
+                            <audio class="testAudio" hidden src="~/sounds/@Model[i].SoundFilePath " type="audio/mpeg">
+                            </audio>
+                            <div class="elem-center">
+                                <i class="bi bi-play-btn playAudio" style="font-size:30px; text-align:center;"></i>
+                            </div>
+                        }
+                        <div class="text-center">
+                            <small class="text-center">@Model[i].UserName</small>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="text-center" style="font-size: 30px;" >
+            @for (var i = strPoint; i < count; i++)
+            {
+                int num = i + 1;
+                <label class="mr-5">@num</label>
+            }
+        </div>
+
+        <div class="d-flex flex-row justify-content-between">
+            <!--
+            <form method="get"  asp-action="ShowAllWords"
+                        asp-controller="Home" asp-route-PointStar="">
+                            <input type="number" name="CountCard" min="4" max="8" value="4" width="30" />
+                            <button class="btn btn-outline-info" type="submit" name="CountCard">Count words!</button>
+                        </form>
+            -->
+            @if (ViewBag.flagEnd != null && ViewBag.flagEnd == true)
+            {
+                <h3>The words ended</h3>
+                <a asp-controller="Home" asp-action="ShowAllWords" class="btn btn-outline-info">End of the list!</a>
+            }
+            else
+            {
+                int PointStart = strPoint + 4;
+                <a asp-controller="Home" asp-action="ShowAllWords" asp-route-PointStart="@PointStart" class="btn btn-outline-info">Next</a>
+            }
+        </div>
+        
+
+    </div>
+    
+
+</div>
+

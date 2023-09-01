@@ -118,8 +118,6 @@
                     </audio>
                     <i class="bi bi-play-btn playAudio" hidden style="font-size:30px; text-align:center;"></i>
                 }
-
-
                 <div class="d-flex justify-content-center">
                     <div class="d-flex align-items-center">
                         <i class="bi bi-arrow-repeat text-center help" hidden style="font-size:35px;"></i>
@@ -129,7 +127,7 @@
                 
                 @if (Model[index].Pict != null)
                 {
-                    <img src="@Model[index].Pict" class="imgFront imgPic" hidden />
+                    <img src="~/img/words/@Model[index].Pict" class="imgFront imgPic" hidden />
                 }
 
                 <img src="/english.jpg" class="img-fluid imgBack" />

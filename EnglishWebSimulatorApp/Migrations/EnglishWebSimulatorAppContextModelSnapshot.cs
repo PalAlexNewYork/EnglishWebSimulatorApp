@@ -100,8 +100,8 @@ namespace EnglishWebSimulatorApp.Migrations
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<byte[]>("Pict")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Pict")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SoundFilePath")
                         .HasColumnType("nvarchar(max)");
@@ -109,7 +109,7 @@ namespace EnglishWebSimulatorApp.Migrations
                     b.Property<string>("Thema")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("User")
+                    b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WordEng")

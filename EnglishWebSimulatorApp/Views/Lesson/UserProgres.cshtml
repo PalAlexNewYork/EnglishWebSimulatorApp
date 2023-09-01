@@ -6,7 +6,7 @@
 }
 
 <div class="container-fluid p-0" >
-    <div class="card m-0" style="background-color:floralwhite">
+    <div class="card-show-rezult m-0" style="background-color:floralwhite">
             
         <div class="backgrImg">
             <div class="text-center text-white d-flex flex-row justify-content-center mt-2">
@@ -47,8 +47,8 @@
                 var lessons = Model.rezults.Where(l => l.Data.Day == x.Day).ToList();
                 @if (words.Count != 0  || lessons.Count != 0)
                 {
-                <div class="card mb-3 cardRez" 
-                id="@d" 
+                    <div class="card-show-rezultd mb-3 cardRez"
+                         id="@d" 
                 style="max-width: 540px;" 
                 hidden>
                     <div class="row g-0">
@@ -89,68 +89,74 @@
         </div>
 
         <!--Данные в виде таблицы о результата пользователя за неделю-->
-        <table class="table-responsive-sm mb-3">
-            <tbody>
-                <tr>
-                    @for (DateTime x = date2; x <= date1; x = x.AddDays(1))
-                    {
-                        <th class="text-center mb-2 "><i class="bi bi-play-btn btn_icon" id="@x.DayOfWeek" style="font-size:30px;"></i></th>
-                    }
-                </tr>
-                <tr>
-                    @for (DateTime x = date2; x <= date1; x = x.AddDays(1))
-                    {
-                        <th class="text-center mb-2"><h4>@x.Day.@x.Month</h4></th>
-                    }
-                </tr>
-            <tr>
-                @for (DateTime x = date2; x <= date1; x = x.AddDays(1))
-                 {
-                        string tmp = x.DayOfWeek.ToString();
-                        string d = tmp.Substring(0, 3);
-                        <th class="text-center mb-2"><h4>@Localizer[d]</h4></th>
-                 }
-            </tr>
-            <tr>
-                    @for (DateTime x = date2; x <= date1; x = x.AddDays(1))
-                    {
-                        string tmp = x.DayOfWeek.ToString();
-                        string d = tmp.Substring(0, 3);
-                        string day = $"/img/week/{d}.webp";
-                        <th class="text-center"><img class="img rounded-circle mb-2 act_btn" 
-                            style="width:50px; height:50px; border:1px solid black; "
-                                 src="@day" alt="Card image cap" value="@d" />
-                        </th>
-                    }
-            </tr>
-            <tr>
-                    @for (DateTime x = date2; x <= date1; x = x.AddDays(1))
-                    {
-                        bool flg = false;
-                        foreach (Rezults r in Model.rezults)
+        <div class="elem-center">
+            <table class="table-responsive-sm mb-3">
+                <tbody>
+                    <tr>
+                        @for (DateTime x = date2; x <= date1; x = x.AddDays(1))
                         {
-                            if (x.Day == r.Data.Day && x.Month == r.Data.Month && x.Year == r.Data.Year)
-                            {
-                                <th class="text-center m-3">
-                                    <img class="img rounded-circle " style="width:50px; height:50px;"
-                                         src="https://cdn.pixabay.com/photo/2013/07/12/14/35/award-148546_1280.png" alt="Card image cap" />
-                                </th>
-                                flg = true;
-                                break;    
-                            }
+                            <th class="text-center mb-2 mr-3 "><i class="bi bi-play-btn btn_icon" id="@x.DayOfWeek" style="font-size:30px;"></i></th>
                         }
-                        if (!flg)
+                    </tr>
+                    <tr>
+                        @for (DateTime x = date2; x <= date1; x = x.AddDays(1))
                         {
-                            <th class="text-center m-3">
-                                <img class="img rounded-circle " style="width:50px; height:50px; "
-                                     src="https://cdn.pixabay.com/animation/2023/04/03/14/25/14-25-02-330_512.gif"  alt="Card image cap" />
+                            <th class="text-center mb-2 mr-3"><h4>@x.Day.@x.Month</h4></th>
+                        }
+                    </tr>
+                    <tr>
+                        @for (DateTime x = date2; x <= date1; x = x.AddDays(1))
+                        {
+                            string tmp = x.DayOfWeek.ToString();
+                            string d = tmp.Substring(0, 3);
+                            <th class="text-center mb-2"><h4>@Localizer[d]</h4></th>
+                        }
+                    </tr>
+                    <tr>
+                        @for (DateTime x = date2; x <= date1; x = x.AddDays(1))
+                        {
+                            string tmp = x.DayOfWeek.ToString();
+                            string d = tmp.Substring(0, 3);
+                            string day = $"/img/week/{d}.webp";
+                            <th class="text-center p-2">
+                                <div>
+                                    <img class="img rounded-circle mb-2 act_btn"
+                                         style="width:50px; height:50px; border:1px solid black; "
+                                         src="@day" alt="Card image cap" value="@d" />
+                                </div>
                             </th>
                         }
-                    }                    
-            </tr>
-               
-            </tbody>    
-        </table>
+                    </tr>
+                    <tr>
+                        @for (DateTime x = date2; x <= date1; x = x.AddDays(1))
+                        {
+                            bool flg = false;
+                            foreach (Rezults r in Model.rezults)
+                            {
+                                if (x.Day == r.Data.Day && x.Month == r.Data.Month && x.Year == r.Data.Year)
+                                {
+                                    <th class="text_center">
+                                        <img class="img" style="width:50px; height:50px;"
+                                             src="~/img/gif/me-the-winner-trophy.gif" alt="Card image cap" />
+                                    </th>
+                                    flg = true;
+                                    break;
+                                }
+                            }
+                            if (!flg)
+                            {
+                                <th class="text-center">
+                                        <img class="img rounded-circle" style="width:50px; height:50px;"
+                                             src="~/img/gif/dm4uz3-foekoe.gif" alt="Card image cap" />
+                                </th>
+                            }
+                        }
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        
   
     </div>
 </div>

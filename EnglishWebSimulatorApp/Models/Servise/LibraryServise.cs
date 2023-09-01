@@ -4,6 +4,7 @@ using EnglishWebSimulatorApp.Models.Interfaces;
 using EnglishWebSimulatorApp.Models.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -29,18 +30,37 @@ namespace EnglishWebSimulatorApp.Models.Servise
             this.libraryWork = libraryWork;
         }
 
+        public List<LibraryEn> libraryEns()=>context.libraryEns.FromSqlRaw("Get_LibraryEns").ToList();
+  
         public void AddWord(LibraryEn en)
         {
-            var t = this.libraryWork.workJsonRepository.GetAll();
-            this.context.Entry(en).State = EntityState.Added;
-            context.SaveChanges();
+            SqlParameter paramWordEn = new SqlParameter("@paramWordEng", en.WordEng );
+            SqlParameter paramWordRu = new SqlParameter("@paramWordRu", en.WordRus );
+            SqlParameter paramPict = null;
+            if(en.Pict!= null) paramPict = new SqlParameter("@paramPict", en.Pict );
+            SqlParameter paramSound = null;
+            if(en.SoundFilePath!=null) paramSound = new SqlParameter("@paramSound", en.SoundFilePath);
+            SqlParameter paramDataTime = new SqlParameter("@paramDataTime", en.DateTime );
+            SqlParameter paramThema = null;
+            if(en.Thema!=null) paramThema = new SqlParameter("@paramThema", en.Thema );
+            SqlParameter paramUserName = new SqlParameter("@paramUserName", en.UserName);
+            
+            var  word = this.context.libraryEns.FromSqlInterpolated(
+                $"CreateWord {paramWordEn}, {paramWordRu}, {paramPict}, {paramSound}, {paramDataTime}, {paramThema}, {paramUserName}"
+                ).ToList();
+            this.context.SaveChanges();
+            //var t = this.libraryWork.workJsonRepository.GetAll();
+            //this.context.Entry(en).State = EntityState.Added;
+            //context.SaveChanges();
         }
 
-        public List<LibraryEn> GetAll() => this.context.libraryEns.ToList();
+        public List<LibraryEn> GetAll() => context.libraryEns.FromSqlRaw("Get_LibraryEns").ToList();
 
         public List<LibraryEn> GetAll(string user)
         {
-            var words = this.context.libraryEns.Where(w => w.User == user).ToList();
+            SqlParameter UserName = new SqlParameter("@UserName", user);
+            var words = this.context.libraryEns.FromSqlRaw("GetLibraryEnsUser @UserName", UserName).ToList();
+            //var words = this.context.libraryEns.Where(w => w.User == user).ToList();
             return words;
         }
 
@@ -65,13 +85,7 @@ namespace EnglishWebSimulatorApp.Models.Servise
                 tmp.Id = word.Id;
                 tmp.WordEng = word.WordEng;
                 tmp.WordRus = word.WordRus;
-                //
-                if (word.Pict != null)
-                {
-                    string imageBase64Data = Convert.ToBase64String(word.Pict);
-                    string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
-                    tmp.Pict = imageDataURL;
-                }
+                tmp.Pict = word.Pict;
                 if (word.SoundFilePath != null)
                     tmp.Sound = word.SoundFilePath;
                 tmp.Thema = word.Thema;
@@ -82,9 +96,12 @@ namespace EnglishWebSimulatorApp.Models.Servise
 
         public void Remove(int id)
         {
-            var w = this.context.libraryEns.FirstOrDefault(w => w.Id == id);
-            this.context.Remove(w);
+            //SqlParameter id_word = new SqlParameter("@paramIdWord", id);
+            this.context.libraryEns.FromSqlRaw($"DeleteWord {id}").ToList();
             this.context.SaveChanges();
+            //var w = this.context.libraryEns.FirstOrDefault(w => w.Id == id);
+            //this.context.Remove(w);
+            //this.context.SaveChanges();
         }
 
         public List<Rezults> Rezults(string user)
@@ -131,7 +148,7 @@ namespace EnglishWebSimulatorApp.Models.Servise
             rezultDay.rezults = rezults;
             //Считаем слова добавленные за неделю
             List<LibraryEn> libraries = new List<LibraryEn>();
-            var words = libratyRepository.GetAll().Where(w => w.User == user).ToList();
+            var words = libratyRepository.GetAll().Where(w => w.UserName == user).ToList();
             var words_json = this.libraryWork.workJsonRepository.GetAll();
             for (DateTime x = date1; x >= date2; x = x.AddDays(-1))
             {
@@ -221,7 +238,7 @@ namespace EnglishWebSimulatorApp.Models.Servise
 
         public List<LibraryEnShow> ChoiceOfWords(string check, int number, string radio, string user, string text)
         {
-            var l = libratyRepository.GetAll().Where(w => w.User == user).ToList();
+            var l = libratyRepository.GetAll().Where(w => w.UserName == user).ToList();
             var libraries = this.librariesShow(l);
 
             if (check == "NumberWords")//колличество слов от 5 до 50, можно последних или рандомных из всего списка
@@ -284,7 +301,7 @@ namespace EnglishWebSimulatorApp.Models.Servise
                 tmp.User = u.NameImg;
                 tmp.Email = u.Email;
                 tmp.Pict = u.Pict;
-                int numOfWords = words.Where(w => w.User == u.Email).ToList().Count();
+                int numOfWords = words.Where(w => w.UserName == u.Email).ToList().Count();
                 int numOfLes = this.rezultsRepository.GetRezults(u.Email).ToList().Count();
                 int tmpPoint = this.rezultsRepository.GetRezults(u.Email).Sum(r => r.Gold);
                 tmp.NumberOfWords = numOfWords;
@@ -327,20 +344,35 @@ namespace EnglishWebSimulatorApp.Models.Servise
             }
         }
 
-        public LibraryEn GetWordsId(int id, string user) => libratyRepository.GetAll().Where(w => w.User == user).ToList().FirstOrDefault(w => w.Id == id);
+        public LibraryEn GetWordsId(int id, string user) => libratyRepository.GetAll().Where(w => w.UserName == user).ToList().FirstOrDefault(w => w.Id == id);
 
         public SelectList SetSelectDateTheme(string theme, string user, string name)
         {
-            var themas_tmp = libratyRepository.GetAll().Where(w => w.User == user).ToList().Select(x => x.Thema);
-            List<string> themas = new HashSet<string>(themas_tmp).ToList();
-            if (name != null) themas.Add(name);
-            int ind = 0;
-            if (theme != null) foreach (var i in themas) { if (i == theme) break; ++ind; }
-            return new SelectList(themas, themas[ind]);
+            var words = libratyRepository.GetAll().Where(w => w.UserName == user).ToList();
+            if (words.Count != 0)
+            {
+                var themas_tmp = libratyRepository.GetAll().Where(w => w.UserName == user).ToList().Select(x => x.Thema);
+                List<string> themas = new HashSet<string>(themas_tmp).ToList();
+                if (name != null) themas.Add(name);
+                int ind = 0;
+                if (themas != null)
+                {
+                    foreach (var i in themas) { if (i == theme) break; ++ind; }
+                    if (ind == 0)
+                        return new SelectList(themas, themas[ind]);
+                    else
+                        return new SelectList(themas, themas[ind - 1]);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else { return null; }         
         }
 
         public List<LibraryEnShow> GetLibrariesShowThema(string text, string user) =>
-                                            this.librariesShow(libratyRepository.GetAll().Where(w => w.User == user && w.Thema == text).ToList());
+                                            this.librariesShow(libratyRepository.GetAll().Where(w => w.UserName == user && w.Thema == text).ToList());
 
         public List<LibraryEnShow> GetWordsFragmentStr(string user, string text, bool flag)
         {
@@ -352,6 +384,18 @@ namespace EnglishWebSimulatorApp.Models.Servise
             {
                 return this.librariesShow(this.GetAll(user).Where(w => w.WordRus.Contains(text, StringComparison.OrdinalIgnoreCase)).ToList());
             }
+        }
+
+        public bool WordVerification(string user, LibraryEn word)
+        {
+            var words = this.GetAll(user);
+            if (words.Count != 0)
+            {
+                if (!words.Any(w => w.WordEng.Equals(word.WordEng, StringComparison.OrdinalIgnoreCase))) return true;
+                else return false;
+            }
+            else 
+            return true;
         }
 
     }

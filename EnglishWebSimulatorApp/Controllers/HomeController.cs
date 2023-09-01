@@ -3,17 +3,14 @@ using EnglishWebSimulatorApp.Models.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
-using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.Xml;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace EnglishWebSimulatorApp.Controllers
 {
@@ -59,7 +56,7 @@ namespace EnglishWebSimulatorApp.Controllers
             {
                 var word = _servise.GetWordsId(id, User.Identity.Name.ToString());
                 ViewBag.SelectList = _servise.SetSelectDateTheme(word.Thema, User.Identity.Name.ToString(), name);
-                ViewBag.PathImg = word.Pict;
+                //ViewBag.PathImg = word.Pict;
                 return View("AddWords", word);
             }
             else 
@@ -74,17 +71,22 @@ namespace EnglishWebSimulatorApp.Controllers
         public async Task<IActionResult> AddWordsMethod(LibraryEn word, IFormFile file, IFormFile fileOne) 
         {
             int word_id = 0;
-            word.User = User.Identity.Name.ToString();
+            word.UserName = User.Identity.Name.ToString();
             word.DateTime = DateTime.Now;
             if (word.Id == 0)
             {
                 if (file != null)
                 {
-                    MemoryStream ms = new MemoryStream();
-                    file.CopyTo(ms);
-                    word.Pict = ms.ToArray();
-                    ms.Close();
-                    ms.Dispose();
+                    var path = Path.Combine(
+                                Directory.GetCurrentDirectory(), $"wwwroot/img/words/",
+                                file.FileName);
+
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                    string NameFile = Path.GetFileName(file.FileName);
+                    word.Pict = NameFile;
                 }
                 if (fileOne != null && fileOne.Length != 0)
                 {
@@ -101,22 +103,26 @@ namespace EnglishWebSimulatorApp.Controllers
                 }
                 if (ModelState.IsValid) 
                 {
-                    if (!(_servise.GetAll(User.Identity.Name.ToString()).All(w => w.WordEng.Equals(word.WordEng, StringComparison.OrdinalIgnoreCase))))
+                    if(_servise.WordVerification(User.Identity.Name.ToString(), word))
                         _servise.AddWord(word);
                     word_id = _servise.GetAll(User.Identity.Name.ToString()).FirstOrDefault(w => w.WordEng.Equals(word.WordEng, StringComparison.OrdinalIgnoreCase)).Id;
                 }
-
             }
             else 
             {
                 var wordObj = _servise.GetAll(User.Identity.Name.ToString()).FirstOrDefault(w => w.Id == word.Id);
                 if (file != null)
                 {
-                    MemoryStream ms = new MemoryStream();
-                    file.CopyTo(ms);
-                    word.Pict = ms.ToArray();
-                    ms.Close();
-                    ms.Dispose();
+                    var path = Path.Combine(
+                                 Directory.GetCurrentDirectory(), $"wwwroot/img/words/",
+                                 file.FileName);
+
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                    string NameFile = Path.GetFileName(file.FileName);
+                    word.Pict = NameFile;
                 }
                 else 
                 {
@@ -163,7 +169,7 @@ namespace EnglishWebSimulatorApp.Controllers
                 randomized[index] = randomized[0];
                 randomized[0] = item;
             }
-            ViewBag.SelectList = _servise.SetSelectDateTheme(null, User.Identity.Name.ToString(), null);
+            if(words.Count!=0)ViewBag.SelectList = _servise.SetSelectDateTheme(null, User.Identity.Name.ToString(), null);
             return View("ShowWords", randomized);
         }
         //
@@ -198,9 +204,64 @@ namespace EnglishWebSimulatorApp.Controllers
         //
         [HttpGet]
         [Route("ShowCardsWords")]
-        public IActionResult ShowCardsWords() 
+        public IActionResult ShowCardsWords(int id, string flag) 
         {
-            return View();
+            var words = _servise.librariesShow(_servise.GetAll(User.Identity.Name.ToString()));
+            if (id == 0)
+            {
+                return View(words[0]);
+            }
+            else if (!string.IsNullOrEmpty(flag))
+            {
+                LibraryEnShow word = null;
+                do
+                {
+                    ++id; word = words.FirstOrDefault(w => w.Id == id);
+                } while (word == null);
+                return View(word);
+            }
+            else 
+            {
+                LibraryEnShow word = null;
+                do
+                {
+                    word = words.FirstOrDefault(w => w.Id == id);
+                    ++id;
+                } while (word == null);
+                return View(word);
+            }
+        }
+        //
+        [HttpGet]
+        [Route("ShowAllWords")] 
+        public IActionResult ShowAllWords(int PointStart)
+        {
+            var tmp = _servise.libraryEns();
+            var uniqueTmp = tmp.GroupBy(w => w.WordEng).ToList();
+                List <LibraryEn> list = new List<LibraryEn>();
+            foreach (IGrouping<string, LibraryEn> element in uniqueTmp)
+            {
+                foreach (LibraryEn w in element) 
+                {
+                    list.Add(w);break;
+                }
+            }
+            
+            ViewBag.PointStart = PointStart;
+
+            if ((4 + PointStart) > list.Count) 
+            {
+                var t = list.Count % 4;
+                ViewBag.CountCard = t + PointStart;
+                ViewBag.flagEnd = true;
+            }
+            else 
+            {
+                ViewBag.CountCard = 4 + PointStart;
+                ViewBag.flagEnd = false;
+            }
+            
+            return View(list);
         }
     }
 }

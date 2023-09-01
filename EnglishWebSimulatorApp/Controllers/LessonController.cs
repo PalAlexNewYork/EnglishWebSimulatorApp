@@ -2,7 +2,6 @@
 using EnglishWebSimulatorApp.Models.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,7 +27,7 @@ namespace EnglishWebSimulatorApp.Controllers
         {
            ViewBag.StartLesson = param;
            var selects =  _servise.SetSelectDateTheme(null, User.Identity.Name.ToString(), null); 
-           ViewBag.Select = selects;
+           if(selects!=null) ViewBag.Select = selects;
             return View();
         }
         //
@@ -37,42 +36,49 @@ namespace EnglishWebSimulatorApp.Controllers
         public IActionResult AddBook(string check, int number, string radio, string param, string text)
         {
             List<LibraryEnShow> libraries = new List<LibraryEnShow>();
-            if (check == "CheckWordsListUser")
+            var wordsUser = _servise.GetAll(User.Identity.Name.ToString());
+            if (wordsUser.Count >= 5)
             {
-                var wordsUser = _servise.GetAll(User.Identity.Name.ToString());
-                List<MyTuple> wordsStr = new List<MyTuple>();
-                foreach (var i in wordsUser) wordsStr.Add(new MyTuple(i.WordEng, i.WordRus));
-                if (param == "ear") ViewBag.lesson = "ear";
+                if (check == "CheckWordsListUser")
+                {
+                    List<MyTuple> wordsStr = new List<MyTuple>();
+                    foreach (var i in wordsUser) wordsStr.Add(new MyTuple(i.WordEng, i.WordRus));
+                    if (param == "ear") ViewBag.lesson = "ear";
                     return View("CheckList", wordsStr);
+                }
+                else
+                {
+                    libraries = _servise.ChoiceOfWords(check, number, radio, User.Identity.Name.ToString(), text);
+                    if (libraries != null)
+                    {
+                        libraryEnShService.DeleteAllWords();
+                        foreach (var lib in libraries)
+                        {
+                            libraryEnShService.AddWordLibEnSh(lib);
+                            libraryEnShService.AddIdWord(lib.Id);
+                        }
+                        ViewBag.right = libraryEnShService.rightAnswer;
+                        ViewBag.notRight = libraryEnShService.notRightAnswer;
+                        if (param == "ear")
+                        {
+                            ViewBag.lesson = "ear";
+                            return View("Lesson", libraries);
+                        }
+                        else if (param == "wordEng")
+                        {
+                            ViewBag.lesson = "WEng";
+                            return View("LessonWordEng", libraries);
+                        }
+                        else return View("Lesson", libraries);
+
+                    }
+                    else
+                        return View("StartLesson");
+                }
             }
             else
             {
-                libraries = _servise.ChoiceOfWords(check, number, radio, User.Identity.Name.ToString(), text);
-                if (libraries != null) 
-                {
-                libraryEnShService.DeleteAllWords();
-                foreach (var lib in libraries)
-                {
-                    libraryEnShService.AddWordLibEnSh(lib);
-                    libraryEnShService.AddIdWord(lib.Id);
-                }
-                ViewBag.right = libraryEnShService.rightAnswer;
-                ViewBag.notRight = libraryEnShService.notRightAnswer;
-                    if (param == "ear")
-                    {
-                        ViewBag.lesson = "ear";
-                          return View("Lesson", libraries);
-                    }
-                    else if (param == "wordEng")
-                    {
-                        ViewBag.lesson = "WEng";
-                        return View("LessonWordEng", libraries);
-                    }
-                    else return View("Lesson", libraries);
-
-                }
-                else
-                    return View("StartLesson");
+                return View("ErorIsEmptyList");
             }
         }
         //
